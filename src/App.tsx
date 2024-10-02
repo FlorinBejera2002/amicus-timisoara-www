@@ -10,6 +10,7 @@ import { useState } from 'react'
 
 export function App() {
   const [categories, setCategories] = useState<string[]>([]) // Modificăm pentru a stoca un array de categorii selectate
+  const [student, setStudent] = useState(false) // Mutați definiția `student` aici, în componenta principală
 
   const handleSubmit = async (event: any) => {
     try {
@@ -96,7 +97,7 @@ export function App() {
       <div className="container mx-auto px-4 py-10 font-poppins max-w-lg">
         <form className="flex flex-col space-y-8" onSubmit={handleSubmit}>
           <div className="flex flex-col space-y-1">
-            <Label text="Numele întreg" />
+            <Label text="Nume & Prenume" />
             <Input
               restProps={{
                 id: 'name',
@@ -106,7 +107,6 @@ export function App() {
               }}
             />
           </div>
-
           <div className="flex flex-col md:flex-row md:space-x-6">
             <div className="flex flex-col space-y-1 flex-1">
               <Label text="Telefon" />
@@ -142,9 +142,9 @@ export function App() {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row md:space-x-3">
+          <div className="flex flex-col md:flex-row md:space-x-6">
             <div className="flex flex-col space-y-1 flex-1">
-              <Label text="La ce facultate ești?" />
+              <Label text="Localitate de proveniență" />
               <Input
                 restProps={{
                   id: 'phone',
@@ -155,17 +155,82 @@ export function App() {
             </div>
 
             <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
-              <Label text="În ce an de studiu?" />
-              <Input
-                restProps={{
-                  id: 'email',
-                  name: 'email',
-                  required: true,
-                  type: 'email'
-                }}
-              />
+              <Label text="Ești membru al bisericii AZȘ?" />
+              <select
+                id="category"
+                name="category"
+                onChange={handleCategoryChange}
+                className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
+              >
+                <option value="Da">Da</option>
+                <option value="Nu">Nu</option>
+              </select>
             </div>
           </div>
+
+          <div className="flex items-center">
+            <h2 className="font-medium text-gray-500">Ești student?</h2>
+            <button
+              type="button"
+              onClick={() => setStudent(true)}
+              className="  text-black font-bold py-2 px-4 rounded underline"
+            >
+              Da
+            </button>
+            /
+            <button
+              type="button"
+              onClick={() => setStudent(false)}
+              className="  text-black font-bold py-2 px-4 rounded underline"
+            >
+              Nu
+            </button>
+          </div>
+
+          {student && (
+            <>
+              <div className="flex flex-col space-y-1">
+                <Label text="La ce universitate ești?" />
+                <select
+                  id="category"
+                  name="category"
+                  onChange={handleCategoryChange}
+                  className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
+                >
+                  <option value="UVT">UVT</option>
+                  <option value="UMFT">UMFT</option>
+                  <option value="UPT">UPT</option>
+                  <option value="USAMVBT">USAMVBT</option>
+                  <option value="Postliceală">Postliceală</option>
+                </select>
+              </div>
+
+              <div className="flex flex-col md:flex-row md:space-x-3">
+                <div className="flex flex-col space-y-1 flex-1">
+                  <Label text="La ce facultate ești?" />
+                  <Input
+                    restProps={{
+                      id: 'faculty',
+                      name: 'faculty',
+                      type: 'text'
+                    }}
+                  />
+                </div>
+
+                <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
+                  <Label text="În ce an de studiu?" />
+                  <Input
+                    restProps={{
+                      id: 'study_year',
+                      name: 'study_year',
+                      required: true,
+                      type: 'text'
+                    }}
+                  />
+                </div>
+              </div>
+            </>
+          )}
 
           <div className="flex flex-col space-y-1">
             <Label text="Selectează departamentul în care dorești să te implici" />
@@ -175,34 +240,19 @@ export function App() {
               onChange={handleCategoryChange}
               className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
             >
-              <option className="hover:!bg-red-500" value="Nici un departament">
-                Nici un departament
-              </option>
-              <option className="hover:!bg-red-500" value="Recreativ">
-                Recreativ
-              </option>
-              <option className="hover:!bg-red-500" value="Cultural">
-                Cultural
-              </option>
-              <option className="hover:!bg-red-500" value="Social">
-                Social
-              </option>
-              <option className="hover:!bg-red-500" value="Proiecte">
-                Proiecte
-              </option>
-              <option className="hover:!bg-red-500" value="PR & Marketing">
-                PR & Marketing
-              </option>
-              <option
-                className="hover:focus-red-500"
-                value="Administrativ & Economic"
-              >
+              <option value="Nici un departament">Nici un departament</option>
+              <option value="Recreativ">Recreativ</option>
+              <option value="Cultural">Cultural</option>
+              <option value="Social">Social</option>
+              <option value="Proiecte">Proiecte</option>
+              <option value="PR & Marketing">PR & Marketing</option>
+              <option value="Administrativ & Economic">
                 Administrativ & Economic
               </option>
             </select>
           </div>
 
-          <div className="flex flex-col space-y-1">
+          {/* <div className="flex flex-col space-y-1">
             <Label text="Vrei să ne transmiți ceva?" />
             <Input
               isTextArea={true}
@@ -211,7 +261,7 @@ export function App() {
                 name: 'details'
               }}
             />
-          </div>
+          </div> */}
 
           <div className="flex justify-center mt-6">
             <Button text="Trimite" />
