@@ -1,1 +1,1 @@
-Arise For Christ requester page for events
+AMiCUS Timișoara
