@@ -72,7 +72,7 @@ export function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-start items-center bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <div className="min-h-screen  flex flex-col justify-start items-center bg-gradient-to-br from-blue-50 via-white to-blue-100">
       <Toaster position="top-right" />
 
       <div
@@ -94,7 +94,7 @@ export function App() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-10 font-poppins max-w-lg">
+      <div className="container mx-auto px-4 py-10 font-poppins max-w-xl">
         <form className="flex flex-col space-y-8" onSubmit={handleSubmit}>
           <div className="flex flex-col space-y-1">
             <Label text="Nume & Prenume" />
@@ -219,14 +219,20 @@ export function App() {
 
                 <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
                   <Label text="În ce an de studiu?" />
-                  <Input
-                    restProps={{
-                      id: 'study_year',
-                      name: 'study_year',
-                      required: true,
-                      type: 'text'
-                    }}
-                  />
+                  <select
+                    id="category"
+                    name="category"
+                    onChange={handleCategoryChange}
+                    className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
+                  >
+                    <option value="I">I</option>
+                    <option value="II">II</option>
+                    <option value="III">III</option>
+                    <option value="IV">IV</option>
+                    <option value="VI">VI</option>
+                    <option value="Master I">Master I</option>
+                    <option value="Master II">Master II</option>
+                  </select>
                 </div>
               </div>
             </>
