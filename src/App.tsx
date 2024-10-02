@@ -246,7 +246,7 @@ export function App() {
               onChange={handleCategoryChange}
               className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
             >
-              <option value="Nici un departament">Nici un departament</option>
+              <option value="Nici un departament">Niciun departament</option>
               <option value="Recreativ">Recreativ</option>
               <option value="Cultural">Cultural</option>
               <option value="Social">Social</option>
