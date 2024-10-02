@@ -147,9 +147,9 @@ export function App() {
               <Label text="Localitate de proveniență" />
               <Input
                 restProps={{
-                  id: 'phone',
-                  name: 'phone',
-                  type: 'tel'
+                  id: 'address',
+                  name: 'address',
+                  type: 'text'
                 }}
               />
             </div>
@@ -229,6 +229,7 @@ export function App() {
                     <option value="II">II</option>
                     <option value="III">III</option>
                     <option value="IV">IV</option>
+                    <option value="VI">V</option>
                     <option value="VI">VI</option>
                     <option value="Master I">Master I</option>
                     <option value="Master II">Master II</option>
