@@ -9,74 +9,67 @@ import heroImage from '../public/hero-image.jpeg'
 import { useState } from 'react'
 
 export function App() {
-  const [categories, setCategories] = useState<string[]>([]) // Modificăm pentru a stoca un array de categorii selectate
-  const [student, setStudent] = useState(false) // Mutați definiția `student` aici, în componenta principală
+  const [student, setStudent] = useState(false) // Stochează dacă utilizatorul este student
 
   const handleSubmit = async (event: any) => {
     try {
       event.preventDefault()
+
+      // Preluare valori din formular
       const name = event.target.name.value
       const email = event.target.email.value
       const phone = event.target.phone.value
-      const details = event.target.details.value
+      const dateOfBirth = event.target.dateOfBirth.value
+      const address = event.target.address.value
+      const isMember = event.target.isMember.value === 'Da'
+      const university = student ? event.target.university.value : null
+      const faculty = student ? event.target.faculty.value : null
+      const studyYear = student ? event.target.studyYear.value : null
+      const department = event.target.department.value
 
       // supabase
-      const supabaseUrl = 'todo'
-      const supabaseAnonKey = 'todo'
-      const supabase = createClient(supabaseUrl, supabaseAnonKey)
+      const supabaseUrl = 'https://tacgpszyibzcntbuxkoz.supabase.co' // Înlocuiește cu valorile tale
+      const supabaseKey =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRhY2dwc3p5aWJ6Y250YnV4a296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgzOTA5MjIsImV4cCI6MjA0Mzk2NjkyMn0.SzLJHmrb7hg-K5fIl0JvfcCEl9qpfRMS5POu-o-WYpc'
+      const supabase = createClient(supabaseUrl, supabaseKey)
 
-      const evReqId = uuid()
       const personRequestingId = uuid()
 
+      // Inserare date în tabelul `requesters`
       const { error: requesterError } = await supabase
         .from('requesters')
         .insert({
-          details: details || '',
-          email: email || '',
           id: personRequestingId,
           name: name || '',
-          phone: phone || ''
+          email: email || '',
+          phone: phone || '',
+          date_of_birth: dateOfBirth || null,
+          address: address || '',
+          is_member: isMember,
+          university: university || null,
+          faculty: faculty || null,
+          study_year: studyYear || null,
+          department: department || ''
         })
 
       if (requesterError) {
         throw new Error(requesterError.message)
       }
 
-      const { error: reqError } = await supabase
-        .from('evangelism_requests')
-        .insert({
-          category: categories.join(', '), // Unim categoriile selectate într-un string
-          id: evReqId,
-          person_requesting_id: personRequestingId,
-          status: 'received'
-        })
-
-      if (reqError) {
-        throw new Error(reqError.message)
-      }
-
-      event.target.reset()
-      toast('✅ Mulțumim!')
+      event.target.reset() // Resetare formular după trimitere
+      toast('✅ Mulțumim pentru înscriere!')
     } catch (error) {
-      toast('❌ Eroare la crearea cererii')
-      console.error('Eroare la crearea cererii', error)
+      toast('❌ Eroare la trimiterea formularului')
+      console.error('Eroare la trimiterea formularului', error)
     }
   }
 
-  // Funcție pentru actualizarea categoriilor selectate
-  const handleCategoryChange = (event: any) => {
-    const selectedOptions = Array.from(event.target.selectedOptions).map(
-      (option: any) => option.value
-    )
-    setCategories(selectedOptions)
-  }
-
   return (
-    <div className="min-h-screen  flex flex-col justify-start items-center bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <div className="min-h-screen flex flex-col justify-start items-center bg-gradient-to-br from-blue-50 via-white to-blue-100">
       <Toaster position="top-right" />
 
       <div
-        className="w-full bg-cover bg-center  h-72 py-16 flex px-4 justify-center items-center text-white shadow-md"
+        className="w-full bg-cover bg-center h-72 py-16 flex px-4 justify-center items-center text-white shadow-md"
         style={{
           backgroundImage: `url(${heroImage})`
         }}
@@ -107,6 +100,7 @@ export function App() {
               }}
             />
           </div>
+
           <div className="flex flex-col md:flex-row md:space-x-6">
             <div className="flex flex-col space-y-1 flex-1">
               <Label text="Telefon" />
@@ -131,13 +125,14 @@ export function App() {
               />
             </div>
           </div>
+
           <div className="flex flex-col space-y-1">
             <Label text="Data nașterii" />
             <Input
               restProps={{
-                id: 'age',
-                name: 'age',
-                type: 'number'
+                id: 'dateOfBirth',
+                name: 'dateOfBirth',
+                type: 'date'
               }}
             />
           </div>
@@ -157,9 +152,8 @@ export function App() {
             <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
               <Label text="Ești membru al bisericii AZȘ?" />
               <select
-                id="category"
-                name="category"
-                onChange={handleCategoryChange}
+                id="isMember"
+                name="isMember"
                 className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
               >
                 <option value="Da">Da</option>
@@ -168,12 +162,13 @@ export function App() {
             </div>
           </div>
 
+          {/* Secțiunea "Ești student?" */}
           <div className="flex items-center">
             <h2 className="font-medium text-gray-500">Ești student?</h2>
             <button
               type="button"
               onClick={() => setStudent(true)}
-              className="  text-black font-bold py-2 px-4 rounded underline"
+              className="text-black font-bold py-2 px-4 rounded underline"
             >
               Da
             </button>
@@ -181,7 +176,7 @@ export function App() {
             <button
               type="button"
               onClick={() => setStudent(false)}
-              className="  text-black font-bold py-2 px-4 rounded underline"
+              className="text-black font-bold py-2 px-4 rounded underline"
             >
               Nu
             </button>
@@ -192,9 +187,8 @@ export function App() {
               <div className="flex flex-col space-y-1">
                 <Label text="La ce universitate ești?" />
                 <select
-                  id="category"
-                  name="category"
-                  onChange={handleCategoryChange}
+                  id="university"
+                  name="university"
                   className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
                 >
                   <option value="UVT">UVT</option>
@@ -220,16 +214,15 @@ export function App() {
                 <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
                   <Label text="În ce an de studiu?" />
                   <select
-                    id="category"
-                    name="category"
-                    onChange={handleCategoryChange}
+                    id="studyYear"
+                    name="studyYear"
                     className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
                   >
                     <option value="I">I</option>
                     <option value="II">II</option>
                     <option value="III">III</option>
                     <option value="IV">IV</option>
-                    <option value="VI">V</option>
+                    <option value="V">V</option>
                     <option value="VI">VI</option>
                     <option value="Master I">Master I</option>
                     <option value="Master II">Master II</option>
@@ -242,12 +235,11 @@ export function App() {
           <div className="flex flex-col space-y-1">
             <Label text="Selectează departamentul în care dorești să te implici" />
             <select
-              id="category"
-              name="category"
-              onChange={handleCategoryChange}
+              id="department"
+              name="department"
               className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
             >
-              <option value="Nici un departament">Niciun departament</option>
+              <option value="Niciun departament">Niciun departament</option>
               <option value="Recreativ">Recreativ</option>
               <option value="Cultural">Cultural</option>
               <option value="Social">Social</option>
@@ -258,17 +250,6 @@ export function App() {
               </option>
             </select>
           </div>
-
-          {/* <div className="flex flex-col space-y-1">
-            <Label text="Vrei să ne transmiți ceva?" />
-            <Input
-              isTextArea={true}
-              restProps={{
-                id: 'details',
-                name: 'details'
-              }}
-            />
-          </div> */}
 
           <div className="flex justify-center mt-6">
             <Button text="Trimite" />
