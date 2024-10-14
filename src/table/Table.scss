@@ -1,0 +1,131 @@
+$background-color: #eee;
+$primary-color: #f5f5f5;
+$space: 20px;
+
+.table-page {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: $background-color;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: $space;
+    padding: $space;
+    // overflow: hidden;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: $space;
+
+        img.logo-amicus-tm {
+            height: calc($space * 2);
+            margin-right: auto;
+        }
+
+        .searchbar {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            input {
+                width: 100%;
+                height: calc($space * 2);
+                padding: 0 $space;
+                border: none;
+                border-radius: $space;
+                background-color: $primary-color;
+                border: 2px solid #ddd;
+                font-size: 16px;
+                color: #333;
+                transition: all 0.2s ease;
+
+                &:focus {
+                    outline: none;
+                    border: 2px solid #bbb;
+                }
+            }
+
+            i {
+                font-size: 20px;
+                position: absolute;
+                height: $space;
+                right: calc($space / 1.25);
+                color: #aaa;
+                transform: translateY(-25%);
+            }
+        }
+    }
+
+    .table {
+        width: 100%;
+        height: 100%;
+        max-width: 2000px;
+        background-color: $primary-color;
+        border-radius: $space;
+        border: 2px solid #ddd;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        .rows {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: $space;
+            padding: calc($space / 2) $space;
+
+            &.header {
+                background-color: $background-color;
+                border-bottom: 2px solid #ddd;
+                
+                .cell h3 {
+                    font-weight: 600;
+                }
+            }
+
+            &.footer {
+                background-color: $background-color;
+                border-top: 2px solid #ddd;
+
+                h3 {
+                    font-weight: 600;
+                }
+            }
+
+            &:nth-child(even) {
+                background-color: $background-color;
+            }
+
+            .cell {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: $space;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                h3 {
+                    font-size: 16px;
+                    color: #333;
+                    font-weight: 400;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
