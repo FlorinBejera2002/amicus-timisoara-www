@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import logo from '/Logo-AMiCUS-TM.png';
 import './Table.scss';
+import Modal from './modal/Modal';
 
 const APIdata: Data[] = [
     {
@@ -32,11 +33,27 @@ const APIdata: Data[] = [
 ];
 
 export default function Table() {
+    const cellSpace = 110;
     const [date, setDate] = useState<Data[]>(APIdata);
-    const [length, setLength] = useState(0);
+    const [modalData, setModalData] = useState<Data>(APIdata[0]);
+    const [showModal, setShowModal] = useState(true);
     const [search, setSearch] = useState('');
+    const [tableWidth, setTableWidth] = useState(window.innerWidth);
 
     const inputRef = useRef<HTMLInputElement>(null);
+    const tableRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => { // set tableWidth to the width of the table
+        const handleResize = () => {
+            setTableWidth(tableRef.current?.offsetWidth || window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -64,19 +81,20 @@ export default function Table() {
                 </div>
             </div>
 
-            <div className="table">
+            <div className="table" ref={tableRef}>
                 <div className="row header">
-                    <div className="cell name"><h3>Nume</h3></div>
-                    <div className="cell email"><h3>Email</h3></div>
-                    <div className="cell phone"><h3>Telefon</h3></div>
-                    <div className="cell address"><h3>Adresă</h3></div>
-                    <div className="cell is-member"><h3>Membru</h3></div>
-                    <div className="cell faculty"><h3>Facultate</h3></div>
-                    <div className="cell study-year"><h3>Anul</h3></div>
-                    <div className="cell department"><h3>Departament</h3></div>
-                    <div className="cell university"><h3>Universitate</h3></div>
-                    <div className="cell date-of-birth"><h3>Data nașterii</h3></div>
-                    {/* <div className="cell achitat"><h3>Achitat</h3></div> */}
+                    <div className={`cell name`}><h3>Nume</h3></div>
+                    <div className={`cell ${(3 * cellSpace) < tableWidth ? '' : 'hide'} email`}><h3>Email</h3></div>
+                    <div className={`cell ${(4 * cellSpace) < tableWidth ? '' : 'hide'} phone`}><h3>Telefon</h3></div>
+                    <div className={`cell ${(5 * cellSpace) < tableWidth ? '' : 'hide'} address`}><h3>Adresă</h3></div>
+                    <div className={`cell ${(6 * cellSpace) < tableWidth ? '' : 'hide'} is-member`}><h3>Membru</h3></div>
+                    <div className={`cell ${(7 * cellSpace) < tableWidth ? '' : 'hide'} faculty`}><h3>Facultate</h3></div>
+                    <div className={`cell ${(8 * cellSpace) < tableWidth ? '' : 'hide'} study-year`}><h3>Anul</h3></div>
+                    <div className={`cell ${(9 * cellSpace) < tableWidth ? '' : 'hide'} department`}><h3>Departament</h3></div>
+                    <div className={`cell ${(10 * cellSpace) < tableWidth ? '' : 'hide'} university`}><h3>Universitate</h3></div>
+                    <div className={`cell ${(11 * cellSpace) < tableWidth ? '' : 'hide'} date-of-birth`}><h3>Data nașterii</h3></div>
+                    <div className={`cell achitat`}><h3>Achitat</h3></div>
+                    <i className="ri-eye-line" style={{ visibility: 'hidden' }}></i>
                 </div>
 
                 <div className="rows">
@@ -89,17 +107,23 @@ export default function Table() {
                     }).map((data, index) => {
                         return (
                             <div className="row" key={index}>
-                                <div className="cell name"><h3>{data.name}</h3></div>
-                                <div className="cell email"><h3>{data.email}</h3></div>
-                                <div className="cell phone"><h3>{data.phone}</h3></div>
-                                <div className="cell address"><h3>{data.address}</h3></div>
-                                <div className="cell is-member"><h3>{data.isMember ? 'Da' : 'Nu'}</h3></div>
-                                <div className="cell faculty"><h3>{data.faculty}</h3></div>
-                                <div className="cell study-year"><h3>{data.studyYear}</h3></div>
-                                <div className="cell department"><h3>{data.department}</h3></div>
-                                <div className="cell university"><h3>{data.university}</h3></div>
-                                <div className="cell date-of-birth"><h3>{data.dateOfBirth}</h3></div>
-                                {/* <div className="cell achitat"><h3>{data.achitat} RON</h3></div> */}
+                                <div className={`cell name`}><h3>{data.name}</h3></div>
+                                <div className={`cell ${(3 * cellSpace) < tableWidth ? '' : 'hide'} email`}><h3>{data.email}</h3></div>
+                                <div className={`cell ${(4 * cellSpace) < tableWidth ? '' : 'hide'} phone`}><h3>{data.phone}</h3></div>
+                                <div className={`cell ${(5 * cellSpace) < tableWidth ? '' : 'hide'} address`}><h3>{data.address}</h3></div>
+                                <div className={`cell ${(6 * cellSpace) < tableWidth ? '' : 'hide'} is-member`}><h3>{data.isMember ? 'Da' : 'Nu'}</h3></div>
+                                <div className={`cell ${(7 * cellSpace) < tableWidth ? '' : 'hide'} faculty`}><h3>{data.faculty}</h3></div>
+                                <div className={`cell ${(8 * cellSpace) < tableWidth ? '' : 'hide'} study-year`}><h3>{data.studyYear}</h3></div>
+                                <div className={`cell ${(9 * cellSpace) < tableWidth ? '' : 'hide'} department`}><h3>{data.department}</h3></div>
+                                <div className={`cell ${(10 * cellSpace) < tableWidth ? '' : 'hide'} university`}><h3>{data.university}</h3></div>
+                                <div className={`cell ${(11 * cellSpace) < tableWidth ? '' : 'hide'} date-of-birth`}><h3>{data.dateOfBirth}</h3></div>
+                                <div className={`cell achitat`}><h3>{data.achitat} RON</h3></div>
+                                <button onClick={() => {
+                                    setModalData(data);
+                                    setShowModal(true);
+                                }}>
+                                    <i className="ri-eye-line"></i>
+                                </button>
                             </div>
                         )
                     })}
@@ -107,15 +131,17 @@ export default function Table() {
                 
                 {date.length === 0 && <div className="no-data">Nu există date</div>}
 
-                {/* <div className="row footer">
-                    <h3>Total achitat: {date.reduce((acc, curr) => acc + curr.achitat, 0)} RON ({date.reduce((acc, curr) => acc + (curr.achitat > 0 ? 1 : 0), 0)}/{date.length})</h3>
-                </div> */}
+                <div className="row footer">
+                    <h3>Total achitat: {date.reduce((acc, curr) => acc + (curr.achitat ? curr.achitat : 0), 0)} RON ({date.reduce((acc, curr) => acc + (curr.achitat ? 1 : 0), 0)}/{date.length})</h3>
+                </div>
             </div>
+
+            <Modal data={modalData} show={showModal} setShow={setShowModal} />
         </div>
     )
 }
 
-interface Data {
+export interface Data {
     name: string,
     email: string,
     phone: string,
