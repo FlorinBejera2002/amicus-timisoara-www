@@ -4,6 +4,32 @@ import './Table.scss';
 import Modal from './modal/Modal';
 
 const APIdata: Data[] = [
+    {
+        name: 'Andrei',
+        email: 'exemplu@email.com',
+        phone: '0723456789',
+        address: 'Str. Exemplu nr. 1',
+        isMember: true,
+        faculty: 'Facultatea de Exemplu',
+        studyYear: 'Anul 1',
+        department: 'Departamentul de Exemplu',
+        university: 'Universitatea de Exemplu',
+        dateOfBirth: '2000-01-01',
+        achitat: 50
+    },
+    {
+        name: 'Maria',
+        email: 'exemplu@email.com',
+        phone: '0723456789',
+        address: 'Str. Exemplu nr. 1',
+        isMember: true,
+        faculty: 'Facultatea de Exemplu',
+        studyYear: 'Anul 1',
+        department: 'Departamentul de Exemplu',
+        university: 'Universitatea de Exemplu',
+        dateOfBirth: '2000-01-01',
+        achitat: 100
+    }
 ];
 
 export default function Table() {
