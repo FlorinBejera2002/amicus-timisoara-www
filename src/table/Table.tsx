@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from "react";
 import logo from '@/assets/Logo-AMiCUS-TM.png';
-import './Table.scss';
 import Modal from './modal/Modal';
 import {createClient} from "@supabase/supabase-js";
 
@@ -80,33 +79,33 @@ export default function Table() {
     }, []);
 
     return (
-        <div className="table-page">
-            <div className="top">
-                <img src={logo} alt="" className="logo-amicus-tm" />
+        <div className="relative h-screen m-0 font-poppins bg-gray-200 flex flex-col justify-center gap-5 p-5 overflow-hidden">
+            <div className="flex justify-between items-center gap-5">
+                <img src={logo} alt="" className="h-10 mr-auto" />
 
-                <div className="search-bar">
-                    <i className="ri-search-line"></i>
-                    <input type="text" placeholder='Apasă tasta "F"' className="search" ref={inputRef} onChange={(e) => setSearch(e.target.value)} />
+                <div className="relative w-full max-w-xs flex items-center justify-center">
+                    <i className="ri-search-line text-xl absolute h-5 right-4 text-gray-400 -translate-y-1/4"></i>
+                    <input type="text" placeholder='Apasă tasta "F"' className="w-full h-10 px-5 rounded-full bg-gray-100 border-2 border-gray-300 text-base text-gray-700 transition-all duration-200 focus:outline-none focus:border-gray-400" ref={inputRef} onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
 
-            <div className="table" ref={tableRef}>
-                <div className="row header">
-                    <div className={`cell name`}><h3>Nume</h3></div>
-                    <div className={`cell ${(3 * cellSpace) < tableWidth ? '' : 'hide'} email`}><h3>Email</h3></div>
-                    <div className={`cell ${(4 * cellSpace) < tableWidth ? '' : 'hide'} phone`}><h3>Telefon</h3></div>
-                    <div className={`cell ${(5 * cellSpace) < tableWidth ? '' : 'hide'} address`}><h3>Adresă</h3></div>
-                    <div className={`cell ${(6 * cellSpace) < tableWidth ? '' : 'hide'} is-member`}><h3>Membru</h3></div>
-                    <div className={`cell ${(7 * cellSpace) < tableWidth ? '' : 'hide'} date-of-birth`}><h3>Data nașterii</h3></div>
-                    <div className={`cell ${(8 * cellSpace) < tableWidth ? '' : 'hide'} department`}><h3>Departament</h3></div>
-                    <div className={`cell ${(9 * cellSpace) < tableWidth ? '' : 'hide'} university`}><h3>Universitate</h3></div>
-                    <div className={`cell ${(10 * cellSpace) < tableWidth ? '' : 'hide'} faculty`}><h3>Facultate</h3></div>
-                    <div className={`cell ${(11 * cellSpace) < tableWidth ? '' : 'hide'} study-year`}><h3>Anul</h3></div>
-                    <div className={`cell achitat`}><h3>Achitat</h3></div>
-                    <i className="ri-eye-line" style={{ visibility: 'hidden' }}></i>
+            <div className="w-full h-full max-w-screen-2xl bg-gray-100 rounded-xl border-2 border-gray-300 overflow-hidden flex flex-col" ref={tableRef}>
+                <div className="flex justify-between items-center gap-5 px-5 py-2.5 bg-gray-200 border-b-2 border-gray-300">
+                    <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis"><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Nume</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(3 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Email</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(4 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Telefon</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(5 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Adresă</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(6 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Membru</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(7 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Data nașterii</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(8 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Departament</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(9 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Universitate</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(10 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Facultate</h3></div>
+                    <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(11 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Anul</h3></div>
+                    <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis justify-end"><h3 className="text-base text-gray-700 font-semibold overflow-hidden text-ellipsis whitespace-nowrap">Achitat</h3></div>
+                    <i className="ri-eye-line invisible"></i>
                 </div>
 
-                <div className="rows">
+                <div className="flex-1 overflow-y-auto">
                     {date.filter((data) => {
                         if (search === '') {
                             return data;
@@ -115,19 +114,19 @@ export default function Table() {
                         }
                     }).map((data, index) => {
                         return (
-                            <div className="row" key={index}>
-                                <div className={`cell name`}><h3>{data.name}</h3></div>
-                                <div className={`cell ${(3 * cellSpace) < tableWidth ? '' : 'hide'} email`}><h3>{data.email}</h3></div>
-                                <div className={`cell ${(4 * cellSpace) < tableWidth ? '' : 'hide'} phone`}><h3>{data.phone}</h3></div>
-                                <div className={`cell ${(5 * cellSpace) < tableWidth ? '' : 'hide'} address`}><h3>{data.address}</h3></div>
-                                <div className={`cell ${(6 * cellSpace) < tableWidth ? '' : 'hide'} is-member`}><h3>{data.isMember ? 'Da' : 'Nu'}</h3></div>
-                                <div className={`cell ${(7 * cellSpace) < tableWidth ? '' : 'hide'} date-of-birth`}><h3>{data.dateOfBirth}</h3></div>
-                                <div className={`cell ${(8 * cellSpace) < tableWidth ? '' : 'hide'} department`}><h3>{data.department}</h3></div>
-                                <div className={`cell ${(9 * cellSpace) < tableWidth ? '' : 'hide'} university`}><h3>{data.university}</h3></div>
-                                <div className={`cell ${(10 * cellSpace) < tableWidth ? '' : 'hide'} faculty`}><h3>{data.faculty}</h3></div>
-                                <div className={`cell ${(11 * cellSpace) < tableWidth ? '' : 'hide'} study-year`}><h3>{data.studyYear}</h3></div>
-                                <div className={`cell achitat`}><h3>{data.cash ? data.cash + ' RON' : '0 RON'}</h3></div>
-                                <button onClick={() => {
+                            <div className="flex justify-between items-center gap-5 px-5 py-2.5 even:bg-gray-200" key={index}>
+                                <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis"><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.name}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(3 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.email}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(4 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.phone}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(5 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.address}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(6 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.isMember ? 'Da' : 'Nu'}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(7 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.dateOfBirth}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(8 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.department}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(9 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.university}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(10 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.faculty}</h3></div>
+                                <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(11 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.studyYear}</h3></div>
+                                <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis justify-end"><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.cash ? data.cash + ' RON' : '0 RON'}</h3></div>
+                                <button className="bg-transparent border-none text-gray-600 cursor-pointer hover:text-gray-800 transition-colors duration-200" onClick={() => {
                                     setModalData(data);
                                     setShowModal(true);
                                 }}>
@@ -137,14 +136,14 @@ export default function Table() {
                         )
                     })}
 
-                    {date.length === 0 && <div className="row">
-                        <div className="cell center">Nu există date</div>
+                    {date.length === 0 && <div className="flex justify-between items-center gap-5 px-5 py-2.5">
+                        <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis justify-center">Nu există date</div>
                     </div>}
                 </div>
 
 
-                <div className="row footer">
-                    <h3>Total achitat: {date.reduce((acc, curr) => acc + (curr.cash ? curr.cash : 0), 0)} RON ({date.reduce((acc, curr) => acc + (curr.cash ? 1 : 0), 0)}/{date.length})</h3>
+                <div className="flex justify-between items-center gap-5 px-5 py-2.5 bg-gray-200 border-t-2 border-gray-300">
+                    <h3 className="text-base text-gray-700 font-semibold">Total achitat: {date.reduce((acc, curr) => acc + (curr.cash ? curr.cash : 0), 0)} RON ({date.reduce((acc, curr) => acc + (curr.cash ? 1 : 0), 0)}/{date.length})</h3>
                 </div>
             </div>
 

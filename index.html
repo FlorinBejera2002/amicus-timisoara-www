@@ -1,22 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="ro" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="src/assets/Logo-Amicus.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>AMiCUS Timișoara - Asociația Medicilor și Studenților Creștini</title>
+  <meta name="description" content="AMiCUS Timișoara este o asociație de medici și studenți creștini dedicați dezvoltării spirituale și profesional în domeniul medical. Alătură-te comunității noastre!" />
+  <meta name="keywords" content="AMiCUS, Timișoara, medici creștini, studenți medicină, asociație medicală, credință, medicină, comunitate creștină, proiecte sociale, podcast medical" />
+  <meta name="author" content="AMiCUS Timișoara" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="Romanian" />
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="AMiCUS Timișoara - Asociația Medicilor și Studenților Creștini" />
+  <meta property="og:description" content="Construim împreună o comunitate de tineri creștini dedicați dezvoltării spirituale și profesional în domeniul medical." />
+  <meta property="og:image" content="/src/assets/bg-image.png" />
+  <meta property="og:url" content="https://amicus-timisoara.ro" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AMiCUS Timișoara" />
+  <meta property="og:locale" content="ro_RO" />
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AMiCUS Timișoara - Asociația Medicilor și Studenților Creștini" />
+  <meta name="twitter:description" content="Construim împreună o comunitate de tineri creștini dedicați dezvoltării spirituale și profesional în domeniul medical." />
+  <meta name="twitter:image" content="/src/assets/bg-image.png" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/src/assets/Logo-Amicus.png" />
+  <link rel="apple-touch-icon" href="/src/assets/Logo-Amicus.png" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://amicus-timisoara.ro" />
+  
+  <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  
+  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AMiCUS Timișoara</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#dc2626" />
+  <meta name="msapplication-TileColor" content="#dc2626" />
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AMiCUS Timișoara",
+    "description": "Asociația Medicilor și Studenților Creștini din Timișoara",
+    "url": "https://amicus-timisoara.ro",
+    "logo": "https://amicus-timisoara.ro/src/assets/Logo-Amicus.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+40-123-456-789",
+      "contactType": "customer service",
+      "email": "contact@amicus-timisoara.ro"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Str. Piața Alexandru Mocioni 7",
+      "addressLocality": "Timișoara",
+      "addressCountry": "RO"
+    },
+    "sameAs": [
+      "https://facebook.com/amicus.timisoara",
+      "https://instagram.com/amicii.timisoara",
+      "https://youtube.com/@amicustimisoara"
+    ]
+  }
+  </script>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
-</body>
 
 </html>

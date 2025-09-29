@@ -1,12 +1,68 @@
-import { Routes, Route } from 'react-router-dom';
-import Table from './table/Table';
-import Form from './form/Form';
+import { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import './i18n';
 
-export function App() {
-    return (
-        <Routes>
-            <Route path="/" element={<Form />} />
-            <Route path="/tabel" element={<Table />} />
-        </Routes>
-    );
+// Components
+import Navigation from './components/Navigation';
+import LoadingAnimation from './components/LoadingAnimation';
+import PrayerWall from './components/PrayerWall';
+
+// Pages
+import HomePage from './pages/HomePage';
+import DashboardPage from './pages/DashboardPage';
+import AboutPage from './pages/AboutPage';
+import ProjectsPage from './pages/ProjectsPage';
+import EventsPage from './pages/EventsPage';
+import BookPage from './pages/BookPage';
+import VisionPage from './pages/VisionPage';
+import PodcastPage from './pages/PodcastPage';
+import ContactPage from './pages/ContactPage';
+import Form from './form/Form';
+import Table from './table/Table';
+
+function App() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <Router>
+      <div className="min-h-screen bg-white">
+        <LoadingAnimation isLoading={isLoading} />
+        
+        {!isLoading && (
+          <div>
+            <Navigation />
+            <Toaster position="top-right" />
+            
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/events" element={<EventsPage />} />
+              <Route path="/book" element={<BookPage />} />
+              <Route path="/vision" element={<VisionPage />} />
+              <Route path="/podcast" element={<PodcastPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/form" element={<Form />} />
+              <Route path="/table" element={<Table />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/prayer-wall" element={<PrayerWall />} />
+            </Routes>
+          </div>
+        )}
+      </div>
+    </Router>
+  );
 }
+
+
+export default App;
