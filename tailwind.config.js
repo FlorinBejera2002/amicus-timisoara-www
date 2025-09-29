@@ -11,7 +11,12 @@ export default {
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
-        accent: '#EAC243'
+        accent: '#EAC243',
+        primary: {
+          red: '#DC2626',
+          black: '#000000',
+          white: '#FFFFFF'
+        }
       }
     },
   },

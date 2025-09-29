@@ -61,22 +61,23 @@ export default function Form() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-start items-center bg-gradient-to-br from-blue-50 via-white to-blue-100">
+    <div className="min-h-screen pt-16 bg-gray-50">
       <Toaster position="top-right" />
 
       <div
-        className="w-full bg-cover bg-center h-72 py-16 flex px-4 justify-center items-center text-white shadow-md"
+        className="w-full bg-cover bg-center h-80 py-16 flex px-4 justify-center items-center text-white shadow-lg relative"
         style={{
           backgroundImage: `url(${heroImage})`
         }}
       >
-        <div className="flex mt-32 gap-5">
-          <img src={logo} alt="amicus logo" className="w-24 h-24" />
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="flex items-center gap-6 relative z-10">
+          <img src={logo} alt="amicus logo" className="w-20 h-20" />
           <div>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white xl:text-white">
+            <h1 className="text-4xl md:text-6xl font-bold text-white">
               AMiCUS Timișoara
             </h1>
-            <h2 className="md:text-xl text-base font-bold text-gray-200 mt-2">
+            <h2 className="md:text-xl text-lg font-semibold text-red-100 mt-2">
               Completează formularul și înscrie-te.
             </h2>
           </div>
@@ -150,7 +151,7 @@ export default function Form() {
               <select
                 id="isMember"
                 name="isMember"
-                className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
+                className="rounded-md border bg-white border-gray-300 focus:border-primary-red focus:ring-2 focus:ring-red-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
               >
                 <option value="Da">Da</option>
                 <option value="Nu">Nu</option>
