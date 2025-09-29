@@ -79,7 +79,7 @@ const resources = {
       searchPlaceholder: 'Apasă tasta "F"',
       
       // Footer
-      address: 'Str. Piața Alexandru Mocioni 7, Timișoara',
+      footerAddress: 'Str. Piața Alexandru Mocioni 7, Timișoara',
       meetingTime: 'Joi ora 20:00'
     }
   },
@@ -163,7 +163,7 @@ const resources = {
       
       // Footer
       followUs: 'Follow Us',
-      address: 'Alexandru Mocioni Square 7, Timișoara',
+      footerAddress: 'Alexandru Mocioni Square 7, Timișoara',
       meetingTime: 'Thursday 8:00 PM'
     }
   }

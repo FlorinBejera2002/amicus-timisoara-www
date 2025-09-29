@@ -1,9 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import logo from '@/assets/Logo-Amicus.png';
 
 export const Footer = () => {
-  const { t } = useTranslation();
 
   const quickLinks = [
     { path: '/', label: 'Home' },
@@ -30,17 +28,17 @@ export const Footer = () => {
 
   return (
     <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {/* Logo and Description */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center space-x-3 mb-4">
-              <img src={logo} alt="AMiCUS Logo" className="h-10 w-10" />
-              <span className="font-bold text-xl">
+          <div className="sm:col-span-2 lg:col-span-1">
+            <div className="flex items-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
+              <img src={logo} alt="AMiCUS Logo" className="h-8 w-8 sm:h-10 sm:w-10" />
+              <span className="font-bold text-lg sm:text-xl">
                 AMiCUS <span className="text-primary-red">Timișoara</span>
               </span>
             </div>
-            <p className="text-gray-300 mb-4">
+            <p className="text-gray-300 mb-4 text-sm sm:text-base leading-relaxed">
               Asociația Medicilor și Studenților Creștini din Timișoara. 
               Construim împreună o comunitate de tineri creștini dedicați dezvoltării spirituale și profesionale.
             </p>
@@ -61,14 +59,14 @@ export const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+          <div className="mt-6 sm:mt-0">
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Quick Links</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.path}
-                    className="text-gray-300 hover:text-white transition-colors duration-200"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 text-sm sm:text-base"
                   >
                     {link.label}
                   </Link>
@@ -78,14 +76,14 @@ export const Footer = () => {
           </div>
 
           {/* Resources */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">Resources</h3>
-            <ul className="space-y-2">
+          <div className="mt-6 sm:mt-0">
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Resources</h3>
+            <ul className="space-y-1.5 sm:space-y-2">
               {resources.map((resource, index) => (
                 <li key={index}>
                   <Link
                     to={resource.path}
-                    className="text-gray-300 hover:text-white transition-colors duration-200"
+                    className="text-gray-300 hover:text-white transition-colors duration-200 text-sm sm:text-base"
                   >
                     {resource.label}
                   </Link>
@@ -95,34 +93,34 @@ export const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div>
-            <h3 className="font-semibold text-lg mb-4">Contact Info</h3>
-            <div className="space-y-3 text-gray-300">
-              <div className="flex items-start space-x-3">
-                <i className="ri-map-pin-line text-primary-red mt-1"></i>
+          <div className="mt-6 sm:mt-0 sm:col-span-2 lg:col-span-1">
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Contact Info</h3>
+            <div className="space-y-2.5 sm:space-y-3 text-gray-300 text-sm sm:text-base">
+              <div className="flex items-start space-x-2 sm:space-x-3">
+                <i className="ri-map-pin-line text-primary-red mt-1 text-base sm:text-lg"></i>
                 <div>
                   <p>Str. Piața Alexandru Mocioni 7</p>
                   <p>Timișoara, România</p>
                 </div>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <i className="ri-time-line text-primary-red"></i>
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <i className="ri-time-line text-primary-red text-base sm:text-lg"></i>
                 <p>Joi ora 20:00</p>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <i className="ri-mail-line text-primary-red"></i>
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <i className="ri-mail-line text-primary-red text-base sm:text-lg"></i>
                 <a 
                   href="mailto:contact@amicus-timisoara.ro"
-                  className="hover:text-white transition-colors duration-200"
+                  className="hover:text-white transition-colors duration-200 break-all sm:break-normal"
                 >
                   contact@amicus-timisoara.ro
                 </a>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <i className="ri-phone-line text-primary-red"></i>
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                <i className="ri-phone-line text-primary-red text-base sm:text-lg"></i>
                 <a 
                   href="tel:+40123456789"
                   className="hover:text-white transition-colors duration-200"
@@ -135,19 +133,19 @@ export const Footer = () => {
         </div>
 
         {/* Newsletter Signup */}
-        <div className="border-t border-gray-800 mt-8 pt-8">
-          <div className="max-w-md mx-auto text-center">
-            <h3 className="font-semibold text-lg mb-2">Stay Connected</h3>
-            <p className="text-gray-300 mb-4">
+        <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8">
+          <div className="max-w-sm sm:max-w-md mx-auto text-center">
+            <h3 className="font-semibold text-base sm:text-lg mb-2">Stay Connected</h3>
+            <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
               Subscribe to our newsletter for updates on events and activities
             </p>
-            <div className="flex space-x-2">
+            <div className="flex flex-col xs:flex-row space-y-2 xs:space-y-0 xs:space-x-2">
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent text-white placeholder-gray-400"
+                className="flex-1 px-3 sm:px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent text-white placeholder-gray-400 text-sm sm:text-base"
               />
-              <button className="bg-primary-red text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200">
+              <button className="bg-primary-red text-white px-4 sm:px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base whitespace-nowrap">
                 Subscribe
               </button>
             </div>
@@ -155,15 +153,15 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
+          <p className="text-gray-400 text-xs sm:text-sm text-center sm:text-left">
             © {new Date().getFullYear()} AMiCUS Timișoara. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+          <div className="flex space-x-4 sm:space-x-6">
+            <Link to="/privacy" className="text-gray-400 hover:text-white text-xs sm:text-sm transition-colors duration-200">
               Privacy Policy
             </Link>
-            <Link to="/terms" className="text-gray-400 hover:text-white text-sm transition-colors duration-200">
+            <Link to="/terms" className="text-gray-400 hover:text-white text-xs sm:text-sm transition-colors duration-200">
               Terms of Service
             </Link>
           </div>
