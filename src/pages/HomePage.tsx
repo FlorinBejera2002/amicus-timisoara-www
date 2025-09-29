@@ -25,12 +25,19 @@ import bgImage from '@/assets/bg-image.png';
 import Footer from '../components/Footer';
 import LazyImage from '../components/LazyImage';
 
+// Global gtag declaration
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
+
 // Import member photos
 import member1 from '@/assets/_DSC0059-2.jpg';
 import member2 from '@/assets/_DSC9796-2.jpg';
 import member3 from '@/assets/_DSC9812-2.jpg';
 import member4 from '@/assets/_DSC9833-2.jpg';
-import member5 from '@/assets/_DSC9836-2.jpg';
+import member5 from '@/assets/_DSC0069-2.jpg';
 import member6 from '@/assets/_DSC9856-2.jpg';
 import member7 from '@/assets/_DSC9866-2.jpg';
 import member8 from '@/assets/_DSC9954-2.jpg';
@@ -141,7 +148,7 @@ export const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
         {/* Background Image with Gradient Overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -186,7 +193,7 @@ export const HomePage = () => {
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20 hidden lg:flex flex-col space-y-4"
+          className="absolute left-2 md:left-4 lg:left-6 top-1/2 transform -translate-y-1/2 z-20 hidden md:flex flex-col space-y-3 lg:space-y-4"
         >
           {[
             { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
@@ -202,7 +209,7 @@ export const HomePage = () => {
               initial={{ x: -50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-              className={`w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 ${social.color} hover:scale-110 hover:border-white/40`}
+              className={`w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 ${social.color} hover:scale-110 hover:border-white/40`}
             >
               <social.Icon className="text-lg" />
             </motion.a>
@@ -216,24 +223,24 @@ export const HomePage = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto"
+          className="relative z-10 text-center text-white w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto"
         >
           {/* Logo with Glow Effect */}
           <motion.div 
             variants={itemVariants} 
-            className="mb-8 relative"
+            className="mb-6 sm:mb-8 relative"
           >
             <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-150"></div>
-            <img src={logo} alt="AMiCUS Logo" className="w-28 h-28 mx-auto mb-6 relative z-10 drop-shadow-2xl" />
+            <img src={logo} alt="AMiCUS Logo" className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mx-auto mb-4 sm:mb-6 relative z-10 drop-shadow-2xl" />
           </motion.div>
 
           {/* Main Title with Enhanced Typography */}
           <motion.h1 
             variants={itemVariants}
-            className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-white via-white to-red-200 bg-clip-text text-transparent drop-shadow-lg"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-white to-red-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
           >
             {t('heroTitle').split(' ')[0]}
-            <span className="block text-4xl md:text-5xl text-primary-red font-semibold mt-2">
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-primary-red font-semibold mt-1 sm:mt-2">
               {t('heroTitle').split(' ')[1]}
             </span>
           </motion.h1>
@@ -241,7 +248,7 @@ export const HomePage = () => {
           {/* Subtitle with Better Spacing */}
           <motion.p 
             variants={itemVariants}
-            className="text-xl md:text-2xl mb-6 text-gray-200 font-light tracking-wide"
+            className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-6 text-gray-200 font-light tracking-wide px-2"
           >
             {t('heroSubtitle')}
           </motion.p>
@@ -249,7 +256,7 @@ export const HomePage = () => {
           {/* Description with Enhanced Styling */}
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl mb-10 text-gray-300 max-w-3xl mx-auto leading-relaxed font-light"
+            className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 text-gray-300 max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed font-light px-2"
           >
             {t('heroDescription')}
           </motion.p>
@@ -257,15 +264,15 @@ export const HomePage = () => {
           {/* Enhanced Action Buttons */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-2"
           >
             <Link
               to="/form"
-              className="group bg-primary-red text-white px-12 py-6 rounded-2xl font-semibold text-xl hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl hover:shadow-red-500/25 hover:scale-105 animate-pulse"
+              className="group bg-primary-red text-white px-6 sm:px-8 md:px-10 lg:px-12 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg md:text-xl hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 shadow-2xl hover:shadow-red-500/25 hover:scale-105 animate-pulse"
               onClick={() => {
                 // Add page tracking
-                if (typeof gtag !== 'undefined') {
-                  gtag('event', 'click', {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'click', {
                     event_category: 'engagement',
                     event_label: 'hero_join_button'
                   });
@@ -278,11 +285,11 @@ export const HomePage = () => {
             
             <Link
               to="/about"
-              className="group border-2 border-white/80 text-white px-12 py-6 rounded-2xl font-semibold text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm hover:scale-105"
+              className="group border-2 border-white/80 text-white px-6 sm:px-8 md:px-10 lg:px-12 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg md:text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 backdrop-blur-sm hover:scale-105"
               onClick={() => {
                 // Add page tracking
-                if (typeof gtag !== 'undefined') {
-                  gtag('event', 'click', {
+                if (typeof window !== 'undefined' && window.gtag) {
+                  window.gtag('event', 'click', {
                     event_category: 'engagement',
                     event_label: 'hero_learn_more_button'
                   });
@@ -297,7 +304,7 @@ export const HomePage = () => {
           {/* Enhanced Stats with Icons */}
           <motion.div
             variants={itemVariants}
-            className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-2"
           >
             {[
               { Icon: FaUsers, number: '200+', label: 'Membri Activi', color: 'text-blue-400' },
@@ -307,12 +314,12 @@ export const HomePage = () => {
             ].map((stat, index) => (
               <motion.div 
                 key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 text-center hover:bg-white/15 transition-all duration-300"
+                className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/20 text-center hover:bg-white/15 transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
               >
-                <stat.Icon className={`text-4xl ${stat.color} mx-auto mb-3`} />
-                <div className="text-3xl font-bold text-white mb-2">{stat.number}</div>
-                <div className="text-sm text-gray-300 font-medium">{stat.label}</div>
+                <stat.Icon className={`text-2xl sm:text-3xl md:text-4xl ${stat.color} mx-auto mb-2 sm:mb-3`} />
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2">{stat.number}</div>
+                <div className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -337,7 +344,7 @@ export const HomePage = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="absolute bottom-20 right-6 lg:hidden flex space-x-3"
+          className="absolute bottom-16 sm:bottom-20 right-4 sm:right-6 md:hidden flex space-x-2 sm:space-x-3"
         >
           {[
             { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
@@ -349,7 +356,7 @@ export const HomePage = () => {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className={`w-12 h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 ${social.color} hover:scale-110`}
+              className={`w-10 h-10 sm:w-12 sm:h-12 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 ${social.color} hover:scale-110`}
             >
               <social.Icon className="text-lg" />
             </a>
@@ -399,19 +406,19 @@ export const HomePage = () => {
       </section>
 
       {/* Committee Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 md:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 sm:mb-12 md:mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
               Comitetul Director
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-xs sm:max-w-md md:max-w-2xl mx-auto px-4">
               Cunoaște echipa de leadership care coordonează activitățile AMiCUS Timișoara
             </p>
           </motion.div>
@@ -428,17 +435,17 @@ export const HomePage = () => {
                 className="group cursor-pointer"
                 onClick={() => setSelectedMember(member)}
               >
-                <div className="bg-gray-50 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                  <div className="relative mb-4 overflow-hidden rounded-xl">
+                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                  <div className="relative mb-3 sm:mb-4 overflow-hidden rounded-lg sm:rounded-xl">
                     <LazyImage 
                       src={member.image} 
                       alt={member.name}
-                      className="w-full h-48 group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-40 sm:h-44 md:h-48 group-hover:scale-110 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{member.name}</h3>
-                  <p className="text-primary-red font-medium text-sm">{member.position}</p>
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-1 leading-tight">{member.name}</h3>
+                  <p className="text-primary-red font-medium text-xs sm:text-sm leading-tight">{member.position}</p>
                 </div>
               </motion.div>
             ))}
@@ -446,17 +453,17 @@ export const HomePage = () => {
 
           {/* Mobile Carousel */}
           <div 
-            className="sm:hidden relative"
+            className="sm:hidden relative px-2"
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
-            <div className="overflow-hidden">
+            <div className="overflow-hidden rounded-xl">
               <motion.div 
                 className="flex transition-transform duration-300 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {Array.from({ length: Math.ceil(committeeMembers.length / 2) }).map((_, slideIndex) => (
-                  <div key={slideIndex} className="w-full flex-shrink-0 grid grid-cols-2 gap-4 px-2">
+                  <div key={slideIndex} className="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1">
                     {committeeMembers.slice(slideIndex * 2, slideIndex * 2 + 2).map((member) => (
                       <motion.div
                         key={member.id}
@@ -464,16 +471,16 @@ export const HomePage = () => {
                         onClick={() => setSelectedMember(member)}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <div className="bg-gray-50 rounded-xl p-4 hover:shadow-lg transition-all duration-300">
-                          <div className="relative mb-3 overflow-hidden rounded-lg">
+                        <div className="bg-gray-50 rounded-lg xs:rounded-xl p-3 xs:p-4 hover:shadow-lg transition-all duration-300">
+                          <div className="relative mb-2 xs:mb-3 overflow-hidden rounded-md xs:rounded-lg">
                             <LazyImage 
                               src={member.image} 
                               alt={member.name}
-                              className="w-full h-32 group-hover:scale-110 transition-transform duration-300"
+                              className="w-full h-28 xs:h-32 group-hover:scale-110 transition-transform duration-300"
                             />
                           </div>
-                          <h3 className="text-sm font-bold text-gray-900 mb-1">{member.name}</h3>
-                          <p className="text-primary-red font-medium text-xs">{member.position}</p>
+                          <h3 className="text-xs xs:text-sm font-bold text-gray-900 mb-1 leading-tight">{member.name}</h3>
+                          <p className="text-primary-red font-medium text-xs leading-tight">{member.position}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -486,26 +493,26 @@ export const HomePage = () => {
             <button
               onClick={prevSlide}
               aria-label="Slide anterior"
-              className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200"
+              className="absolute left-1 xs:left-0 top-1/2 transform -translate-y-1/2 xs:-translate-x-4 w-8 h-8 xs:w-10 xs:h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
             >
-              <FaChevronLeft />
+              <FaChevronLeft className="text-sm xs:text-base" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Slide următor"
-              className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200"
+              className="absolute right-1 xs:right-0 top-1/2 transform -translate-y-1/2 xs:translate-x-4 w-8 h-8 xs:w-10 xs:h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
             >
-              <FaChevronRight />
+              <FaChevronRight className="text-sm xs:text-base" />
             </button>
 
             {/* Carousel Indicators */}
-            <div className="flex justify-center mt-6 space-x-2">
+            <div className="flex justify-center mt-4 xs:mt-6 space-x-1 xs:space-x-2">
               {Array.from({ length: Math.ceil(committeeMembers.length / 2) }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   aria-label={`Mergi la slide-ul ${index + 1}`}
-                  className={`w-2 h-2 rounded-full transition-colors duration-200 ${
+                  className={`w-2 h-2 xs:w-2.5 xs:h-2.5 rounded-full transition-colors duration-200 ${
                     currentSlide === index ? 'bg-primary-red' : 'bg-gray-300'
                   }`}
                 />
@@ -520,38 +527,39 @@ export const HomePage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4"
             onClick={() => setSelectedMember(null)}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-white rounded-2xl max-w-md w-full p-6 relative"
+              className="bg-white rounded-xl sm:rounded-2xl max-w-sm sm:max-w-md w-full p-5 sm:p-6 relative max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setSelectedMember(null)}
-                className="absolute top-4 right-4 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors duration-200"
+                aria-label="Închide modal"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 sm:w-8 sm:h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-colors duration-200"
               >
-                <FaTimes />
+                <FaTimes className="text-sm" />
               </button>
               
-              <div className="text-center mb-6">
-                <div className="w-24 h-24 mx-auto mb-4 overflow-hidden rounded-full">
+              <div className="text-center mb-5 sm:mb-6">
+                <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3 sm:mb-4 overflow-hidden rounded-full">
                   <LazyImage 
                     src={selectedMember.image} 
                     alt={selectedMember.name}
                     className="w-full h-full"
                   />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{selectedMember.name}</h3>
-                <p className="text-primary-red font-semibold text-lg">{selectedMember.position}</p>
+                <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{selectedMember.name}</h3>
+                <p className="text-primary-red font-semibold text-base sm:text-lg">{selectedMember.position}</p>
               </div>
               
-              <div className="text-gray-600 leading-relaxed">
-                <h4 className="font-semibold text-gray-900 mb-2">Responsabilități:</h4>
-                <p>{selectedMember.description}</p>
+              <div className="text-gray-600 leading-relaxed text-sm sm:text-base">
+                <h4 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Responsabilități:</h4>
+                <p className="leading-relaxed">{selectedMember.description}</p>
               </div>
             </motion.div>
           </motion.div>

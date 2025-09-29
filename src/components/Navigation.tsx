@@ -74,13 +74,18 @@ export const Navigation = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-14 sm:h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <img src={logo} alt="AMiCUS Logo" className="h-10 w-10" />
-            <span className="font-bold text-xl text-gray-900">
-              AMiCUS <span className="text-primary-red">Timișoara</span>
+          <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
+            <img src={logo} alt="AMiCUS Logo" className="h-8 w-8 sm:h-10 sm:w-10" />
+            <span className="font-bold text-lg sm:text-xl text-gray-900">
+              <span className="hidden xs:inline">AMiCUS </span>
+              <span className="text-primary-red">
+                <span className="xs:hidden">AMiCUS </span>
+                <span className="hidden xs:inline">Timișoara</span>
+                <span className="xs:hidden">TM</span>
+              </span>
             </span>
           </Link>
 
