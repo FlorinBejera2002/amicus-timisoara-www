@@ -54,6 +54,7 @@ function App() {
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/form" element={<Form />} />
               <Route path="/table" element={<Table />} />
+              <Route path="/tabel-admin-amicus-2024-secret" element={<Table />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/prayer-wall" element={<PrayerWall />} />
             </Routes>

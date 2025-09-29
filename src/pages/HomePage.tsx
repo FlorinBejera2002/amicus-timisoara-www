@@ -15,7 +15,6 @@ import {
   FaPray,
   FaHeart,
   FaGraduationCap,
-  FaStethoscope,
   FaTimes,
   FaChevronLeft,
   FaChevronRight
@@ -70,10 +69,10 @@ export const HomePage = () => {
   const committeeMembers = [
     {
       id: 1,
-      name: 'Dr. Maria Popescu',
+      name: 'Maria Popescu',
       position: 'Președinte',
       image: member1,
-      description: 'Coordonează activitățile generale ale asociației și reprezintă AMiCUS în relațiile cu instituțiile medicale și universitare. Asigură implementarea strategiei și viziunii organizației.'
+      description: 'Coordonează activitățile generale ale asociației și reprezintă AMiCUS în relațiile cu universitățile și organizațiile studențești. Asigură implementarea strategiei și viziunii organizației studențești.'
     },
     {
       id: 2,
@@ -148,7 +147,7 @@ export const HomePage = () => {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 sm:px-6 lg:px-8">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 lg:px-8">
         {/* Background Image with Gradient Overlay */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -193,7 +192,7 @@ export const HomePage = () => {
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="absolute left-2 md:left-4 lg:left-6 top-1/2 transform -translate-y-1/2 z-20 hidden md:flex flex-col space-y-3 lg:space-y-4"
+          className="absolute left-2 md:left-4 lg:left-6 top-1/3 transform -translate-y-1/2 z-20 hidden md:flex items-center flex-col space-y-3 lg:space-y-4"
         >
           {[
             { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
@@ -223,17 +222,8 @@ export const HomePage = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 text-center text-white w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto"
+          className="relative z-10 text-center text-white w-full max-w-7xl mx-auto flex flex-col items-center justify-center"
         >
-          {/* Logo with Glow Effect */}
-          <motion.div 
-            variants={itemVariants} 
-            className="mb-6 sm:mb-8 relative"
-          >
-            <div className="absolute inset-0 bg-white/20 rounded-full blur-xl scale-150"></div>
-            <img src={logo} alt="AMiCUS Logo" className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 mx-auto mb-4 sm:mb-6 relative z-10 drop-shadow-2xl" />
-          </motion.div>
-
           {/* Main Title with Enhanced Typography */}
           <motion.h1 
             variants={itemVariants}
@@ -253,24 +243,15 @@ export const HomePage = () => {
             {t('heroSubtitle')}
           </motion.p>
 
-          {/* Description with Enhanced Styling */}
-          <motion.p 
-            variants={itemVariants}
-            className="text-base sm:text-lg md:text-xl mb-8 sm:mb-10 text-gray-300 max-w-sm sm:max-w-md md:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed font-light px-2"
-          >
-            {t('heroDescription')}
-          </motion.p>
-
           {/* Enhanced Action Buttons */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-2"
+            className="flex flex-col items-center md:flex-row gap-4 md:gap-6 justify-center mb-12 md:mb-16 px-2"
           >
             <Link
               to="/form"
-              className="group bg-primary-red text-white px-6 sm:px-8 md:px-10 lg:px-12 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg md:text-xl hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 shadow-2xl hover:shadow-red-500/25 hover:scale-105 animate-pulse"
+              className="w-fit group bg-primary-red text-white px-4 md:px-6 lg:px-8 py-3 md:py-4 rounded-md font-semibold text-base sm:text-lg md:text-xl hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 shadow-2xl hover:shadow-red-500/25 hover:scale-105 animate-pulse"
               onClick={() => {
-                // Add page tracking
                 if (typeof window !== 'undefined' && window.gtag) {
                   window.gtag('event', 'click', {
                     event_category: 'engagement',
@@ -285,7 +266,7 @@ export const HomePage = () => {
             
             <Link
               to="/about"
-              className="group border-2 border-white/80 text-white px-6 sm:px-8 md:px-10 lg:px-12 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-semibold text-base sm:text-lg md:text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 backdrop-blur-sm hover:scale-105"
+              className="w-fit group border-2 border-white/80 text-white px-4 md:px-6 lg:px-8 py-3 md:py-4 rounded-md font-semibold text-base sm:text-lg md:text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 backdrop-blur-sm hover:scale-105"
               onClick={() => {
                 // Add page tracking
                 if (typeof window !== 'undefined' && window.gtag) {
@@ -301,55 +282,18 @@ export const HomePage = () => {
             </Link>
           </motion.div>
 
-          {/* Enhanced Stats with Icons */}
-          <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6 max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto px-2"
-          >
-            {[
-              { Icon: FaUsers, number: '200+', label: 'Membri Activi', color: 'text-blue-400' },
-              { Icon: FaHandsHelping, number: '25+', label: 'Proiecte Sociale', color: 'text-green-400' },
-              { Icon: FaGraduationCap, number: '8+', label: 'Ani de Experiență', color: 'text-yellow-400' },
-              { Icon: FaStethoscope, number: '50+', label: 'Medici Parteneri', color: 'text-red-400' }
-            ].map((stat, index) => (
-              <motion.div 
-                key={index} 
-                className="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 border border-white/20 text-center hover:bg-white/15 transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-              >
-                <stat.Icon className={`text-2xl sm:text-3xl md:text-4xl ${stat.color} mx-auto mb-2 sm:mb-3`} />
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 sm:mb-2">{stat.number}</div>
-                <div className="text-xs sm:text-sm text-gray-300 font-medium leading-tight">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* Enhanced Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 15, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white cursor-pointer"
-        >
-          <div className="flex flex-col items-center space-y-2">
-            <span className="text-xs font-medium tracking-wider opacity-80">SCROLL</span>
-            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Mobile Social Icons */}
+          {/* Mobile Social Icons */}
         <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="absolute bottom-16 sm:bottom-20 right-4 sm:right-6 md:hidden flex space-x-2 sm:space-x-3"
+          className="md:hidden flex space-x-2 sm:space-x-3 justify-center mt-10"
         >
           {[
-            { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
-            { Icon: FaInstagram, url: 'https://instagram.com/amicii.timisoara', color: 'hover:bg-pink-600' },
-            { Icon: FaYoutube, url: 'https://youtube.com/@amicustimisoara', color: 'hover:bg-red-600' }
+             { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
+             { Icon: FaInstagram, url: 'https://instagram.com/amicii.timisoara', color: 'hover:bg-pink-600' },
+             { Icon: FaYoutube, url: 'https://youtube.com/@amicustimisoara', color: 'hover:bg-red-600' },
+             { Icon: FaEnvelope, url: 'mailto:contact@amicus-timisoara.ro', color: 'hover:bg-gray-600' }
           ].map((social, index) => (
             <a
               key={index}
@@ -362,11 +306,13 @@ export const HomePage = () => {
             </a>
           ))}
         </motion.div>
+
+        </motion.div>
       </section>
 
       {/* Book Section */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -390,12 +336,12 @@ export const HomePage = () => {
                 Descoperă Cartea AMiCUS
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                O compilație unică de experiențe, mărturii și învățături din comunitatea AMiCUS. 
-                Fiecare pagină reflectă călătoria spirituală și profesională a membrilor noștri.
+                O compilație unică de experiențe, mărturii și învățături din comunitatea studenților creștini AMiCUS. 
+                Fiecare pagină reflectă călătoria spirituală și academică a studenților noștri.
               </p>
               <Link
                 to="/book"
-                className="bg-primary-red text-white px-8 py-4 rounded-xl font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105"
+                className="bg-primary-red text-white px-8 py-4 rounded-md font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105"
               >
                 <FaBookOpen className="text-xl" />
                 <span>Citește Cartea</span>
@@ -435,8 +381,8 @@ export const HomePage = () => {
                 className="group cursor-pointer"
                 onClick={() => setSelectedMember(member)}
               >
-                <div className="bg-gray-50 rounded-xl sm:rounded-2xl p-4 sm:p-5 md:p-6 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                  <div className="relative mb-3 sm:mb-4 overflow-hidden rounded-lg sm:rounded-xl">
+                <div className="bg-gray-50 rounded-md p-4 sm:p-5 md:p-6 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                  <div className="relative mb-3 sm:mb-4 overflow-hidden rounded-lg sm:rounded-md">
                     <LazyImage 
                       src={member.image} 
                       alt={member.name}
@@ -457,7 +403,7 @@ export const HomePage = () => {
             onMouseEnter={() => setIsAutoPlaying(false)}
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
-            <div className="overflow-hidden rounded-xl">
+            <div className="overflow-hidden rounded-md">
               <motion.div 
                 className="flex transition-transform duration-300 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -471,7 +417,7 @@ export const HomePage = () => {
                         onClick={() => setSelectedMember(member)}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <div className="bg-gray-50 rounded-lg xs:rounded-xl p-3 xs:p-4 hover:shadow-lg transition-all duration-300">
+                        <div className="bg-gray-50 rounded-lg xs:rounded-md p-3 xs:p-4 hover:shadow-lg transition-all duration-300">
                           <div className="relative mb-2 xs:mb-3 overflow-hidden rounded-md xs:rounded-lg">
                             <LazyImage 
                               src={member.image} 
@@ -534,7 +480,7 @@ export const HomePage = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-white rounded-xl sm:rounded-2xl max-w-sm sm:max-w-md w-full p-5 sm:p-6 relative max-h-[90vh] overflow-y-auto"
+              className="bg-white rounded-md max-w-sm sm:max-w-md w-full p-5 sm:p-6 relative max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -568,7 +514,7 @@ export const HomePage = () => {
 
       {/* Events Section */}
       <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -614,10 +560,10 @@ export const HomePage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                className="bg-white rounded-md p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 <div className="flex items-center mb-4">
-                  <div className={`w-12 h-12 ${event.color} rounded-xl flex items-center justify-center mr-4`}>
+                  <div className={`w-12 h-12 ${event.color} rounded-md flex items-center justify-center mr-4`}>
                     <event.Icon className="text-xl text-white" />
                   </div>
                   <div>
@@ -644,7 +590,7 @@ export const HomePage = () => {
 
       {/* Podcast Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -656,8 +602,8 @@ export const HomePage = () => {
                 Podcast AMiCUS
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                Ascultă conversații inspiraționale cu membri ai comunității, 
-                discuții despre credință, carieră și dezvoltare personală.
+                Ascultă conversații inspiraționale cu studenți din comunitatea noastră, 
+                discuții despre credință, viața universitară și dezvoltare personală.
               </p>
               <div className="space-y-4 mb-6">
                 <div className="flex items-center space-x-3">
@@ -675,7 +621,7 @@ export const HomePage = () => {
               </div>
               <Link
                 to="/podcast"
-                className="bg-primary-red text-white px-8 py-4 rounded-xl font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105"
+                className="bg-primary-red text-white px-8 py-4 rounded-md font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105"
               >
                 <FaMicrophone className="text-xl" />
                 <span>Ascultă Podcast-ul</span>
@@ -694,7 +640,7 @@ export const HomePage = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold">Ultimul Episod</h3>
-                    <p className="text-gray-300">Credința în Medicină</p>
+                    <p className="text-gray-300">Credința în Viața Universitară</p>
                   </div>
                 </div>
                 <div className="bg-gray-800 rounded-lg p-4">
@@ -714,7 +660,7 @@ export const HomePage = () => {
 
       {/* Daily Devotional Section */}
       <section className="py-20 bg-primary-red text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto px-4 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

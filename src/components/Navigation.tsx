@@ -58,8 +58,7 @@ export const Navigation = () => {
         { path: '/form', label: 'Înscrie-te', icon: 'ri-user-add-line' }
       ]
     },
-    { path: '/contact', label: t('contact'), type: 'single' },
-    { path: '/dashboard', label: t('dashboard'), type: 'single' }
+    { path: '/contact', label: t('contact'), type: 'single' }
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -172,6 +171,14 @@ export const Navigation = () => {
                 )}
               </div>
             ))}
+            
+            {/* Inscriere Button */}
+            <Link
+              to="/form"
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+            >
+              Înscriere
+            </Link>
             
             {/* Language Toggle */}
             <button
