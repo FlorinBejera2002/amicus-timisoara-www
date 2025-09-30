@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaMicrophone, FaYoutube, FaPlay, FaClock } from 'react-icons/fa';
+import { FaYoutube, FaPlay, FaClock } from 'react-icons/fa';
 
 interface YouTubeVideo {
   id: string;
