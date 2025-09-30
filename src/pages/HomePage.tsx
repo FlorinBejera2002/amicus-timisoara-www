@@ -13,12 +13,10 @@ import {
   FaMicrophone,
   FaPray,
   FaHeart,
-  FaGraduationCap,
   FaTimes,
   FaChevronLeft,
   FaChevronRight
 } from 'react-icons/fa';
-import logo from '@/assets/Logo-Amicus.png';
 import bgImage from '@/assets/bg-image.png';
 import Footer from '../components/Footer';
 import LazyImage from '../components/LazyImage';
