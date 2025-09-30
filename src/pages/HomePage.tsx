@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { 
   FaFacebookF, 
   FaInstagram, 
@@ -42,7 +41,6 @@ import member7 from '@/assets/_DSC9866-2.jpg';
 import member8 from '@/assets/_DSC9954-2.jpg';
 
 export const HomePage = () => {
-  const { t } = useTranslation();
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -69,59 +67,59 @@ export const HomePage = () => {
   const committeeMembers = [
     {
       id: 1,
-      name: 'Maria Popescu',
+      name: 'Florin Bejera',
       position: 'Președinte',
-      image: member1,
+      image: member3,
       description: 'Coordonează activitățile generale ale asociației și reprezintă AMiCUS în relațiile cu universitățile și organizațiile studențești. Asigură implementarea strategiei și viziunii organizației studențești.'
     },
     {
       id: 2,
-      name: 'Andrei Ionescu',
-      position: 'Vicepreședinte',
-      image: member2,
-      description: 'Sprijină președintele în coordonarea activităților și preia responsabilitățile acestuia în absența sa. Coordonează proiectele strategice ale asociației.'
+      name: 'Carolina Boghiu',
+      position: 'Administrativ & Resurse Umane',
+      image: member1,
+      description: 'Coordonează activitățile administrativă ale asociației. Asigură gestionarea documentației și menținerea comunicării internă. Asigură respectarea procedurilor administrative.'
     },
     {
       id: 3,
-      name: 'Elena Dumitrescu',
-      position: 'Secretar General',
-      image: member3,
-      description: 'Gestionează documentația oficială, organizează ședințele și menține comunicarea internă. Asigură respectarea procedurilor administrative.'
-    },
-    {
-      id: 4,
-      name: 'Alexandru Georgescu',
-      position: 'Trezorier',
-      image: member4,
-      description: 'Administrează fondurile asociației, elaborează bugetul anual și monitorizează cheltuielile. Asigură transparența financiară a organizației.'
-    },
-    {
-      id: 5,
-      name: 'Ioana Marinescu',
-      position: 'Coordonator Proiecte Sociale',
-      image: member5,
-      description: 'Dezvoltă și coordonează proiectele sociale ale AMiCUS. Colaborează cu organizațiile partenere pentru maximizarea impactului în comunitate.'
-    },
-    {
-      id: 6,
-      name: 'Mihai Constantinescu',
-      position: 'Coordonator Evenimente',
-      image: member6,
-      description: 'Planifică și organizează conferințele, seminariile și activitățile culturale. Asigură logistica și promovarea evenimentelor asociației.'
-    },
-    {
-      id: 7,
-      name: 'Ana Stoica',
-      position: 'Coordonator PR & Marketing',
+      name: 'Luis Pruteanu',
+      position: 'Marketing & PR',
       image: member7,
       description: 'Gestionează prezența online a AMiCUS, dezvoltă strategii de comunicare și menține relațiile cu media. Coordonează campaniile de promovare.'
     },
     {
-      id: 8,
-      name: 'David Radu',
-      position: 'Coordonator Spiritual',
+      id: 4,
+      name: 'Oana Popa',
+      position: 'Cultural',
+      image: member6,
+      description: 'Planifică și organizează conferințele, seminariile și activitățile culturale. Asigură logistica și promovarea evenimentelor asociației.'
+    },
+    {
+      id: 5,
+      name: 'Oana Maghiarii',
+      position: 'Social si Spiritual',
       image: member8,
-      description: 'Coordonează activitățile spirituale, organizează studiile biblice și momentele de rugăciune. Oferă consiliere spirituală membrilor asociației.'
+      description: 'Dezvoltă și coordonează proiectele sociale ale AMiCUS. Colaborează cu organizațiile partenere pentru maximizarea impactului în comunitate.'
+    },
+    {
+      id: 6,
+      name: 'Marc Gherzan',
+      position: 'Recreativ',
+      image: member5,
+      description: 'Planifică și organizează conferințele, seminariile și activitățile culturale. Asigură logistica și promovarea evenimentelor asociației.'
+    },
+    {
+      id: 7,
+      name: 'Gabriela Mich',
+      position: 'Proiecte',
+      image: member2,
+      description: 'Planifică și organizează conferințele, seminariile și activitățile culturale. Asigură logistica și promovarea evenimentelor asociației.'
+    },
+    {
+      id: 8,
+      name: 'Levis Nistor',
+      position: 'Capelan',
+      image: member4,
+      description: 'Sprijină președintele în coordonarea activităților și preia responsabilitățile acestuia în absența sa. Coordonează proiectele strategice ale asociației.'
     }
   ];
 
@@ -222,64 +220,89 @@ export const HomePage = () => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="relative z-10 text-center text-white w-full max-w-7xl mx-auto flex flex-col items-center justify-center"
+          className="relative z-10 text-center text-white w-full max-w-7xl mx-auto flex flex-col items-center justify-center px-4 mt-28"
         >
-          {/* Main Title with Enhanced Typography */}
+          
+          {/* Main Title */}
           <motion.h1 
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-white via-white to-red-200 bg-clip-text text-transparent drop-shadow-lg leading-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight"
           >
-            {t('heroTitle').split(' ')[0]}
-            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-primary-red font-semibold mt-1 sm:mt-2">
-              {t('heroTitle').split(' ')[1]}
+            <span className="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+              AMiCUS
+            </span>
+            <br />
+            <span className="text-primary-red text-4xl md:text-5xl lg:text-6xl font-semibold">
+              Timișoara
             </span>
           </motion.h1>
 
-          {/* Subtitle with Better Spacing */}
+          {/* Subtitle */}
           <motion.p 
             variants={itemVariants}
-            className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-4 sm:mb-6 text-gray-200 font-light tracking-wide px-2"
+            className="text-xl md:text-2xl mb-4 text-gray-200 font-light max-w-3xl"
           >
-            {t('heroSubtitle')}
+            Asociația Studenților Creștini din Timișoara
           </motion.p>
 
-          {/* Enhanced Action Buttons */}
+          {/* Description */}
+          <motion.p 
+            variants={itemVariants}
+            className="text-lg md:text-xl mb-12 text-gray-300 max-w-2xl leading-relaxed"
+          >
+            O comunitate de studenți creștini care se întâlnesc pentru a crește împreună în credință, prietenie și serviciu în orașul Timișoara.
+          </motion.p>
+
+          {/* Action Buttons */}
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col items-center md:flex-row gap-4 md:gap-6 justify-center mb-12 md:mb-16 px-2"
+            className="flex flex-col sm:flex-row gap-6 justify-center mb-16"
           >
             <Link
               to="/form"
-              className="w-fit group bg-primary-red text-white px-4 md:px-6 lg:px-8 py-3 md:py-4 rounded-md font-semibold text-base sm:text-lg md:text-xl hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 shadow-2xl hover:shadow-red-500/25 hover:scale-105 animate-pulse"
-              onClick={() => {
-                if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'click', {
-                    event_category: 'engagement',
-                    event_label: 'hero_join_button'
-                  });
-                }
-              }}
+              className="group bg-primary-red text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-all duration-300 flex items-center justify-center space-x-3 shadow-2xl hover:shadow-red-500/25 hover:scale-105"
             >
               <FaUsers className="text-xl" />
-              <span>{t('joinUs') || 'Alătură-te nouă'}</span>
+              <span>Înscrie-te acum</span>
             </Link>
             
             <Link
               to="/about"
-              className="w-fit group border-2 border-white/80 text-white px-4 md:px-6 lg:px-8 py-3 md:py-4 rounded-md font-semibold text-base sm:text-lg md:text-xl hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-2 sm:space-x-3 backdrop-blur-sm hover:scale-105"
-              onClick={() => {
-                // Add page tracking
-                if (typeof window !== 'undefined' && window.gtag) {
-                  window.gtag('event', 'click', {
-                    event_category: 'engagement',
-                    event_label: 'hero_learn_more_button'
-                  });
-                }
-              }}
+              className="group border-2 border-white/80 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 flex items-center justify-center space-x-3 backdrop-blur-sm hover:scale-105"
             >
               <FaHeart className="text-xl" />
-              <span>{t('learnMore') || 'Află mai multe'}</span>
+              <span>Află mai multe</span>
             </Link>
+          </motion.div>
+
+          {/* Features Grid */}
+          <motion.div 
+            variants={itemVariants}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full mb-12"
+          >
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+                <FaPray className="text-2xl text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Creștere Spirituală</h3>
+              <p className="text-gray-300 text-sm">Studii biblice, rugăciune și dezvoltare în credința creștină</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+                <FaUsers className="text-2xl text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Comunitate</h3>
+              <p className="text-gray-300 text-sm">Prietenii autentice și sprijin reciproc între studenți</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
+                <FaHandsHelping className="text-2xl text-white" />
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Serviciu</h3>
+              <p className="text-gray-300 text-sm">Proiecte sociale și voluntariat în comunitatea locală</p>
+            </div>
           </motion.div>
 
           {/* Mobile Social Icons */}
@@ -362,11 +385,8 @@ export const HomePage = () => {
             className="text-center mb-10 sm:mb-12 md:mb-16"
           >
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
-              Comitetul Director
+              Echipa de organizare - 2025
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-xs sm:max-w-md md:max-w-2xl mx-auto px-4">
-              Cunoaște echipa de leadership care coordonează activitățile AMiCUS Timișoara
-            </p>
           </motion.div>
 
           {/* Desktop and Tablet Grid */}
@@ -381,12 +401,12 @@ export const HomePage = () => {
                 className="group cursor-pointer"
                 onClick={() => setSelectedMember(member)}
               >
-                <div className="bg-gray-50 rounded-md p-4 sm:p-5 md:p-6 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <div className="bg-gray-50 rounded-md p-4 sm:p-5 md:p-6 hover:shadow-sm transition-all duration-300 group-hover:scale-105">
                   <div className="relative mb-3 sm:mb-4 overflow-hidden rounded-lg sm:rounded-md">
                     <LazyImage 
                       src={member.image} 
                       alt={member.name}
-                      className="w-full h-40 sm:h-44 md:h-48 group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-50"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
