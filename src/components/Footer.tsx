@@ -132,25 +132,6 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Newsletter Signup */}
-        <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8">
-          <div className="max-w-sm sm:max-w-md mx-auto text-center">
-            <h3 className="font-semibold text-base sm:text-lg mb-2">Stay Connected</h3>
-            <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
-              Subscribe to our newsletter for updates on events and activities
-            </p>
-            <div className="flex flex-col xs:flex-row space-y-2 xs:space-y-0 xs:space-x-2">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-3 sm:px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent text-white placeholder-gray-400 text-sm sm:text-base"
-              />
-              <button className="bg-primary-red text-white px-4 sm:px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 text-sm sm:text-base whitespace-nowrap">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
 
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">

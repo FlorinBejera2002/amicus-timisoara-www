@@ -385,10 +385,6 @@ export const EventsPage = () => {
                 <span>Alătură-te Comunității</span>
                 <i className="ri-user-add-line"></i>
               </Link>
-              <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-red transition-colors duration-200 inline-flex items-center justify-center space-x-2">
-                <span>Abonează-te la Newsletter</span>
-                <i className="ri-mail-line"></i>
-              </button>
             </div>
           </motion.div>
         </div>

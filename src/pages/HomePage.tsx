@@ -20,6 +20,8 @@ import {
 import bgImage from '@/assets/bg-image.png';
 import Footer from '../components/Footer';
 import LazyImage from '../components/LazyImage';
+import YouTubePodcast from '../components/YouTubePodcast';
+import DailyVerse from '../components/DailyVerse';
 
 // Global gtag declaration
 declare global {
@@ -235,14 +237,6 @@ export const HomePage = () => {
             </span>
           </motion.h1>
 
-          {/* Subtitle */}
-          <motion.p 
-            variants={itemVariants}
-            className="text-xl md:text-2xl mb-4 text-gray-200 font-light max-w-3xl"
-          >
-            Asociația Studenților Creștini din Timișoara
-          </motion.p>
-
           {/* Description */}
           <motion.p 
             variants={itemVariants}
@@ -301,14 +295,15 @@ export const HomePage = () => {
               <h3 className="text-xl font-semibold mb-2">Serviciu</h3>
               <p className="text-gray-300 text-sm">Proiecte sociale și voluntariat în comunitatea locală</p>
             </div>
+
+            
           </motion.div>
 
-          {/* Mobile Social Icons */}
-        <motion.div
+          <motion.div
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="md:hidden flex space-x-2 sm:space-x-3 justify-center mt-10"
+          className="md:hidden flex space-x-2 sm:space-x-3 justify-center mb-16"
         >
           {[
              { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
@@ -328,62 +323,116 @@ export const HomePage = () => {
           ))}
         </motion.div>
 
+          {/* Mobile Social Icons */}
+       
+
         </motion.div>
       </section>
 
       {/* Book Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Book Image */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
               viewport={{ once: true }}
+              className="relative "
             >
-              <div className="bg-gradient-to-br from-primary-red to-red-800 rounded-lg p-8 text-white shadow-xl">
-                <i className="ri-book-open-line text-6xl mb-4"></i>
-                <h3 className="text-2xl font-bold mb-2">Cartea AMiCUS</h3>
-                <p className="text-red-100">O colecție de povești inspiraționale și învățături spirituale</p>
+              <div className="relative group">
+                {/* Book Cover Placeholder - Replace with actual book image */}
+                <div className="bg-gradient-to-br from-primary-red via-red-600 to-red-800 rounded-2xl shadow-2xl transform rotate-3 group-hover:rotate-0 transition-transform duration-500 aspect-[6/4] flex flex-col justify-between p-8 text-white">
+                  <div>
+                    <FaBookOpen className="text-6xl mb-4 opacity-80" />
+                    <h3 className="text-3xl font-bold mb-2">AMiCUS</h3>
+                    <p className="text-red-100 text-lg">Povești de credință</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-red-200 text-sm">Asociația Studenților</p>
+                    <p className="text-red-200 text-sm">Creștini Timișoara</p>
+                  </div>
+                </div>
+                
+                {/* Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary-red/20 to-red-800/20 rounded-2xl blur-xl scale-110 -z-10"></div>
               </div>
             </motion.div>
+
+            {/* Book Content */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
+              className="space-y-8"
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Descoperă Cartea AMiCUS
-              </h2>
-              <p className="text-lg text-gray-600 mb-6">
-                O compilație unică de experiențe, mărturii și învățături din comunitatea studenților creștini AMiCUS. 
-                Fiecare pagină reflectă călătoria spirituală și academică a studenților noștri.
-              </p>
-              <Link
-                to="/book"
-                className="bg-primary-red text-white px-8 py-4 rounded-md font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105"
-              >
-                <FaBookOpen className="text-xl" />
-                <span>Citește Cartea</span>
-              </Link>
+              <div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Cartea AMiCUS
+            </h2>
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                  Cartea AMiCUS este o compilație unică de experiențe, mărturii și învățături din comunitatea studenților creștini. 
+                  Fiecare pagină reflectă călătoria spirituală și academică a studenților noștri, oferind inspirație și îndrumire.
+                </p>
+              </div>
+
+              {/* Features */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaHeart className="text-primary-red text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Mărturii Personale</h4>
+                    <p className="text-gray-600 text-sm">Povești reale de transformare și creștere</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-primary-red/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <FaPray className="text-primary-red text-xl" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Învățături Spirituale</h4>
+                    <p className="text-gray-600 text-sm">Reflecții biblice și aplicații practice</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  to="/book"
+                  className="bg-primary-red text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center justify-center space-x-3 hover:scale-105 shadow-lg"
+                >
+                  <FaBookOpen className="text-xl" />
+                  <span>Citește Online</span>
+                </Link>
+                
+                <button className="border-2 border-primary-red text-primary-red px-8 py-4 rounded-lg font-semibold hover:bg-primary-red hover:text-white transition-all duration-300 inline-flex items-center justify-center space-x-3 hover:scale-105">
+                  <FaEnvelope className="text-xl" />
+                  <span>Obține un exemplar</span>
+                </button>
+              </div>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Committee Section */}
-      <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-10 sm:mb-12 md:mb-16"
+            className="text-center mb-8 md:mb-10"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 px-2">
-              Echipa de organizare - 2025
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 px-2">
+              Echipa Noastră
             </h2>
           </motion.div>
 
@@ -435,16 +484,16 @@ export const HomePage = () => {
                         onClick={() => setSelectedMember(member)}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <div className="bg-gray-50 rounded-lg xs:rounded-md p-3 xs:p-4 hover:shadow-lg transition-all duration-300">
-                          <div className="relative mb-2 xs:mb-3 overflow-hidden rounded-md xs:rounded-lg">
+                        <div className="bg-gray-50 rounded-lg p-4 xs:p-5 hover:shadow-lg transition-all duration-300">
+                          <div className="relative mb-3 xs:mb-4 overflow-hidden rounded-lg">
                             <LazyImage 
                               src={member.image} 
                               alt={member.name}
-                              className="w-full h-28 xs:h-32 group-hover:scale-110 transition-transform duration-300"
+                              className="w-full h-36 xs:h-40 group-hover:scale-110 transition-transform duration-300"
                             />
                           </div>
-                          <h3 className="text-xs xs:text-sm font-bold text-gray-900 mb-1 leading-tight">{member.name}</h3>
-                          <p className="text-primary-red font-medium text-xs leading-tight">{member.position}</p>
+                          <h3 className="text-sm xs:text-base font-bold text-gray-900 mb-1 leading-tight">{member.name}</h3>
+                          <p className="text-primary-red font-medium text-xs xs:text-sm leading-tight">{member.position}</p>
                         </div>
                       </motion.div>
                     ))}
@@ -457,16 +506,16 @@ export const HomePage = () => {
             <button
               onClick={prevSlide}
               aria-label="Slide anterior"
-              className="absolute left-1 xs:left-0 top-1/2 transform -translate-y-1/2 xs:-translate-x-4 w-8 h-8 xs:w-10 xs:h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
+              className="absolute left-1 xs:left-0 top-1/2 transform -translate-y-1/2 xs:-translate-x-4 w-7 h-7 xs:w-8 xs:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
             >
-              <FaChevronLeft className="text-sm xs:text-base" />
+              <FaChevronLeft className="text-xs xs:text-sm" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Slide următor"
-              className="absolute right-1 xs:right-0 top-1/2 transform -translate-y-1/2 xs:translate-x-4 w-8 h-8 xs:w-10 xs:h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
+              className="absolute right-1 xs:right-0 top-1/2 transform -translate-y-1/2 xs:translate-x-4 w-7 h-7 xs:w-8 xs:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
             >
-              <FaChevronRight className="text-sm xs:text-base" />
+              <FaChevronRight className="text-xs xs:text-sm" />
             </button>
 
             {/* Carousel Indicators */}
@@ -531,14 +580,14 @@ export const HomePage = () => {
       </section>
 
       {/* Events Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-10 md:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Evenimente Viitoare
@@ -548,66 +597,167 @@ export const HomePage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              { 
-                title: 'Întâlnire Săptămânală', 
-                date: 'Joi, 20:00', 
-                location: 'Piața Mocioni 7',
-                Icon: FaPray,
-                color: 'bg-blue-500'
-              },
-              { 
-                title: 'Conferința Anuală', 
-                date: '15 Decembrie', 
-                location: 'Sala Mare UVT',
-                Icon: FaCalendarAlt,
-                color: 'bg-green-500'
-              },
-              { 
-                title: 'Proiect Social', 
-                date: '20 Decembrie', 
-                location: 'Centrul Orașului',
-                Icon: FaHandsHelping,
-                color: 'bg-purple-500'
-              }
-            ].map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-md p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              >
-                <div className="flex items-center mb-4">
-                  <div className={`w-12 h-12 ${event.color} rounded-md flex items-center justify-center mr-4`}>
-                    <event.Icon className="text-xl text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{event.title}</h3>
-                    <p className="text-primary-red font-medium">{event.date}</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 mb-4 flex items-center">
-                  <FaUsers className="mr-2 text-primary-red" />
-                  {event.location}
-                </p>
-                <Link
-                  to="/events"
-                  className="text-primary-red font-medium hover:text-red-700 transition-colors duration-200 inline-flex items-center space-x-2"
-                >
-                  <span>Află mai multe</span>
-                  <FaChevronRight className="text-sm" />
-                </Link>
-              </motion.div>
-            ))}
+          {/* Events Scroll Container */}
+          <div className="relative">
+            <div className="overflow-x-auto pb-4">
+              <div className="flex space-x-6 min-w-max">
+                {[
+                  { 
+                    id: 1,
+                    title: 'Întâlnire Săptămânală', 
+                    date: 'Joi, 19 Decembrie',
+                    time: '20:00 - 22:00',
+                    location: 'Piața Mocioni 7, Timișoara',
+                    guest: 'Pastor Daniel Popescu',
+                    theme: 'Credința în Timpul Examenelor',
+                    type: 'Întâlnire Spirituală',
+                    Icon: FaPray,
+                    color: 'bg-blue-500'
+                  },
+                  { 
+                    id: 2,
+                    title: 'Conferința Anuală AMiCUS', 
+                    date: 'Sâmbătă, 15 Decembrie',
+                    time: '09:00 - 18:00',
+                    location: 'Sala Mare UVT, Timișoara',
+                    guest: 'Dr. Maria Ionescu',
+                    theme: 'Viitorul Creștinismului în Universități',
+                    type: 'Conferință',
+                    Icon: FaCalendarAlt,
+                    color: 'bg-green-500'
+                  },
+                  { 
+                    id: 3,
+                    title: 'Proiect Social - Ajutorarea Nevoiașilor', 
+                    date: 'Duminică, 22 Decembrie',
+                    time: '14:00 - 17:00',
+                    location: 'Centrul Orașului, Timișoara',
+                    guest: 'Echipa AMiCUS',
+                    theme: 'Serviciul în Comunitate',
+                    type: 'Proiect Social',
+                    Icon: FaHandsHelping,
+                    color: 'bg-purple-500'
+                  },
+                  { 
+                    id: 4,
+                    title: 'Seară de Rugăciune și Laudă', 
+                    date: 'Vineri, 27 Decembrie',
+                    time: '19:30 - 21:30',
+                    location: 'Biserica Baptistă Emanuel',
+                    guest: 'Trupa de Laudă AMiCUS',
+                    theme: 'Mulțumire și Recunoștință',
+                    type: 'Eveniment Spiritual',
+                    Icon: FaMicrophone,
+                    color: 'bg-red-500'
+                  },
+                  { 
+                    id: 5,
+                    title: 'Workshop Leadership Creștin', 
+                    date: 'Sâmbătă, 4 Ianuarie',
+                    time: '10:00 - 16:00',
+                    location: 'Centrul de Conferințe UVT',
+                    guest: 'Pr. Alexandru Munteanu',
+                    theme: 'Dezvoltarea Liderilor Creștini',
+                    type: 'Workshop',
+                    Icon: FaUsers,
+                    color: 'bg-indigo-500'
+                  }
+                ].map((event, index) => (
+                  <motion.div
+                    key={event.id}
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[320px] max-w-[320px] flex-shrink-0"
+                  >
+                    {/* Event Header */}
+                    <div className="flex items-start justify-between mb-4">
+                      <div className={`w-12 h-12 ${event.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                        <event.Icon className="text-xl text-white" />
+                      </div>
+                      <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                        {event.type}
+                      </span>
+                    </div>
+
+                    {/* Event Title */}
+                    <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 leading-tight">
+                      {event.title}
+                    </h3>
+
+                    {/* Event Details */}
+                    <div className="space-y-3 mb-4">
+                      {/* Date & Time */}
+                      <div className="flex items-center text-sm text-gray-600">
+                        <FaCalendarAlt className="mr-2 text-primary-red flex-shrink-0" />
+                        <div>
+                          <p className="font-medium">{event.date}</p>
+                          <p className="text-xs text-gray-500">{event.time}</p>
+                        </div>
+                      </div>
+
+                      {/* Location */}
+                      <div className="flex items-start text-sm text-gray-600">
+                        <FaUsers className="mr-2 text-primary-red mt-0.5 flex-shrink-0" />
+                        <p className="line-clamp-2">{event.location}</p>
+                      </div>
+
+                      {/* Guest */}
+                      <div className="flex items-center text-sm text-gray-600">
+                        <FaMicrophone className="mr-2 text-primary-red flex-shrink-0" />
+                        <p className="font-medium">{event.guest}</p>
+                      </div>
+
+                      {/* Theme */}
+                      <div className="flex items-start text-sm text-gray-600">
+                        <FaBookOpen className="mr-2 text-primary-red mt-0.5 flex-shrink-0" />
+                        <p className="line-clamp-2 italic">"{event.theme}"</p>
+                      </div>
+                    </div>
+
+                    {/* CTA Button */}
+                    <Link
+                      to="/events"
+                      className="w-full bg-primary-red text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center justify-center space-x-2 group"
+                    >
+                      <span>Află mai multe</span>
+                      <FaChevronRight className="text-sm group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+
+            {/* Scroll Indicators */}
+            <div className="flex justify-center mt-6 space-x-2">
+              <div className="w-2 h-2 bg-primary-red rounded-full"></div>
+              <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+              <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
+            </div>
           </div>
+
+          {/* View All Events Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Link
+              to="/events"
+              className="bg-primary-red text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105 shadow-lg"
+            >
+              <FaCalendarAlt className="text-xl" />
+              <span>Vezi Toate Evenimentele</span>
+            </Link>
+          </motion.div>
         </div>
       </section>
 
       {/* Podcast Section */}
-      <section className="py-20 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -645,63 +795,18 @@ export const HomePage = () => {
                 <span>Ascultă Podcast-ul</span>
               </Link>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg p-8 text-white">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mr-4">
-                    <i className="ri-play-fill text-2xl"></i>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold">Ultimul Episod</h3>
-                    <p className="text-gray-300">Credința în Viața Universitară</p>
-                  </div>
-                </div>
-                <div className="bg-gray-800 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-gray-400">00:00</span>
-                    <span className="text-sm text-gray-400">45:32</span>
-                  </div>
-                  <div className="w-full bg-gray-600 rounded-full h-2">
-                    <div className="bg-primary-red h-2 rounded-full w-1/3"></div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <YouTubePodcast 
+              channelId="UCYourChannelIdHere"
+              // apiKey="YOUR_YOUTUBE_API_KEY" // Uncomment and add your API key
+            />
           </div>
         </div>
       </section>
 
-      {/* Daily Devotional Section */}
-      <section className="py-20 bg-primary-red text-white">
-        <div className="max-w-4xl mx-auto px-4 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <i className="ri-book-read-line text-6xl mb-6"></i>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Devoționalul Zilnic
-            </h2>
-            <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-              "Căci Eu știu gândurile pe care le am cu privire la voi, zice Domnul, 
-              gânduri de pace și nu de nenorocire, ca să vă dau un viitor și o nădejde."
-            </p>
-            <p className="text-red-200 mb-8">- Ieremia 29:11</p>
-            <Link
-              to="/devotional"
-              className="bg-white text-primary-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 inline-flex items-center space-x-2"
-            >
-              <span>Citește Devoționalul</span>
-              <i className="ri-book-open-line"></i>
-            </Link>
-          </motion.div>
+      {/* Daily Verse Section */}
+      <section className="py-10 md:py-16 bg-primary-red text-white">
+        <div className="max-w-6xl mx-auto px-4 lg:px-8">
+          <DailyVerse />
         </div>
       </section>
 

@@ -7,6 +7,7 @@ import './i18n';
 import Navigation from './components/Navigation';
 import LoadingAnimation from './components/LoadingAnimation';
 import PrayerWall from './components/PrayerWall';
+import CookieBanner from './components/CookieBanner';
 
 // Pages
 import HomePage from './pages/HomePage';
@@ -58,6 +59,8 @@ function App() {
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/prayer-wall" element={<PrayerWall />} />
             </Routes>
+            
+            <CookieBanner />
           </div>
         )}
       </div>
