@@ -150,12 +150,6 @@ export const Events = () => {
       setCurrentEventSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
     };
 
-    // Get events for current slide (for desktop)
-    const getCurrentSlideEvents = () => {
-      const start = currentEventSlide * cardsPerSlide;
-      return eventsData.slice(start, start + cardsPerSlide);
-    };
-
     // Keyboard navigation for events carousel
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {

@@ -1,13 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { 
-  FaUsers,
-  FaHandsHelping,
-  FaCalendarAlt,
-  FaTimes,
-  FaChevronLeft,
-  FaChevronRight,
-} from 'react-icons/fa';
+import { FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 // Import member photos
 import member1 from '@/assets/_DSC0059-2.jpg';
