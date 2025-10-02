@@ -10,7 +10,7 @@ import PrayerWall from './components/PrayerWall';
 import CookieBanner from './components/CookieBanner';
 
 // Pages
-import HomePage from './pages/HomePage';
+import {HomePage} from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import AboutPage from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';

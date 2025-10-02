@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import logo from '@/assets/Logo-Amicus.png';
 
 interface LoadingAnimationProps {
   isLoading: boolean;
@@ -26,7 +27,7 @@ export const LoadingAnimation = ({ isLoading }: LoadingAnimationProps) => {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="w-24 h-24 bg-primary-red rounded-full flex items-center justify-center"
+          className="w-24 h-24 rounded-full flex items-center justify-center"
         >
           <motion.span
             animate={{
@@ -37,9 +38,9 @@ export const LoadingAnimation = ({ isLoading }: LoadingAnimationProps) => {
               repeat: Infinity,
               ease: "easeInOut"
             }}
-            className="text-white font-bold text-2xl"
+            className=""
           >
-            A
+           <img src={logo} alt="AMiCUS Logo" className="w-24 h-24" />
           </motion.span>
         </motion.div>
 

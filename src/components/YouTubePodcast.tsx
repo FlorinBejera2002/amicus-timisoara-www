@@ -17,7 +17,7 @@ interface YouTubePodcastProps {
   apiKey?: string;
 }
 
-const YouTubePodcast: React.FC<YouTubePodcastProps> = ({ 
+export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({ 
   channelId = 'UCYourChannelIdHere', 
   apiKey 
 }) => {
@@ -205,4 +205,3 @@ const YouTubePodcast: React.FC<YouTubePodcastProps> = ({
   );
 };
 
-export default YouTubePodcast;
