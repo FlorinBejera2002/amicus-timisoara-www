@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaBookOpen, FaCalendarAlt, FaHeart } from 'react-icons/fa';
+import { FaBookOpen, FaCalendarAlt } from 'react-icons/fa';
 import dailyVersesData from '../data/dailyVerses.json';
 
 interface Verse {
@@ -10,7 +10,7 @@ interface Verse {
   date: string;
 }
 
-const DailyVerse: React.FC = () => {
+export const DailyVerse: React.FC = () => {
   const [todaysVerse, setTodaysVerse] = useState<Verse | null>(null);
 
   useEffect(() => {
@@ -110,44 +110,10 @@ const DailyVerse: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
         viewport={{ once: true }}
-        className="text-red-200 mb-8 text-lg font-semibold"
+        className="text-red-200 text-lg font-semibold"
       >
         - {todaysVerse.reference}
       </motion.p>
-
-      {/* Action Buttons */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.7 }}
-        viewport={{ once: true }}
-        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-      >
-        <button className="bg-white text-primary-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 inline-flex items-center space-x-2 shadow-lg hover:scale-105 transform">
-          <FaHeart className="text-xl" />
-          <span>Salvează Versetul</span>
-        </button>
-        
-        <button className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary-red transition-all duration-200 inline-flex items-center space-x-2 backdrop-blur-sm hover:scale-105 transform">
-          <FaBookOpen className="text-xl" />
-          <span>Citește Mai Mult</span>
-        </button>
-      </motion.div>
-
-      {/* Decorative Elements */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.8 }}
-        viewport={{ once: true }}
-        className="mt-12 flex justify-center space-x-4"
-      >
-        <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-        <div className="w-2 h-2 bg-white/50 rounded-full"></div>
-        <div className="w-2 h-2 bg-white/30 rounded-full"></div>
-      </motion.div>
     </motion.div>
   );
 };
-
-export default DailyVerse;

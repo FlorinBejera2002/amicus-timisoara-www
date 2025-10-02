@@ -15,13 +15,15 @@ import {
   FaHeart,
   FaTimes,
   FaChevronLeft,
-  FaChevronRight
+  FaChevronRight,
+  FaUser,
+  FaMapMarkerAlt,
+  FaCalendarPlus
 } from 'react-icons/fa';
 import bgImage from '@/assets/bg-image.png';
 import Footer from '../components/Footer';
-import LazyImage from '../components/LazyImage';
 import YouTubePodcast from '../components/YouTubePodcast';
-import DailyVerse from '../components/DailyVerse';
+import{ DailyVerse} from '../components/DailyVerse';
 
 // Global gtag declaration
 declare global {
@@ -44,6 +46,31 @@ export const HomePage = () => {
   const [selectedMember, setSelectedMember] = useState<any>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [currentEventSlide, setCurrentEventSlide] = useState(0);
+
+useEffect(() => {
+  if (!isAutoPlaying) return;
+  
+  const interval = setInterval(() => {
+    nextSlide();
+  }, 4000);
+
+  return () => clearInterval(interval);
+}, [isAutoPlaying]);
+
+// Keyboard navigation for events carousel
+useEffect(() => {
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'ArrowLeft') {
+      prevEventSlide();
+    } else if (event.key === 'ArrowRight') {
+      nextEventSlide();
+    }
+  };
+
+  window.addEventListener('keydown', handleKeyDown);
+  return () => window.removeEventListener('keydown', handleKeyDown);
+}, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -81,7 +108,7 @@ export const HomePage = () => {
     },
     {
       id: 3,
-      name: 'Luis Pruteanu',
+      name: 'Luis Prundeanu',
       position: 'Marketing & PR',
       image: member7,
       description: 'Gestionează prezența online a AMiCUS, dezvoltă strategii de comunicare și menține relațiile cu media. Coordonează campaniile de promovare.'
@@ -95,7 +122,7 @@ export const HomePage = () => {
     },
     {
       id: 5,
-      name: 'Oana Maghiarii',
+      name: 'Oana Maghiari',
       position: 'Social si Spiritual',
       image: member8,
       description: 'Dezvoltă și coordonează proiectele sociale ale AMiCUS. Colaborează cu organizațiile partenere pentru maximizarea impactului în comunitate.'
@@ -123,25 +150,152 @@ export const HomePage = () => {
     }
   ];
 
+  const cardsPerSlide = 2; 
+  const totalTeamSlides = Math.ceil(committeeMembers.length / cardsPerSlide);
+
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % Math.ceil(committeeMembers.length / 2));
+    setCurrentSlide((prev) => (prev + 1) % totalTeamSlides);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + Math.ceil(committeeMembers.length / 2)) % Math.ceil(committeeMembers.length / 2));
+    setCurrentSlide((prev) => (prev - 1 + totalTeamSlides) % totalTeamSlides);
   };
 
-  // Auto-play carousel
+  // Events data
+  const eventsData = [
+    { 
+      id: 1,
+      title: 'Prima întâlnire', 
+      date: 'Joi, 9 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      guest: 'Levis Nistor',
+      theme: 'Amprenta',
+      type: 'Întâlnire AMiCUS',
+      Icon: FaUsers,
+      color: 'bg-blue-500'
+    },
+    { 
+      id: 2,
+      title: 'Deschiderea anului Universitar', 
+      date: 'Sâmbătă, 11 Noiembrie',
+      time: '17:00 - 18:00',
+      location: 'Biserica AZS Maranatha, Timișoara',
+      guest: 'Ionuț Feier',
+      theme: 'Către necunoscut',
+      type: 'Eveniment',
+      Icon: FaCalendarAlt,
+      color: 'bg-green-500'
+    },
+    { 
+      id: 3,
+      title: 'Serată', 
+      date: 'Sâmbătă, 11 Noiembrie',
+      time: '20:00 - 23:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      guest: 'Echipa AMiCUS',
+      theme: 'Seară de jocuri',
+      type: 'Recreativ',
+      Icon: FaHandsHelping,
+      color: 'bg-purple-500'
+    },
+    { 
+      id: 4,
+      title: 'Întâlnire AMiCUS', 
+      date: 'Joi, 16 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      guest: 'Mihoc',
+      theme: 'Față în față cu succesul?',
+      type: 'Întâlnire AMiCUS',
+      Icon: FaUsers,
+      color: 'bg-blue-500'
+    },
+    { 
+      id: 5,
+      title: 'Drumeție', 
+      date: 'Duminica, 19 Octombrie',
+      time: '09:00 - 18:00',
+      location: 'Moneasa - Platoul Tinoasa - Cabana Izoi',
+      guest: 'Pr. Alexandru Munteanu',
+      theme: 'Dezvoltarea Liderilor Creștini',
+      type: 'Recreativ',
+      Icon: FaUsers,
+      color: 'bg-indigo-500'
+    },
+    { 
+      id: 6,
+      title: 'De vorbă cu capelanul', 
+      date: 'Marti, 21 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      guest: 'Levis Nistor',
+      theme: 'De vorbă cu capelanul',
+      type: 'Proiect',
+      Icon: FaUsers,
+      color: 'bg-green-500'
+    },
+    { 
+      id: 7,
+      title: 'Întâlnire AMiCUS', 
+      date: 'Joi, 23 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      guest: 'Adi Dorgo',
+      theme: 'Orientare/Carieră',
+      type: 'Întâlnire AMiCUS',
+      Icon: FaUsers,
+      color: 'bg-blue-500'
+    },
+    { 
+      id: 8,
+      title: 'Ieșire culturală', 
+      date: 'Marți, 28 Octombrie',
+      time: '09:00 - 18:00',
+      location: 'Timișoara',
+      guest: '',
+      theme: 'Ieșire culturală',
+      type: 'Cultural',
+      Icon: FaUsers,
+      color: 'bg-green-500'
+    },
+    { 
+      id: 9,
+      title: 'Întâlnire AMiCUS', 
+      date: 'Joi, 30 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      guest: 'Florin Orodan',
+      theme: 'Apocalipsa',
+      type: 'Întâlnire AMiCUS',
+      Icon: FaUsers,
+      color: 'bg-blue-500'
+    }
+  ];
+  const cardsPerSlideEvents = 3; 
+
+  const totalSlides = Math.ceil(eventsData.length / cardsPerSlideEvents);
+
+
+  // Auto-advance events carousel
   useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 4000); // Change slide every 4 seconds
+    if (isAutoPlaying) {
+      const interval = setInterval(() => {
+        nextEventSlide();
+      }, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [isAutoPlaying]);
 
-    return () => clearInterval(interval);
-  }, [currentSlide, isAutoPlaying]);
+  const nextEventSlide = () => {
+    setCurrentEventSlide((prev) => (prev + 1) % totalSlides);
+  };
 
+  const prevEventSlide = () => {
+    setCurrentEventSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  };
+
+  
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -242,7 +396,7 @@ export const HomePage = () => {
             variants={itemVariants}
             className="text-lg md:text-xl mb-12 text-gray-300 max-w-2xl leading-relaxed"
           >
-            O comunitate de studenți creștini care se întâlnesc pentru a crește împreună în credință, prietenie și serviciu în orașul Timișoara.
+            Mai mult decât o comunitate, o asociație studențească sau o oportunitate de dezvoltare. AMiCUS Timișoara e o familie! Hai să fim prieteni!
           </motion.p>
 
           {/* Action Buttons */}
@@ -450,10 +604,11 @@ export const HomePage = () => {
               >
                 <div className="bg-gray-50 rounded-md p-4 sm:p-5 md:p-6 hover:shadow-sm transition-all duration-300 group-hover:scale-105">
                   <div className="relative mb-3 sm:mb-4 overflow-hidden rounded-lg sm:rounded-md">
-                    <LazyImage 
+                    <img 
                       src={member.image} 
                       alt={member.name}
-                      className="w-full h-50"
+                      className="w-full h-50 object-cover"
+                      loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
@@ -475,28 +630,31 @@ export const HomePage = () => {
                 className="flex transition-transform duration-300 ease-in-out"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
-                {Array.from({ length: Math.ceil(committeeMembers.length / 2) }).map((_, slideIndex) => (
+                {Array.from({ length: totalTeamSlides }).map((_, slideIndex) => (
                   <div key={slideIndex} className="w-full flex-shrink-0 grid grid-cols-2 gap-3 px-1">
-                    {committeeMembers.slice(slideIndex * 2, slideIndex * 2 + 2).map((member) => (
-                      <motion.div
-                        key={member.id}
-                        className="group cursor-pointer"
-                        onClick={() => setSelectedMember(member)}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <div className="bg-gray-50 rounded-lg p-4 xs:p-5 hover:shadow-lg transition-all duration-300">
-                          <div className="relative mb-3 xs:mb-4 overflow-hidden rounded-lg">
-                            <LazyImage 
-                              src={member.image} 
-                              alt={member.name}
-                              className="w-full h-36 xs:h-40 group-hover:scale-110 transition-transform duration-300"
-                            />
+                    {committeeMembers
+                      .slice(slideIndex * cardsPerSlide, slideIndex * cardsPerSlide + cardsPerSlide)
+                      .map((member) => (
+                        <motion.div
+                          key={member.id}
+                          className="group cursor-pointer"
+                          onClick={() => setSelectedMember(member)}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <div className="bg-gray-50 rounded-lg p-3 hover:shadow-lg transition-all duration-300 h-full">
+                            <div className="relative mb-2 overflow-hidden rounded-lg aspect-square">
+                              <img 
+                                src={member.image} 
+                                alt={member.name}
+                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                loading="lazy"
+                              />
+                            </div>
+                            <h3 className="text-sm font-bold text-gray-900 mb-1 leading-tight line-clamp-1">{member.name}</h3>
+                            <p className="text-primary-red font-medium text-xs leading-tight line-clamp-1">{member.position}</p>
                           </div>
-                          <h3 className="text-sm xs:text-base font-bold text-gray-900 mb-1 leading-tight">{member.name}</h3>
-                          <p className="text-primary-red font-medium text-xs xs:text-sm leading-tight">{member.position}</p>
-                        </div>
-                      </motion.div>
-                    ))}
+                        </motion.div>
+                      ))}
                   </div>
                 ))}
               </motion.div>
@@ -506,26 +664,26 @@ export const HomePage = () => {
             <button
               onClick={prevSlide}
               aria-label="Slide anterior"
-              className="absolute left-1 xs:left-0 top-1/2 transform -translate-y-1/2 xs:-translate-x-4 w-7 h-7 xs:w-8 xs:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
+              className="absolute left-1 xs:left-0 top-1/2 transform -translate-y-1/2 xs:-translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
             >
-              <FaChevronLeft className="text-xs xs:text-sm" />
+              <FaChevronLeft className="text-sm" />
             </button>
             <button
               onClick={nextSlide}
               aria-label="Slide următor"
-              className="absolute right-1 xs:right-0 top-1/2 transform -translate-y-1/2 xs:translate-x-4 w-7 h-7 xs:w-8 xs:h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
+              className="absolute right-1 xs:right-0 top-1/2 transform -translate-y-1/2 xs:translate-x-4 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-gray-600 hover:text-primary-red transition-colors duration-200 z-10"
             >
-              <FaChevronRight className="text-xs xs:text-sm" />
+              <FaChevronRight className="text-sm" />
             </button>
 
             {/* Carousel Indicators */}
-            <div className="flex justify-center mt-4 xs:mt-6 space-x-1 xs:space-x-2">
-              {Array.from({ length: Math.ceil(committeeMembers.length / 2) }).map((_, index) => (
+            <div className="flex justify-center mt-4 xs:mt-6 space-x-2">
+              {Array.from({ length: totalTeamSlides }).map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   aria-label={`Mergi la slide-ul ${index + 1}`}
-                  className={`w-2 h-2 xs:w-2.5 xs:h-2.5 rounded-full transition-colors duration-200 ${
+                  className={`w-2.5 h-2.5 rounded-full transition-colors duration-200 ${
                     currentSlide === index ? 'bg-primary-red' : 'bg-gray-300'
                   }`}
                 />
@@ -560,10 +718,11 @@ export const HomePage = () => {
               
               <div className="text-center mb-5 sm:mb-6">
                 <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3 sm:mb-4 overflow-hidden rounded-full">
-                  <LazyImage 
+                  <img 
                     src={selectedMember.image} 
                     alt={selectedMember.name}
-                    className="w-full h-full"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{selectedMember.name}</h3>
@@ -597,144 +756,132 @@ export const HomePage = () => {
             </p>
           </motion.div>
 
-          {/* Events Scroll Container */}
+          {/* Events Container */}
           <div className="relative">
-            <div className="overflow-x-auto pb-4">
-              <div className="flex space-x-6 min-w-max">
-                {[
-                  { 
-                    id: 1,
-                    title: 'Întâlnire Săptămânală', 
-                    date: 'Joi, 19 Decembrie',
-                    time: '20:00 - 22:00',
-                    location: 'Piața Mocioni 7, Timișoara',
-                    guest: 'Pastor Daniel Popescu',
-                    theme: 'Credința în Timpul Examenelor',
-                    type: 'Întâlnire Spirituală',
-                    Icon: FaPray,
-                    color: 'bg-blue-500'
-                  },
-                  { 
-                    id: 2,
-                    title: 'Conferința Anuală AMiCUS', 
-                    date: 'Sâmbătă, 15 Decembrie',
-                    time: '09:00 - 18:00',
-                    location: 'Sala Mare UVT, Timișoara',
-                    guest: 'Dr. Maria Ionescu',
-                    theme: 'Viitorul Creștinismului în Universități',
-                    type: 'Conferință',
-                    Icon: FaCalendarAlt,
-                    color: 'bg-green-500'
-                  },
-                  { 
-                    id: 3,
-                    title: 'Proiect Social - Ajutorarea Nevoiașilor', 
-                    date: 'Duminică, 22 Decembrie',
-                    time: '14:00 - 17:00',
-                    location: 'Centrul Orașului, Timișoara',
-                    guest: 'Echipa AMiCUS',
-                    theme: 'Serviciul în Comunitate',
-                    type: 'Proiect Social',
-                    Icon: FaHandsHelping,
-                    color: 'bg-purple-500'
-                  },
-                  { 
-                    id: 4,
-                    title: 'Seară de Rugăciune și Laudă', 
-                    date: 'Vineri, 27 Decembrie',
-                    time: '19:30 - 21:30',
-                    location: 'Biserica Baptistă Emanuel',
-                    guest: 'Trupa de Laudă AMiCUS',
-                    theme: 'Mulțumire și Recunoștință',
-                    type: 'Eveniment Spiritual',
-                    Icon: FaMicrophone,
-                    color: 'bg-red-500'
-                  },
-                  { 
-                    id: 5,
-                    title: 'Workshop Leadership Creștin', 
-                    date: 'Sâmbătă, 4 Ianuarie',
-                    time: '10:00 - 16:00',
-                    location: 'Centrul de Conferințe UVT',
-                    guest: 'Pr. Alexandru Munteanu',
-                    theme: 'Dezvoltarea Liderilor Creștini',
-                    type: 'Workshop',
-                    Icon: FaUsers,
-                    color: 'bg-indigo-500'
-                  }
-                ].map((event, index) => (
-                  <motion.div
-                    key={event.id}
-                    initial={{ opacity: 0, x: 50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 min-w-[320px] max-w-[320px] flex-shrink-0"
-                  >
-                    {/* Event Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div className={`w-12 h-12 ${event.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                        <event.Icon className="text-xl text-white" />
-                      </div>
-                      <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                        {event.type}
-                      </span>
-                    </div>
-
-                    {/* Event Title */}
-                    <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 leading-tight">
-                      {event.title}
-                    </h3>
-
-                    {/* Event Details */}
-                    <div className="space-y-3 mb-4">
-                      {/* Date & Time */}
-                      <div className="flex items-center text-sm text-gray-600">
-                        <FaCalendarAlt className="mr-2 text-primary-red flex-shrink-0" />
-                        <div>
-                          <p className="font-medium">{event.date}</p>
-                          <p className="text-xs text-gray-500">{event.time}</p>
-                        </div>
-                      </div>
-
-                      {/* Location */}
-                      <div className="flex items-start text-sm text-gray-600">
-                        <FaUsers className="mr-2 text-primary-red mt-0.5 flex-shrink-0" />
-                        <p className="line-clamp-2">{event.location}</p>
-                      </div>
-
-                      {/* Guest */}
-                      <div className="flex items-center text-sm text-gray-600">
-                        <FaMicrophone className="mr-2 text-primary-red flex-shrink-0" />
-                        <p className="font-medium">{event.guest}</p>
-                      </div>
-
-                      {/* Theme */}
-                      <div className="flex items-start text-sm text-gray-600">
-                        <FaBookOpen className="mr-2 text-primary-red mt-0.5 flex-shrink-0" />
-                        <p className="line-clamp-2 italic">"{event.theme}"</p>
-                      </div>
-                    </div>
-
-                    {/* CTA Button */}
-                    <Link
-                      to="/events"
-                      className="w-full bg-primary-red text-white py-3 px-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center justify-center space-x-2 group"
+            {/* Navigation Arrows */}
+            <div className="flex justify-between w-full absolute top-1/2 -translate-y-1/2 left-0 right-0 z-10 px-2">
+              <button
+                onClick={prevEventSlide}
+                className="bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all duration-300 hover:scale-110 border border-gray-200"
+                aria-label="Evenimentul anterior"
+              >
+                <FaChevronLeft className="text-primary-red text-xl" />
+              </button>
+              <button
+                onClick={nextEventSlide}
+                className="bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all duration-300 hover:scale-110 border border-gray-200"
+                aria-label="Evenimentul următor"
+              >
+                <FaChevronRight className="text-primary-red text-xl" />
+              </button>
+            </div>
+            
+            {/* Events Carousel */}
+            <div 
+              className="overflow-hidden relative"
+              onMouseEnter={() => setIsAutoPlaying(false)}
+              onMouseLeave={() => setIsAutoPlaying(true)}
+            >
+              <div 
+                className="flex transition-transform duration-500 ease-in-out bg-transparent pb-6 px-2"
+                style={{ transform: `translateX(calc(-${currentEventSlide * 100}% - ${currentEventSlide * 1.5}rem))` }}
+              >
+                {eventsData.map((event, index) => (
+                  <div key={event.id} className="w-full flex-shrink-0 px-2">
+                    <motion.div
+                      initial={{ opacity: 0, x: 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="bg-white rounded-xl p-6 shadow-sm transition-all duration-300 hover:scale-105 flex flex-col h-full"
                     >
-                      <span>Află mai multe</span>
-                      <FaChevronRight className="text-sm group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </motion.div>
+                      {/* Event Header */}
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`w-12 h-12 ${event.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                          <event.Icon className="text-xl text-white" />
+                        </div>
+                        <span className="text-xs font-semibold text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
+                          {event.type}
+                        </span>
+                      </div>
+
+                      {/* Event Title */}
+                      <h3 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 leading-tight">
+                        {event.title}
+                      </h3>
+
+                      {/* Event Details */}
+                      <div className="space-y-3 mb-4 flex-grow">
+                        {/* Date & Time */}
+                        <div className="flex items-center text-sm text-gray-600">
+                          <FaCalendarAlt className="mr-2 text-primary-red flex-shrink-0" />
+                          <span>{event.date} • {event.time}</span>
+                        </div>
+                        
+                        {/* Location */}
+                        {event.location && (
+                          <div className="flex items-start text-sm text-gray-600">
+                            <FaMapMarkerAlt className="mr-2 text-primary-red mt-0.5 flex-shrink-0" />
+                            <span>{event.location}</span>
+                          </div>
+                        )}
+                        
+                        {/* Guest */}
+                        {event.guest && (
+                          <div className="flex items-center text-sm text-gray-600">
+                            <FaUser className="mr-2 text-primary-red flex-shrink-0" />
+                            <span>{event.guest}</span>
+                          </div>
+                        )}
+                        
+                        {/* Theme */}
+                        {event.theme && (
+                          <div className="flex items-center text-sm text-gray-600">
+                            <FaBookOpen className="mr-2 text-primary-red flex-shrink-0" />
+                            <span>{event.theme}</span>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* CTA Button */}
+                      <button 
+                        className="mt-auto w-full bg-primary-red text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-300 flex items-center justify-center space-x-2"
+                        onClick={() => {
+                          if (window.gtag) {
+                            window.gtag('event', 'select_content', {
+                              content_type: 'event',
+                              item_id: event.id,
+                              event_name: event.title
+                            });
+                          }
+                        }}
+                      >
+                        <FaCalendarPlus className="text-sm" />
+                        <span>Înscrie-te acum</span>
+                      </button>
+                    </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
-
+                     
             {/* Scroll Indicators */}
-            <div className="flex justify-center mt-6 space-x-2">
-              <div className="w-2 h-2 bg-primary-red rounded-full"></div>
-              <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-              <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-            </div>
+            {totalSlides > 1 && (
+              <div className="flex justify-center space-x-2">
+                {Array.from({ length: totalSlides }).map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentEventSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentEventSlide 
+                        ? 'bg-primary-red scale-110' 
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Mergi la slide-ul ${index + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* View All Events Button */}

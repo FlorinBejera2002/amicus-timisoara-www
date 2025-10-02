@@ -18,7 +18,7 @@ export const AboutPage = () => {
     {
       icon: 'ri-graduation-cap-line',
       title: 'Excelența',
-      description: 'Încurajăm performanța academică și profesională în domeniul medical și nu numai.'
+      description: 'Încurajăm performanța academică și profesională în toate domeniile de studiu.'
     },
     {
       icon: 'ri-hand-heart-line',
@@ -75,8 +75,7 @@ export const AboutPage = () => {
               Despre AMiCUS Timișoara
             </h1>
             <p className="text-xl text-red-100 max-w-3xl mx-auto">
-              Asociația Medicilor și Studenților Creștini din Timișoara - 
-              O comunitate dedicată dezvoltării spirituale și profesionale
+              Mai mult decât o comunitate, o asociație studențească sau o oportunitate de dezvoltare. AMiCUS Timișoara e o familie!
             </p>
           </motion.div>
         </div>
@@ -93,7 +92,7 @@ export const AboutPage = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                Misiunea Noastră
+                Despre Noi
               </h2>
               <p className="text-lg text-gray-600 mb-6">
                 AMiCUS Timișoara este o asociație studențească autonomă, apolitică, 
@@ -104,8 +103,16 @@ export const AboutPage = () => {
               </p>
               <p className="text-lg text-gray-600 mb-6">
                 Suntem parte din rețeaua națională AMiCUS, activând în 13 centre universitare 
-                din România și Republica Moldova, cu peste 2000 de membri activi.
+                din România și Republica Moldova, cu peste 2000 de membri activi. 
+                Poți afla mai multe despre AMiCUS la nivel național <a href="https://amicus.ro" target="_blank" rel="noopener noreferrer" className="text-primary-red hover:underline">aici</a>.
               </p>
+              
+              <div className="bg-primary-red/10 rounded-lg p-6 mb-6">
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Misiunea Noastră</h3>
+                <p className="text-lg text-gray-700 font-semibold italic">
+                  "Într-o societate fără reper, ne dorim să fim lumină!"
+                </p>
+              </div>
               <Link
                 to="/form"
                 className="bg-primary-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 inline-flex items-center space-x-2"
@@ -122,10 +129,13 @@ export const AboutPage = () => {
               className="bg-gray-50 rounded-lg p-8"
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Viziunea Noastră</h3>
-              <blockquote className="text-lg text-gray-700 italic mb-4">
-                "Să fim o comunitate de tineri creștini care impactează pozitiv societatea 
-                prin excelență profesională, integritate morală și serviciu dedicat."
+              <blockquote className="text-lg text-gray-700 mb-4">
+                <strong>Prietenii de calitate, proiecte cu impact, asumarea valorilor și un stil de viață diferit.</strong>
               </blockquote>
+              <p className="text-gray-700 mb-4">
+                Prin activitățile noastre ne propunem să oferim atât membrilor, cât și participanților ocazii unice de dezvoltare și conștientizare. 
+                Muncim ca o echipă pentru a aduce valorile de ieri în lumea de azi!
+              </p>
               <div className="flex items-center space-x-4">
                 <div className="w-12 h-12 bg-primary-red rounded-full flex items-center justify-center">
                   <i className="ri-eye-line text-xl text-white"></i>
@@ -241,41 +251,54 @@ export const AboutPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
               Istoria Noastră
             </h2>
-            <p className="text-lg text-gray-600">
-              O călătorie de peste un deceniu în slujirea comunității
-            </p>
           </motion.div>
 
-          <div className="space-y-8">
-            {[
-              { year: '2010', event: 'Înființarea AMiCUS Timișoara', description: 'Prima întâlnire oficială și stabilirea viziunii' },
-              { year: '2015', event: 'Primul Congres Local', description: 'Organizarea primului eveniment major cu peste 200 de participanți' },
-              { year: '2018', event: 'Extinderea Activităților', description: 'Lansarea programelor de mentorat și dezvoltare profesională' },
-              { year: '2020', event: 'Adaptarea Digitală', description: 'Tranziția către activități online în perioada pandemiei' },
-              { year: '2023', event: 'Noi Proiecte Sociale', description: 'Lansarea inițiativelor de impact comunitar și social' }
-            ].map((milestone, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="flex items-center space-x-6"
-              >
-                <div className="flex-shrink-0 w-20 h-20 bg-primary-red rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">{milestone.year}</span>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {milestone.event}
-                  </h3>
-                  <p className="text-gray-600">
-                    {milestone.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+          >
+            <p className="mb-6">
+              Studenția anilor '90 a fost marcată de o puternică perioadă de tranziție între două regimuri politice total diferite, 
+              între libertate și povara ei, între oportunități și visuri fără de sfârșit. În toată această dorință de a atinge 
+              excelența și performanța academică, studenții n-au uitat niciodată ce contează cu adevărat: omul. Omul în toată 
+              splendoarea și decăderea lui. Omul ca întreg. Omul ca prieten... Și așa a luat naștere AMiCUS.
+            </p>
+            
+            <p className="mb-6">
+              Apariția AMiCUS-ului are la bază preocuparea unui grup de studenți ieșeni pentru întărirea relațiilor interumane, 
+              fundamentate pe valorile moralei creștine și pe promovarea unor principii de viață sănătoase pentru trup, minte și suflet. 
+              Aceste idei s-au convertit în scopuri ale asociației.
+            </p>
+            
+            <p className="mb-6">
+              Actele oficiale consemnează ziua de <strong>7 aprilie 1993</strong> drept data de înființare a asociației studențești 
+              non-guvernamentale, non-profit și apolitice AMiCUS, acronim de la <em>Adventist Ministry for International College and University Students</em>. 
+              Astfel, în 1993, AMiCUS International ajungea în România.
+            </p>
+            
+            <p className="mb-6">
+              Cu un puternic impact la nivel național, AMiCUS se răspândește ușor și în celelalte centre universitare: 
+              București, Craiova, Brașov, Timișoara și așa mai departe.
+            </p>
+            
+            <p className="mb-6">
+              <strong>AMiCUS Timișoara</strong>, după mai bine de un sfert de veac, continuă să îndeplinească misiunea ce i-a fost încredințată. 
+              În prezent, activitatea filialei se axează pe direcțiile: dezvoltare multilaterală, implicare în comunitate și nevoile ei, 
+              transmiterea de valori și sprijinirea atât a membrilor, cât și a tuturor semenilor.
+            </p>
+            
+            <p className="mb-6">
+              Continuând proiectele tradiție (<strong>Orășelul Copiilor, Zi de bine, proiecte educaționale și seminare, proiecte sociale, 
+              campionate sportive, excursii</strong>), bucurându-ne mereu de noi idei și șanse de reîntâlnire (<strong>clubul de carte Bibliophile, 
+              Crosul Caritabil Alerg pentru mama, Campania de Donare de sânge Picătura de Viață, Podcastul Conceptum, Lecții de Zbor pentru Boboci, 
+              TedTalks, De vorbă cu capelanul, activități recreative, concerte caritabile</strong> sub numele <em>Inima a fost dată împreună cu darul</em>), 
+              privind cu admirație spre ideile specifice fiecărei generații în parte (<strong>Clubul Meteora, proiectul Pași spre cer, XChange, H2O pentru S2</strong> etc.), 
+              suntem gata întotdeuna să ne unim forțele și să spunem <strong><em>Iată-mă, trimite-mă!</em></strong>
+            </p>
+          </motion.div>
         </div>
       </section>
 
@@ -292,7 +315,7 @@ export const AboutPage = () => {
               Fă Parte din Povestea Noastră
             </h2>
             <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-              Alătură-te unei comunități care valorează credința, excelența și serviciul
+              Alătură-te unei comunități ce are la bază credința, nădejdea și prietenia!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -319,4 +342,4 @@ export const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export { AboutPage as default };

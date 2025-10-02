@@ -39,8 +39,7 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-gray-300 mb-4 text-sm sm:text-base leading-relaxed">
-              Asociația Medicilor și Studenților Creștini din Timișoara. 
-              Construim împreună o comunitate de tineri creștini dedicați dezvoltării spirituale și profesionale.
+            Hai să fim prieteni!
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social, index) => (
@@ -103,29 +102,24 @@ export const Footer = () => {
                   <p>Timișoara, România</p>
                 </div>
               </div>
-              
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <i className="ri-time-line text-primary-red text-base sm:text-lg"></i>
-                <p>Joi ora 20:00</p>
-              </div>
-              
+          
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <i className="ri-mail-line text-primary-red text-base sm:text-lg"></i>
                 <a 
-                  href="mailto:contact@amicus-timisoara.ro"
+                  href="mailto:aamicustm@gmail.com"
                   className="hover:text-white transition-colors duration-200 break-all sm:break-normal"
                 >
-                  contact@amicus-timisoara.ro
+                 aamicustm@gmail.com
                 </a>
               </div>
               
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <i className="ri-phone-line text-primary-red text-base sm:text-lg"></i>
                 <a 
-                  href="tel:+40123456789"
+                  href="tel:+40 768 096 881"
                   className="hover:text-white transition-colors duration-200"
                 >
-                  +40 123 456 789
+                  +40 768 096 881
                 </a>
               </div>
             </div>
