@@ -51,7 +51,7 @@ return (
           </h2>
           <p className="text-lg text-gray-600 mb-6 leading-relaxed">
             Cartea AMiCUS este o compilație unică de experiențe, mărturii și învățături din comunitatea studenților creștini. 
-            Fiecare pagină reflectă călătoria spirituală și academică a studenților noștri, oferind inspirație și îndrumire.
+            Fiecare pagină reflectă călătoria spirituală și academică a studenților noștri, oferind inspirație și îndrumare.
           </p>
         </div>
 

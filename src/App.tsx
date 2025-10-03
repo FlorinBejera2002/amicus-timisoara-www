@@ -5,7 +5,7 @@ import './i18n';
 
 // Components
 import Navigation from './components/Navigation';
-import LoadingAnimation from './components/LoadingAnimation';
+import {LoadingAnimation} from './components/LoadingAnimation';
 import PrayerWall from './components/PrayerWall';
 import CookieBanner from './components/CookieBanner';
 
@@ -14,7 +14,7 @@ import {HomePage} from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import AboutPage from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';
-import EventsPage from './pages/EventsPage';
+import {EventsPage} from './pages/EventsPage';
 import BookPage from './pages/BookPage';
 import VisionPage from './pages/VisionPage';
 import PodcastPage from './pages/PodcastPage';
@@ -22,7 +22,7 @@ import ContactPage from './pages/ContactPage';
 import Form from './form/Form';
 import Table from './table/Table';
 
-function App() {
+export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -67,6 +67,3 @@ function App() {
     </Router>
   );
 }
-
-
-export default App;

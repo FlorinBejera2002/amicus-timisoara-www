@@ -10,7 +10,7 @@ import {
   FaPray,
   FaHeart,
 } from 'react-icons/fa';
-import bgImage from '@/assets/bg-image.png';
+import bgImage from '@/assets/bg-image-1.jpg';
 
 export const Hero = () => {
     const containerVariants = {
@@ -35,10 +35,10 @@ export const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 lg:px-8">
 {/* Background Image with Gradient Overlay */}
 <div 
-  className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+  className="absolute inset-0 bg-cover bg-top bg-center bg-no-repeat"
   style={{ backgroundImage: `url(${bgImage})` }}
 >
-  <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/60 to-primary-red/40"></div>
+  <div className="absolute inset-0 bg-black/70"></div>
 </div>
 
 {/* Floating Elements */}
@@ -191,9 +191,9 @@ export const Hero = () => {
   >
     {[
       { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
-      { Icon: FaInstagram, url: 'https://instagram.com/amicii.timisoara', color: 'hover:bg-pink-600' },
-      { Icon: FaYoutube, url: 'https://youtube.com/@amicustimisoara', color: 'hover:bg-red-600' },
-      { Icon: FaEnvelope, url: 'mailto:contact@amicus-timisoara.ro', color: 'hover:bg-gray-600' }
+      { Icon: FaInstagram, url: 'https://www.instagram.com/amicus.timisoara/', color: 'hover:bg-pink-600' },
+      { Icon: FaYoutube, url: 'https://www.youtube.com/@amicus.timisoara', color: 'hover:bg-red-600' },
+      { Icon: FaEnvelope, url: 'mailto:aamicustimisoara@gmail.com', color: 'hover:bg-gray-600' }
     ].map((social, index) => (
       <a
         key={index}

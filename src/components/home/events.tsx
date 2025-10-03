@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { 
   FaUsers,
   FaHandsHelping,
@@ -14,7 +14,6 @@ import {
 } from 'react-icons/fa';
 
 export const Events = () => {
-    const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [currentEventSlide, setCurrentEventSlide] = useState(0);
     const cardsPerSlide = 3; // Show 3 cards per slide on desktop
 
@@ -35,7 +34,7 @@ export const Events = () => {
         { 
           id: 2,
           title: 'Deschiderea anului Universitar', 
-          date: 'Sâmbătă, 11 Noiembrie',
+          date: 'Sâmbătă, 11 Octombrie',
           time: '17:00 - 18:00',
           location: 'Biserica AZS Maranatha, Timișoara',
           guest: 'Ionuț Feier',
@@ -47,7 +46,7 @@ export const Events = () => {
         { 
           id: 3,
           title: 'Serată', 
-          date: 'Sâmbătă, 11 Noiembrie',
+          date: 'Sâmbătă, 11 Octombrie',
           time: '20:00 - 23:00',
           location: 'Piața Mocioni 7, Timișoara',
           guest: 'Echipa AMiCUS',
@@ -126,31 +125,19 @@ export const Events = () => {
           theme: 'Apocalipsa',
           type: 'Întâlnire AMiCUS',
           Icon: FaUsers,
-          color: 'bg-blue-500'
         }
       ];
 
     const totalSlides = Math.ceil(eventsData.length / cardsPerSlide);
 
-    // Auto-advance events carousel
-    useEffect(() => {
-      if (isAutoPlaying) {
-        const interval = setInterval(() => {
-          nextEventSlide();
-        }, 5000);
-        return () => clearInterval(interval);
-      }
-    }, [isAutoPlaying, currentEventSlide]);
-  
-    const nextEventSlide = () => {
-      setCurrentEventSlide((prev) => (prev + 1) % totalSlides);
-    };
-  
-    const prevEventSlide = () => {
-      setCurrentEventSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-    };
+    const nextEventSlide = useCallback(() => {
+      setCurrentEventSlide(prev => (prev + 1) % totalSlides);
+    }, [totalSlides]);
 
-    // Keyboard navigation for events carousel
+    const prevEventSlide = useCallback(() => {
+      setCurrentEventSlide(prev => (prev - 1 + totalSlides) % totalSlides);
+    }, [totalSlides]);
+
     useEffect(() => {
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'ArrowLeft') {
@@ -159,10 +146,10 @@ export const Events = () => {
           nextEventSlide();
         }
       };
-  
+
       window.addEventListener('keydown', handleKeyDown);
       return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [prevEventSlide, nextEventSlide]);
 
     return (
       <section className="py-10 md:py-16 bg-gray-50">
@@ -186,7 +173,6 @@ export const Events = () => {
             {/* Mobile Scrollable Container */}
             <div 
               className="md:hidden overflow-x-auto pb-6 -mx-4 px-4"
-              onTouchStart={() => setIsAutoPlaying(false)}
             >
               <div className="flex space-x-4 w-max">
                 {eventsData.map((event, index) => (
@@ -263,8 +249,6 @@ export const Events = () => {
             {/* Desktop Carousel */}
             <div 
               className="hidden md:block overflow-hidden relative"
-              onMouseEnter={() => setIsAutoPlaying(false)}
-              onMouseLeave={() => setIsAutoPlaying(true)}
             >
               {/* Desktop Navigation */}
               <div className="flex justify-between w-full absolute top-1/2 -translate-y-1/2 left-0 right-0 z-10 px-2">

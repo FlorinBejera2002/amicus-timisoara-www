@@ -83,7 +83,7 @@ export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({
           });
         }
       } catch (err) {
-        setError('Nu s-au putut încărca datele podcast-ului');
+        setError('Nu s-au putut încărca datele podcast-ului' + err);
         // Fallback la mock data
         setLatestVideo(mockVideo);
       } finally {

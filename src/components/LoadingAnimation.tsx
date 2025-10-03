@@ -98,4 +98,3 @@ export const LoadingAnimation = ({ isLoading }: LoadingAnimationProps) => {
   );
 };
 
-export default LoadingAnimation;

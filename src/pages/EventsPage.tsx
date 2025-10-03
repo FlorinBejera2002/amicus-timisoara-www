@@ -395,4 +395,3 @@ export const EventsPage = () => {
   );
 };
 
-export default EventsPage;
