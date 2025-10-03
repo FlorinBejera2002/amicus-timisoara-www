@@ -156,7 +156,7 @@ export const Hero = () => {
   {/* Features Grid */}
   <motion.div 
     variants={itemVariants}
-    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full mb-12 hidden md:block"
+    className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl w-full mb-12 hidden md:flex"
   >
     <div className="text-center">
       <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur-sm border border-white/20">
