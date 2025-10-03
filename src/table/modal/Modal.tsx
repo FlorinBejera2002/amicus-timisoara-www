@@ -10,9 +10,9 @@ export default function Modal({ data, show, setShow, date, setDate, onDelete }: 
         setAchitat(data.cash);
     }, [data]);
 
-    const supabaseUrl = 'https://trzpetwunbmirbuqhxkh.supabase.co' // Înlocuiește cu valorile tale
+    const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co' // Înlocuiește cu valorile tale
     const supabaseKey =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRyenBldHd1bmJtaXJidXFoeGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MDczMjYsImV4cCI6MjA3Mjk4MzMyNn0.M_bWzJgK6_2RgHeLyZDGUfz1PEv4ZYshm8sxqb2Y-Ec'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbWpkd3NrZG9zYm1lbmFxaHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NzgwNDQsImV4cCI6MjA3NTA1NDA0NH0.ujTLHvPIAbF1HVhgOF1Tqk-Rr4a18z7ZoEjk7IANe-E'
     const supabase = createClient(supabaseUrl, supabaseKey)
 
     const handleUpdateCash = async (e: React.FormEvent) => {

@@ -14,10 +14,9 @@ export default function Table() {
     const inputRef = useRef<HTMLInputElement>(null);
     const tableRef = useRef<HTMLDivElement>(null);
 
-    const supabaseUrl = 'https://trzpetwunbmirbuqhxkh.supabase.co' // Înlocuiește cu valorile tale
-    const supabaseKey =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRyenBldHd1bmJtaXJidXFoeGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MDczMjYsImV4cCI6MjA3Mjk4MzMyNn0.M_bWzJgK6_2RgHeLyZDGUfz1PEv4ZYshm8sxqb2Y-Ec'
-    const supabase = createClient(supabaseUrl, supabaseKey)
+    const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co' // Înlocuiește cu valorile tale
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbWpkd3NrZG9zYm1lbmFxaHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NzgwNDQsImV4cCI6MjA3NTA1NDA0NH0.ujTLHvPIAbF1HVhgOF1Tqk-Rr4a18z7ZoEjk7IANe-E';
+    const supabase = createClient(supabaseUrl, supabaseKey);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,9 +29,9 @@ export default function Table() {
                 console.error('Eroare la preluarea datelor:', error);
             } else {
                 // Map the data to match the Data interface
-                const mappedData: Data[] = data.map((item: any) => ({
+                const mappedData = data.map((item: any) => ({
                     id: item.id,
-                    name: item.name,
+                    name: item.full_name || item.name || '',
                     email: item.email,
                     phone: item.phone,
                     address: item.address,
