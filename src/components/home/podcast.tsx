@@ -1,11 +1,5 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { 
-  FaUsers,
-  FaMicrophone,
-  FaHeart,
-} from 'react-icons/fa';
-import {YouTubePodcast} from '../YouTubePodcast';
+import { FaUsers, FaMicrophone, FaHeart, FaYoutube } from 'react-icons/fa';
 
 export const Podcast = () => {
 
@@ -29,7 +23,7 @@ export const Podcast = () => {
         <div className="space-y-4 mb-6">
           <div className="flex items-center space-x-3">
             <FaMicrophone className="text-primary-red text-xl" />
-            <span className="text-gray-700">Episoade săptămânale</span>
+            <span className="text-gray-700">Episoade lunare</span>
           </div>
           <div className="flex items-center space-x-3">
             <FaUsers className="text-primary-red text-xl" />
@@ -40,17 +34,27 @@ export const Podcast = () => {
             <span className="text-gray-700">Povești inspiraționale</span>
           </div>
         </div>
-        <Link
-          to="/podcast"
+        <a
+          href="https://www.youtube.com/playlist?list=PLuAQECfKvdHBZo4hBt9ESiDwN0teufCJD"
+          target="_blank"
+          rel="noopener noreferrer"
           className="bg-primary-red text-white px-8 py-4 rounded-md font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center space-x-3 hover:scale-105"
         >
-          <FaMicrophone className="text-xl" />
-          <span>Ascultă Podcast-ul</span>
-        </Link>
+          <FaYoutube className="text-xl" />
+          <span>Abonează-te pe YouTube</span>
+        </a>
       </motion.div>
-      <YouTubePodcast 
-        channelId="UCYourChannelIdHere"
-      />
+      <div className="w-full h-64 md:h-96">
+          <iframe
+            className="w-full h-full rounded-xl shadow-lg"
+            src="https://www.youtube.com/embed/videoseries?list=PLuAQECfKvdHBZo4hBt9ESiDwN0teufCJD"
+            title="Playlist Podcast AMiCUS"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen={true}
+            loading="lazy"
+          ></iframe>
+      </div>
     </div>
   </div>
  </section>       

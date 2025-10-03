@@ -10,89 +10,96 @@ interface YouTubeVideo {
   publishedAt: string;
   duration: string;
   viewCount: string;
+  videoId: string;
 }
 
 interface YouTubePodcastProps {
-  channelId?: string;
   apiKey?: string;
+  maxResults?: number;
+  channelId?: string;
 }
 
-export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({ 
-  channelId = 'UCYourChannelIdHere', 
-  apiKey 
+export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({
+  channelId = 'UCq9CRbq63JyifTl143ct1fw',
+  apiKey,
+  maxResults = 3
 }) => {
-  const [latestVideo, setLatestVideo] = useState<YouTubeVideo | null>(null);
+  const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<YouTubeVideo | null>(null);
 
-  // Mock data pentru demonstrație - înlocuiește cu API call real
-  const mockVideo: YouTubeVideo = {
-    id: 'dQw4w9WgXcQ',
-    title: 'Credința în Viața Universitară - Episodul 15',
-    description: 'O conversație inspirațională despre cum să îți menții credința în timpul studiilor universitare...',
-    thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
-    publishedAt: '2024-01-15T10:00:00Z',
-    duration: 'PT45M32S',
-    viewCount: '1234'
-  };
+  // No mock data - only real YouTube data will be shown
 
   useEffect(() => {
-    const fetchLatestVideo = async () => {
+    const fetchVideos = async () => {
       try {
         setLoading(true);
         
         if (!apiKey) {
-          // Folosește mock data dacă nu există API key
-          setTimeout(() => {
-            setLatestVideo(mockVideo);
-            setLoading(false);
-          }, 1000);
+          setError('YouTube API key is required to load videos');
+          setLoading(false);
           return;
         }
 
-        // API call real către YouTube
-        const response = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=1&type=video`
+        // First, fetch the uploads playlist ID from the channel
+        const channelResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/channels?key=${apiKey}&id=${channelId}&part=contentDetails`
         );
         
-        if (!response.ok) {
-          throw new Error('Failed to fetch YouTube data');
+        if (!channelResponse.ok) {
+          throw new Error('Nu s-a putut obține canalul YouTube');
         }
 
-        const data = await response.json();
+        const channelData = await channelResponse.json();
+        const uploadsPlaylistId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+        // Then fetch the videos from the uploads playlist
+        const playlistResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/playlistItems?key=${apiKey}&playlistId=${uploadsPlaylistId}&part=snippet&maxResults=${maxResults}`
+        );
         
-        if (data.items && data.items.length > 0) {
-          const video = data.items[0];
+        if (!playlistResponse.ok) {
+          throw new Error('Nu s-au putut încărca videoclipurile');
+        }
+
+        const playlistData = await playlistResponse.json();
+        
+        if (playlistData.items && playlistData.items.length > 0) {
+          // Get video IDs for batch request
+          const videoIds = playlistData.items.map((item: any) => item.snippet.resourceId.videoId).join(',');
           
-          // Fetch additional details
+          // Fetch video details in a batch request
           const detailsResponse = await fetch(
-            `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${video.id.videoId}&part=contentDetails,statistics`
+            `https://www.googleapis.com/youtube/v3/videos?key=${apiKey}&id=${videoIds}&part=contentDetails,statistics,snippet`
           );
           
           const detailsData = await detailsResponse.json();
-          const videoDetails = detailsData.items[0];
           
-          setLatestVideo({
-            id: video.id.videoId,
+          const videosData = detailsData.items.map((video: any) => ({
+            id: video.id,
+            videoId: video.id,
             title: video.snippet.title,
             description: video.snippet.description,
             thumbnail: video.snippet.thumbnails.maxres?.url || video.snippet.thumbnails.high.url,
             publishedAt: video.snippet.publishedAt,
-            duration: videoDetails.contentDetails.duration,
-            viewCount: videoDetails.statistics.viewCount
-          });
+            duration: video.contentDetails.duration,
+            viewCount: video.statistics.viewCount
+          }));
+          
+          setVideos(videosData);
+          setSelectedVideo(videosData[0]);
         }
       } catch (err) {
-        setError('Nu s-au putut încărca datele podcast-ului' + err);
-        // Fallback la mock data
-        setLatestVideo(mockVideo);
+        console.error('Error fetching YouTube data:', err);
+        setError('Nu s-au putut încărca videoclipurile. Vă rugăm încercați din nou mai târziu.');
       } finally {
         setLoading(false);
       }
     };
 
-    fetchLatestVideo();
-  }, [channelId, apiKey]);
+    fetchVideos();
+  }, [channelId, apiKey, maxResults]);
 
   const formatDuration = (duration: string) => {
     // Convert ISO 8601 duration to readable format
@@ -118,10 +125,12 @@ export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({
     });
   };
 
-  const openYouTubeVideo = () => {
-    if (latestVideo) {
-      window.open(`https://www.youtube.com/watch?v=${latestVideo.id}`, '_blank');
-    }
+  const openYouTubeVideo = (videoId: string) => {
+    window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank');
+  };
+
+  const selectVideo = (video: YouTubeVideo) => {
+    setSelectedVideo(video);
   };
 
   if (loading) {
@@ -134,15 +143,20 @@ export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({
             <div className="h-4 bg-gray-600 rounded w-48"></div>
           </div>
         </div>
-        <div className="bg-gray-800 rounded-lg p-4">
-          <div className="h-4 bg-gray-600 rounded w-full mb-2"></div>
-          <div className="h-2 bg-gray-600 rounded w-full"></div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-gray-800 rounded-lg p-4">
+              <div className="h-4 bg-gray-600 rounded w-3/4 mb-2"></div>
+              <div className="h-2 bg-gray-600 rounded w-1/2 mb-4"></div>
+              <div className="aspect-video bg-gray-600 rounded-lg"></div>
+            </div>
+          ))}
         </div>
       </div>
     );
   }
 
-  if (error && !latestVideo) {
+  if (error || videos.length === 0) {
     return (
       <div className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg p-8 text-white">
         <div className="text-center">
@@ -159,48 +173,77 @@ export const YouTubePodcast: React.FC<YouTubePodcastProps> = ({
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg p-8 text-white cursor-pointer hover:scale-105 transition-transform duration-300"
-      onClick={openYouTubeVideo}
+      className="bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg p-8 text-white"
     >
-      {latestVideo && (
-        <>
-          <div className="flex items-center mb-6">
-            <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mr-4 group-hover:bg-red-600 transition-colors">
-              <FaPlay className="text-2xl ml-1" />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-xl font-bold mb-1">Ultimul Episod</h3>
-              <p className="text-gray-300 line-clamp-2">{latestVideo.title}</p>
-            </div>
-            <FaYoutube className="text-3xl text-red-500" />
-          </div>
-          
-          <div className="mb-4">
+      <div className="flex items-center mb-8">
+        <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mr-4">
+          <FaPlay className="text-2xl ml-1" />
+        </div>
+        <div className="flex-1">
+          <h2 className="text-2xl font-bold">Podcast-uri AMiCUS</h2>
+          <p className="text-gray-300">Urmărește ultimele episoade</p>
+        </div>
+        <FaYoutube className="text-4xl text-red-500" />
+      </div>
+
+      {selectedVideo && (
+        <div className="mb-8">
+          <div 
+            className="relative group cursor-pointer mb-4"
+            onClick={() => openYouTubeVideo(selectedVideo.videoId)}
+          >
             <img 
-              src={latestVideo.thumbnail} 
-              alt={latestVideo.title}
-              className="w-full h-48 object-cover rounded-lg"
+              src={selectedVideo.thumbnail} 
+              alt={selectedVideo.title}
+              className="w-full h-64 md:h-96 object-cover rounded-lg group-hover:opacity-90 transition-opacity"
             />
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="bg-black/50 rounded-full p-4">
+                <FaPlay className="text-4xl text-white" />
+              </div>
+            </div>
           </div>
           
-          <div className="bg-gray-800 rounded-lg p-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center space-x-4 text-sm text-gray-400">
-                <span className="flex items-center space-x-1">
-                  <FaClock />
-                  <span>{formatDuration(latestVideo.duration)}</span>
-                </span>
-                <span>{formatDate(latestVideo.publishedAt)}</span>
+          <h3 className="text-xl font-bold mb-2">{selectedVideo.title}</h3>
+          <div className="flex items-center space-x-4 text-sm text-gray-400 mb-4">
+            <span className="flex items-center space-x-1">
+              <FaClock />
+              <span>{formatDuration(selectedVideo.duration)}</span>
+            </span>
+            <span>{formatDate(selectedVideo.publishedAt)}</span>
+            <span>{parseInt(selectedVideo.viewCount).toLocaleString()} vizualizări</span>
+          </div>
+          <p className="text-gray-300 line-clamp-3">{selectedVideo.description}</p>
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {videos.map((video) => (
+          <div 
+            key={video.id}
+            className={`bg-gray-800 rounded-lg overflow-hidden cursor-pointer transition-all ${selectedVideo?.id === video.id ? 'ring-2 ring-primary-red' : 'hover:ring-1 hover:ring-gray-600'}`}
+            onClick={() => selectVideo(video)}
+          >
+            <div className="relative">
+              <img 
+                src={video.thumbnail} 
+                alt={video.title}
+                className="w-full h-32 object-cover"
+              />
+              <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
+                {formatDuration(video.duration)}
               </div>
-              <span className="text-sm text-gray-400">{parseInt(latestVideo.viewCount).toLocaleString()} vizualizări</span>
             </div>
-            <div className="flex items-center space-x-3">
-              <FaPlay className="text-primary-red" />
-              <span className="text-sm">Click pentru a viziona pe YouTube</span>
+            <div className="p-3">
+              <h4 className="font-medium line-clamp-2 text-sm">{video.title}</h4>
+              <div className="flex items-center justify-between mt-2 text-xs text-gray-400">
+                <span>{formatDate(video.publishedAt)}</span>
+                <span>{parseInt(video.viewCount).toLocaleString()} viz.</span>
+              </div>
             </div>
           </div>
-        </>
-      )}
+        ))}
+      </div>
     </motion.div>
   );
 };
