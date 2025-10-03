@@ -1,257 +1,546 @@
-import { createClient } from '@supabase/supabase-js'
-import { Toaster, toast } from 'sonner'
-import { Button } from '../components/Button'
-import { Input } from '../components/Input'
-import { Label } from '../components/Label'
-import logo from '@/assets/Logo-Amicus.png'
-import heroImage from '@/assets/hero-image.jpeg'
-import { useState } from 'react'
+import { createClient } from '@supabase/supabase-js';
+import { Toaster, toast } from 'sonner';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import logo from '@/assets/Logo-Amicus.png';
+import Footer from '../components/Footer';
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+  dateOfBirth: string;
+  address: string;
+  isMember: boolean;
+  isStudent: boolean;
+  university: string;
+  faculty: string;
+  studyYear: string;
+  department: string;
+  howDidYouHear: string;
+  interests: string[];
+  motivation: string;
+}
+
+// Move components outside to prevent re-creation on each render
+const InputField = ({ label, type = 'text', value, onChange, required = false, placeholder = '' }: {
+  label: string;
+  type?: string;
+  value: string;
+  onChange: (value: string) => void;
+  required?: boolean;
+  placeholder?: string;
+}) => (
+  <div className="space-y-2">
+    <label className="block text-sm font-medium text-gray-700">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
+    <input
+      type={type}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      placeholder={placeholder}
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-all duration-200 bg-white"
+      required={required}
+    />
+  </div>
+);
+
+const SelectField = ({ label, value, onChange, options, required = false }: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: { value: string; label: string }[];
+  required?: boolean;
+}) => (
+  <div className="space-y-2">
+    <label className="block text-sm font-medium text-gray-700">
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
+    <select
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-red focus:border-transparent transition-all duration-200 bg-white"
+      required={required}
+    >
+      <option value="">Selectează...</option>
+      {options.map(option => (
+        <option key={option.value} value={option.value}>{option.label}</option>
+      ))}
+    </select>
+  </div>
+);
 
 export default function Form() {
-  const [student, setStudent] = useState(false) // Stochează dacă utilizatorul este student
+  const [currentStep, setCurrentStep] = useState(1);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    phone: '',
+    dateOfBirth: '',
+    address: '',
+    isMember: false,
+    isStudent: false,
+    university: '',
+    faculty: '',
+    studyYear: '',
+    department: '',
+    howDidYouHear: '',
+    interests: [],
+    motivation: ''
+  });
 
-  const handleSubmit = async (event: any) => {
-    try {
-      event.preventDefault()
+  const totalSteps = 4;
 
-      // Preluare valori din formular
-      const name = event.target.name.value
-      const email = event.target.email.value
-      const phone = event.target.phone.value
-      const dateOfBirth = event.target.dateOfBirth.value
-      const address = event.target.address.value
-      const isMember = event.target.isMember.value === 'Da'
-      const university = student ? event.target.university.value : null
-      const faculty = student ? event.target.faculty.value : null
-      const studyYear = student ? event.target.studyYear.value : null
-      const department = event.target.department.value
+  const updateFormData = (field: keyof FormData, value: any) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
 
-      // supabase
-      const supabaseUrl = 'https://trzpetwunbmirbuqhxkh.supabase.co' // Înlocuiește cu valorile tale
-      const supabaseKey =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRyenBldHd1bmJtaXJidXFoeGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MDczMjYsImV4cCI6MjA3Mjk4MzMyNn0.M_bWzJgK6_2RgHeLyZDGUfz1PEv4ZYshm8sxqb2Y-Ec'
-      const supabase = createClient(supabaseUrl, supabaseKey)
+  const handleInterestToggle = (interest: string) => {
+    setFormData(prev => ({
+      ...prev,
+      interests: prev.interests.includes(interest)
+        ? prev.interests.filter(i => i !== interest)
+        : [...prev.interests, interest]
+    }));
+  };
 
-      // Inserare date în tabelul `requesters`
-      const { error: requesterError } = await supabase
-        .from('users')
-        .insert({
-          name: name || '',
-          email: email || '',
-          phone: phone || '',
-          date_of_birth: dateOfBirth || null,
-          address: address || '',
-          is_member: isMember,
-          university: university || null,
-          faculty: faculty || null,
-          study_year: studyYear || null,
-          department: department || ''
-        })
-
-      if (requesterError) {
-          console.error(requesterError)
-      }
-
-      event.target.reset() // Resetare formular după trimitere
-      toast('✅ Mulțumim pentru înscriere!')
-    } catch (error) {
-      toast('❌ Eroare la trimiterea formularului')
-      console.error('Eroare la trimiterea formularului', error)
+  const validateStep = (step: number): boolean => {
+    switch (step) {
+      case 1:
+        return !!(formData.name && formData.email && formData.phone);
+      case 2:
+        return !!(formData.dateOfBirth && formData.address);
+      case 3:
+        return formData.isStudent ? !!(formData.university && formData.faculty && formData.studyYear) : true;
+      case 4:
+        return !!(formData.department && formData.howDidYouHear);
+      default:
+        return true;
     }
-  }
+  };
+
+  const nextStep = () => {
+    if (validateStep(currentStep)) {
+      setCurrentStep(prev => Math.min(prev + 1, totalSteps));
+    } else {
+      toast.error('Te rugăm să completezi toate câmpurile obligatorii');
+    }
+  };
+
+  const prevStep = () => {
+    setCurrentStep(prev => Math.max(prev - 1, 1));
+  };
+
+  const handleSubmit = async () => {
+    if (!validateStep(4)) {
+      toast.error('Te rugăm să completezi toate câmpurile obligatorii');
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    try {
+      const supabaseUrl = 'https://trzpetwunbmirbuqhxkh.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRyenBldHd1bmJtaXJidXFoeGtoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc0MDczMjYsImV4cCI6MjA3Mjk4MzMyNn0.M_bWzJgK6_2RgHeLyZDGUfz1PEv4ZYshm8sxqb2Y-Ec';
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const { error } = await supabase.from('users').insert({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        date_of_birth: formData.dateOfBirth || null,
+        address: formData.address,
+        is_member: formData.isMember,
+        university: formData.isStudent ? formData.university : null,
+        faculty: formData.isStudent ? formData.faculty : null,
+        study_year: formData.isStudent ? formData.studyYear : null,
+        department: formData.department
+      });
+
+      if (error) throw error;
+
+      toast.success('🎉 Mulțumim pentru înscriere! Te vom contacta în curând.');
+      
+      // Reset form
+      setFormData({
+        name: '', email: '', phone: '', dateOfBirth: '', address: '',
+        isMember: false, isStudent: false, university: '', faculty: '',
+        studyYear: '', department: '', howDidYouHear: '', interests: [], motivation: ''
+      });
+      setCurrentStep(1);
+      
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('❌ Eroare la trimiterea formularului. Te rugăm să încerci din nou.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const StepIndicator = () => (
+    <div className="flex items-center justify-center mb-8">
+      {Array.from({ length: totalSteps }, (_, i) => i + 1).map((step) => (
+        <div key={step} className="flex items-center">
+          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all duration-300 ${
+            step <= currentStep 
+              ? 'bg-primary-red text-white shadow-lg' 
+              : 'bg-gray-200 text-gray-500'
+          }`}>
+            {step < currentStep ? (
+              <i className="ri-check-line text-lg"></i>
+            ) : (
+              step
+            )}
+          </div>
+          {step < totalSteps && (
+            <div className={`w-16 h-1 mx-2 transition-all duration-300 ${
+              step < currentStep ? 'bg-primary-red' : 'bg-gray-200'
+            }`}></div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
 
   return (
-    <div className="min-h-screen pt-16 bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 pt-16">
       <Toaster position="top-right" />
-
-      <div
-        className="w-full bg-cover bg-center h-80 py-16 flex px-4 justify-center items-center text-white shadow-lg relative"
-        style={{
-          backgroundImage: `url(${heroImage})`
-        }}
-      >
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="flex items-center gap-6 relative z-10">
-          <img src={logo} alt="amicus logo" className="w-20 h-20" />
-          <div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white">
-              AMiCUS Timișoara
-            </h1>
-            <h2 className="md:text-xl text-lg font-semibold text-red-100 mt-2">
-              Completează formularul și înscrie-te.
-            </h2>
-          </div>
+      
+      {/* Hero Section */}
+      <div className="bg-gradient-to-r from-primary-red to-red-700 text-white py-16">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center justify-center gap-6 mb-6"
+          >
+            <img src={logo} alt="AMiCUS Logo" className="w-16 h-16" />
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold">Alătură-te AMiCUS</h1>
+              <p className="text-xl text-red-100 mt-2">Fă parte din comunitatea noastră</p>
+            </div>
+          </motion.div>
+          <p className="text-lg text-red-100 max-w-2xl mx-auto">
+            Completează formularul de mai jos pentru a te înscrie în comunitatea AMiCUS Timișoara. 
+            Procesul durează doar câteva minute.
+          </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-10 font-poppins max-w-xl">
-        <form className="flex flex-col space-y-8" onSubmit={handleSubmit}>
-          <div className="flex flex-col space-y-1">
-            <Label text="Nume & Prenume" />
-            <Input
-              restProps={{
-                id: 'name',
-                name: 'name',
-                required: true,
-                type: 'text'
-              }}
-            />
-          </div>
-
-          <div className="flex flex-col md:flex-row md:space-x-6">
-            <div className="flex flex-col space-y-1 flex-1">
-              <Label text="Telefon" />
-              <Input
-                restProps={{
-                  id: 'phone',
-                  name: 'phone',
-                  type: 'tel'
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
-              <Label text="Email" />
-              <Input
-                restProps={{
-                  id: 'email',
-                  name: 'email',
-                  required: true,
-                  type: 'email'
-                }}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col space-y-1">
-            <Label text="Data nașterii" />
-            <Input
-              restProps={{
-                id: 'dateOfBirth',
-                name: 'dateOfBirth',
-                type: 'date'
-              }}
-            />
-          </div>
-
-          <div className="flex flex-col md:flex-row md:space-x-6">
-            <div className="flex flex-col space-y-1 flex-1">
-              <Label text="Localitate de proveniență" />
-              <Input
-                restProps={{
-                  id: 'address',
-                  name: 'address',
-                  type: 'text'
-                }}
-              />
-            </div>
-
-            <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
-              <Label text="Ești membru al bisericii AZȘ?" />
-              <select
-                id="isMember"
-                name="isMember"
-                className="rounded-md border bg-white border-gray-300 focus:border-primary-red focus:ring-2 focus:ring-red-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
-              >
-                <option value="Da">Da</option>
-                <option value="Nu">Nu</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Secțiunea "Ești student?" */}
-          <div className="flex items-center">
-            <h2 className="font-medium text-gray-500">Ești student?</h2>
-            <button
-              type="button"
-              onClick={() => setStudent(true)}
-              className="text-black font-bold py-2 px-4 rounded underline"
+      {/* Form Section */}
+      <div className="max-w-2xl mx-auto px-4 py-12">
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <StepIndicator />
+          
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
             >
-              Da
-            </button>
-            /
-            <button
-              type="button"
-              onClick={() => setStudent(false)}
-              className="text-black font-bold py-2 px-4 rounded underline"
-            >
-              Nu
-            </button>
-          </div>
-
-          {student && (
-            <>
-              <div className="flex flex-col space-y-1">
-                <Label text="La ce universitate ești?" />
-                <select
-                  id="university"
-                  name="university"
-                  className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
-                >
-                  <option value="UVT">UVT</option>
-                  <option value="UMFT">UMFT</option>
-                  <option value="UPT">UPT</option>
-                  <option value="USAMVBT">USAMVBT</option>
-                  <option value="Postliceală">Postliceală</option>
-                </select>
-              </div>
-
-              <div className="flex flex-col md:flex-row md:space-x-3">
-                <div className="flex flex-col space-y-1 flex-1">
-                  <Label text="La ce facultate ești?" />
-                  <Input
-                    restProps={{
-                      id: 'faculty',
-                      name: 'faculty',
-                      type: 'text'
-                    }}
+              {/* Step 1: Personal Information */}
+              {currentStep === 1 && (
+                <div className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Informații Personale</h2>
+                    <p className="text-gray-600">Să te cunoaștem mai bine</p>
+                  </div>
+                  
+                  <InputField
+                    label="Nume și Prenume"
+                    value={formData.name}
+                    onChange={(value) => updateFormData('name', value)}
+                    required={true}
+                    placeholder="Ex: Ion Popescu"
                   />
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <InputField
+                      label="Email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(value) => updateFormData('email', value)}
+                      required={true}
+                      placeholder="ex@email.com"
+                    />
+                    
+                    <InputField
+                      label="Telefon"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(value) => updateFormData('phone', value)}
+                      required={true}
+                      placeholder="0712345678"
+                    />
+                  </div>
                 </div>
+              )}
 
-                <div className="flex flex-col space-y-1 flex-1 mt-5 md:mt-0">
-                  <Label text="În ce an de studiu?" />
-                  <select
-                    id="studyYear"
-                    name="studyYear"
-                    className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
-                  >
-                    <option value="I">I</option>
-                    <option value="II">II</option>
-                    <option value="III">III</option>
-                    <option value="IV">IV</option>
-                    <option value="V">V</option>
-                    <option value="VI">VI</option>
-                    <option value="Master I">Master I</option>
-                    <option value="Master II">Master II</option>
-                  </select>
+              {/* Step 2: Additional Details */}
+              {currentStep === 2 && (
+                <div className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Detalii Suplimentare</h2>
+                    <p className="text-gray-600">Câteva informații în plus</p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <InputField
+                      label="Data Nașterii"
+                      type="date"
+                      value={formData.dateOfBirth}
+                      onChange={(value) => updateFormData('dateOfBirth', value)}
+                      required={true}
+                    />
+                    
+                    <InputField
+                      label="Localitate"
+                      value={formData.address}
+                      onChange={(value) => updateFormData('address', value)}
+                      required={true}
+                      placeholder="Ex: Timișoara"
+                    />
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Ești membru al unei biserici Adventiste?
+                    </label>
+                    <div className="flex space-x-4">
+                      {[
+                        { value: true, label: 'Da' },
+                        { value: false, label: 'Nu' }
+                      ].map((option) => (
+                        <button
+                          key={option.label}
+                          type="button"
+                          onClick={() => updateFormData('isMember', option.value)}
+                          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                            formData.isMember === option.value
+                              ? 'bg-primary-red text-white shadow-lg'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
+              )}
 
-          <div className="flex flex-col space-y-1">
-            <Label text="Selectează departamentul în care dorești să te implici" />
-            <select
-              id="department"
-              name="department"
-              className="rounded-md border bg-white border-gray-300 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition duration-200 ease-in-out px-6 py-3 text-gray-700 placeholder-gray-400 shadow-lg w-full"
+              {/* Step 3: Student Information */}
+              {currentStep === 3 && (
+                <div className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Informații Academice</h2>
+                    <p className="text-gray-600">Spune-ne despre studiile tale</p>
+                  </div>
+                  
+                  <div className="space-y-4">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Ești în prezent student?
+                    </label>
+                    <div className="flex space-x-4">
+                      {[
+                        { value: true, label: 'Da, sunt student' },
+                        { value: false, label: 'Nu, nu sunt student' }
+                      ].map((option) => (
+                        <button
+                          key={option.label}
+                          type="button"
+                          onClick={() => updateFormData('isStudent', option.value)}
+                          className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                            formData.isStudent === option.value
+                              ? 'bg-primary-red text-white shadow-lg'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {formData.isStudent && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      className="space-y-6"
+                    >
+                      <SelectField
+                        label="Universitatea"
+                        value={formData.university}
+                        onChange={(value) => updateFormData('university', value)}
+                        required={true}
+                        options={[
+                          { value: 'UVT', label: 'Universitatea de Vest din Timișoara' },
+                          { value: 'UMFT', label: 'Universitatea de Medicină și Farmacie' },
+                          { value: 'UPT', label: 'Universitatea Politehnica Timișoara' },
+                          { value: 'USAMVBT', label: 'Universitatea de Științe Agricole' },
+                          { value: 'Postliceală', label: 'Școală Postliceală' },
+                          { value: 'Altă', label: 'Altă universitate' }
+                        ]}
+                      />
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <InputField
+                          label="Facultatea"
+                          value={formData.faculty}
+                          onChange={(value) => updateFormData('faculty', value)}
+                          required={true}
+                          placeholder="Ex: Medicină"
+                        />
+                        
+                        <SelectField
+                          label="Anul de studiu"
+                          value={formData.studyYear}
+                          onChange={(value) => updateFormData('studyYear', value)}
+                          required={true}
+                          options={[
+                            { value: 'I', label: 'Anul I' },
+                            { value: 'II', label: 'Anul II' },
+                            { value: 'III', label: 'Anul III' },
+                            { value: 'IV', label: 'Anul IV' },
+                            { value: 'V', label: 'Anul V' },
+                            { value: 'VI', label: 'Anul VI' },
+                            { value: 'Master I', label: 'Master I' },
+                            { value: 'Master II', label: 'Master II' },
+                            { value: 'Doctorat', label: 'Doctorat' }
+                          ]}
+                        />
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+              )}
+
+              {/* Step 4: Involvement & Interests */}
+              {currentStep === 4 && (
+                <div className="space-y-6">
+                  <div className="text-center mb-8">
+                    <h2 className="text-2xl font-bold text-gray-900 mb-2">Implicare și Interese</h2>
+                    <p className="text-gray-600">Cum vrei să te implici în comunitate?</p>
+                  </div>
+                  
+                  <SelectField
+                    label="Departamentul în care dorești să te implici"
+                    value={formData.department}
+                    onChange={(value) => updateFormData('department', value)}
+                    required={true}
+                    options={[
+                      { value: 'Recreativ', label: 'Departamentul Recreativ' },
+                      { value: 'Cultural', label: 'Departamentul Cultural' },
+                      { value: 'Social', label: 'Departamentul Social' },
+                      { value: 'Proiecte', label: 'Departamentul Proiecte' },
+                      { value: 'PR & Marketing', label: 'PR & Marketing' },
+                      { value: 'Spiritual', label: 'Departamentul Spiritual' },
+                      { value: 'Administrativ & Economic', label: 'Administrativ & Economic' },
+                      { value: 'Niciun departament', label: 'Nu știu încă / Niciun departament' }
+                    ]}
+                  />
+                  
+                  <SelectField
+                    label="Cum ai aflat despre AMiCUS?"
+                    value={formData.howDidYouHear}
+                    onChange={(value) => updateFormData('howDidYouHear', value)}
+                    required={true}
+                    options={[
+                      { value: 'Prieteni', label: 'Prin prieteni' },
+                      { value: 'Social Media', label: 'Social Media (Facebook, Instagram)' },
+                      { value: 'Eveniment', label: 'La un eveniment AMiCUS' },
+                      { value: 'Biserica', label: 'Prin biserica' },
+                      { value: 'Website', label: 'Website-ul AMiCUS' },
+                      { value: 'Altceva', label: 'Altceva' }
+                    ]}
+                  />
+                  
+                  <div className="space-y-3">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Ce te interesează? (opțional)
+                    </label>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {[
+                        'Activități sociale', 'Evenimente culturale', 'Studiu biblic',
+                        'Voluntariat', 'Sport și recreere', 'Muzică și artă',
+                        'Proiecte comunitare', 'Dezvoltare personală', 'Networking'
+                      ].map((interest) => (
+                        <button
+                          key={interest}
+                          type="button"
+                          onClick={() => handleInterestToggle(interest)}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                            formData.interests.includes(interest)
+                              ? 'bg-primary-red text-white shadow-md'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {interest}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
+          
+          {/* Navigation Buttons */}
+          <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
+            <button
+              onClick={prevStep}
+              disabled={currentStep === 1}
+              className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                currentStep === 1
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
             >
-              <option value="Niciun departament">Niciun departament</option>
-              <option value="Recreativ">Recreativ</option>
-              <option value="Cultural">Cultural</option>
-              <option value="Social">Social</option>
-              <option value="Proiecte">Proiecte</option>
-              <option value="PR & Marketing">PR & Marketing</option>
-              <option value="Spiritual">Spiritual</option>
-              <option value="Administrativ & Economic">Administrativ & Economic</option>
-            </select>
+              <i className="ri-arrow-left-line mr-2"></i>
+              Înapoi
+            </button>
+            
+            {currentStep < totalSteps ? (
+              <button
+                onClick={nextStep}
+                className="px-8 py-3 bg-primary-red text-white rounded-lg font-medium hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+              >
+                Continuă
+                <i className="ri-arrow-right-line ml-2"></i>
+              </button>
+            ) : (
+              <button
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className={`px-8 py-3 rounded-lg font-medium transition-all duration-200 shadow-lg hover:shadow-xl ${
+                  isSubmitting
+                    ? 'bg-gray-400 text-white cursor-not-allowed'
+                    : 'bg-green-600 text-white hover:bg-green-700'
+                }`}
+              >
+                {isSubmitting ? (
+                  <>
+                    <i className="ri-loader-4-line animate-spin mr-2"></i>
+                    Se trimite...
+                  </>
+                ) : (
+                  <>
+                    <i className="ri-check-line mr-2"></i>
+                    Trimite Înscrierea
+                  </>
+                )}
+              </button>
+            )}
           </div>
-
-          <div className="flex justify-center mt-6">
-            <Button text="Trimite" />
-          </div>
-        </form>
+        </div>
       </div>
+      
+      <Footer />
     </div>
-  )
+  );
 }
