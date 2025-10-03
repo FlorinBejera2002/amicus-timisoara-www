@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslation } from 'react-i18next';
 import logo from '@/assets/Logo-Amicus.png';
 
 interface DropdownItem {
@@ -17,48 +16,25 @@ interface NavItem {
   items?: DropdownItem[];
 }
 
-export const Navigation = () => {
+const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('ro');
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const { t, i18n } = useTranslation();
   const location = useLocation();
 
-  const toggleLanguage = () => {
-    const newLang = currentLang === 'ro' ? 'en' : 'ro';
-    setCurrentLang(newLang);
-    i18n.changeLanguage(newLang);
-  };
-
   const navItems: NavItem[] = [
-    { path: '/', label: t('home'), type: 'single' },
+    { path: '/', label: 'Acasă', type: 'single' },
+    { path: '/about', label: 'Despre Noi', type: 'single' },
     {
-      label: 'Despre Noi',
+      label: 'Proiecte',
       type: 'dropdown',
       items: [
-        { path: '/about', label: t('about'), icon: 'ri-information-line' },
-        { path: '/vision', label: t('vision'), icon: 'ri-eye-line' },
-        { path: '/projects', label: t('projects'), icon: 'ri-folder-line' }
+        { path: '/projects', label: 'Toate Proiectele', icon: 'ri-folder-line' },
+        { path: '/prayer-wall', label: 'Peretele Rugăciunii', icon: 'ri-hands-pray-line' },
+        { path: '/book', label: 'Carte', icon: 'ri-book-line' }
       ]
     },
-    {
-      label: 'Activități',
-      type: 'dropdown',
-      items: [
-        { path: '/events', label: t('events'), icon: 'ri-calendar-line' },
-        { path: '/prayer-wall', label: t('prayerWall'), icon: 'ri-heart-line' },
-        { path: '/podcast', label: t('podcast'), icon: 'ri-mic-line' }
-      ]
-    },
-    {
-      label: 'Resurse',
-      type: 'dropdown',
-      items: [
-        { path: '/book', label: t('book'), icon: 'ri-book-line' },
-        { path: '/form', label: 'Înscrie-te', icon: 'ri-user-add-line' }
-      ]
-    },
-    { path: '/contact', label: t('contact'), type: 'single' }
+    { path: '/events', label: 'Evenimente', type: 'single' },
+    { path: '/contact', label: 'Contact', type: 'single' }
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -67,9 +43,92 @@ export const Navigation = () => {
     return items.some(item => location.pathname === item.path);
   };
 
-  const handleDropdownToggle = (label: string) => {
-    setActiveDropdown(activeDropdown === label ? null : label);
-  };
+  // Mobile menu component
+  const MobileMenu = () => (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.2 }}
+          className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-30"
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {navItems.map((item, index) => (
+              <div key={index}>
+                {item.type === 'single' ? (
+                  <Link
+                    to={item.path!}
+                    className={`block px-3 py-2 rounded-md text-base font-medium ${
+                      isActive(item.path!)
+                        ? 'bg-red-50 text-primary-red'
+                        : 'text-gray-700 hover:bg-gray-50 hover:text-primary-red'
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <div>
+                    <button
+                      onClick={() => setActiveDropdown(
+                        activeDropdown === item.label ? null : item.label
+                      )}
+                      className="flex items-center justify-between w-full px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary-red rounded-md"
+                    >
+                      <span>{item.label}</span>
+                      <i className={`ri-arrow-down-s-line transition-transform duration-200 ${
+                        activeDropdown === item.label ? 'rotate-180' : ''
+                      }`}></i>
+                    </button>
+                    
+                    <AnimatePresence>
+                      {activeDropdown === item.label && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="ml-4 mt-1 space-y-1"
+                        >
+                          {item.items!.map((subItem, subIndex) => (
+                            <Link
+                              key={subIndex}
+                              to={subItem.path}
+                              onClick={() => {
+                                setIsOpen(false);
+                                setActiveDropdown(null);
+                              }}
+                              className={`flex items-center space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
+                                isActive(subItem.path)
+                                  ? 'text-primary-red bg-red-50'
+                                  : 'text-gray-600 hover:text-primary-red hover:bg-gray-50'
+                              }`}
+                            >
+                              <i className={`${subItem.icon} text-base`}></i>
+                              <span>{subItem.label}</span>
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </div>
+            ))}
+            <Link
+              to="/form"
+              className="block w-full text-center bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md text-base font-medium mt-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Înscriere
+            </Link>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
@@ -89,7 +148,7 @@ export const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             {navItems.map((item, index) => (
               <div key={index} className="relative">
                 {item.type === 'single' ? (
@@ -175,121 +234,31 @@ export const Navigation = () => {
             {/* Inscriere Button */}
             <Link
               to="/form"
-              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200"
+              className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 ml-2"
             >
               Înscriere
             </Link>
-            
-            {/* Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-primary-red transition-colors duration-200 border border-gray-300 rounded-md hover:border-primary-red"
-            >
-              <span>{currentLang.toUpperCase()}</span>
-              <i className="ri-global-line text-sm"></i>
-            </button>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center space-x-4">
-            <button
-              onClick={toggleLanguage}
-              className="p-2 text-gray-700 hover:text-primary-red transition-colors duration-200"
-            >
-              <span className="text-sm font-medium">{currentLang.toUpperCase()}</span>
-            </button>
-            
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 text-gray-700 hover:text-primary-red transition-colors duration-200"
+              aria-label="Toggle menu"
             >
-              <i className={`ri-${isOpen ? 'close' : 'menu'}-line text-xl`}></i>
+              {isOpen ? (
+                <i className="ri-close-line text-2xl"></i>
+              ) : (
+                <i className="ri-menu-line text-2xl"></i>
+              )}
             </button>
           </div>
         </div>
+        <MobileMenu />
       </div>
-
-      {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-white border-t border-gray-200"
-          >
-            <div className="px-4 py-2 space-y-1">
-              {navItems.map((item, index) => (
-                <div key={index}>
-                  {item.type === 'single' ? (
-                    <Link
-                      to={item.path!}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
-                        isActive(item.path!)
-                          ? 'text-primary-red bg-red-50'
-                          : 'text-gray-700 hover:text-primary-red hover:bg-gray-50'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  ) : (
-                    <div>
-                      <button
-                        onClick={() => handleDropdownToggle(item.label)}
-                        className={`w-full flex items-center justify-between px-3 py-2 text-base font-medium rounded-md transition-colors duration-200 ${
-                          isDropdownActive(item.items!)
-                            ? 'text-primary-red bg-red-50'
-                            : 'text-gray-700 hover:text-primary-red hover:bg-gray-50'
-                        }`}
-                      >
-                        <span>{item.label}</span>
-                        <i className={`ri-arrow-down-s-line transition-transform duration-200 ${
-                          activeDropdown === item.label ? 'rotate-180' : ''
-                        }`}></i>
-                      </button>
-                      
-                      <AnimatePresence>
-                        {activeDropdown === item.label && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="ml-4 mt-1 space-y-1"
-                          >
-                            {item.items!.map((subItem, subIndex) => (
-                              <Link
-                                key={subIndex}
-                                to={subItem.path}
-                                onClick={() => {
-                                  setIsOpen(false);
-                                  setActiveDropdown(null);
-                                }}
-                                className={`flex items-center space-x-3 px-3 py-2 text-sm rounded-md transition-colors duration-200 ${
-                                  isActive(subItem.path)
-                                    ? 'text-primary-red bg-red-50'
-                                    : 'text-gray-600 hover:text-primary-red hover:bg-gray-50'
-                                }`}
-                              >
-                                <i className={`${subItem.icon} text-base`}></i>
-                                <span>{subItem.label}</span>
-                              </Link>
-                            ))}
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </nav>
   );
 };
 
-export default Navigation;
+export { Navigation };

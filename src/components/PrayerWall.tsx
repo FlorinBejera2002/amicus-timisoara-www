@@ -150,20 +150,55 @@ export const PrayerWall = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">{t('prayerWallTitle')}</h1>
-        <p className="text-lg text-gray-600 mb-6">{t('prayerWallDescription')}</p>
-        
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="bg-primary-red text-white px-6 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors duration-200 flex items-center space-x-2 mx-auto"
-        >
-          <i className="ri-add-line"></i>
-          <span>{t('addPrayer')}</span>
-        </button>
-      </div>
+    <div className="min-h-screen pt-16">
+      {/* Hero Section */}
+      <section className="py-20 bg-gradient-to-br from-primary-red to-red-800 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <i className="ri-hands-pray-line text-6xl mb-6"></i>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Peretele Rugăciunii
+            </h1>
+            <p className="text-xl text-red-100 max-w-3xl mx-auto mb-8">
+              Împărtășește-ți rugăciunile cu comunitatea noastră. Studenții AMiCUS se vor ruga pentru tine.
+            </p>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto mb-8">
+              <h3 className="text-2xl font-bold mb-4">Cum funcționează?</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-red-100">
+                <div className="text-center">
+                  <i className="ri-edit-line text-3xl mb-2"></i>
+                  <p className="font-medium">1. Scrii rugăciunea</p>
+                  <p className="text-sm">Împărtășește cererea ta</p>
+                </div>
+                <div className="text-center">
+                  <i className="ri-team-line text-3xl mb-2"></i>
+                  <p className="font-medium">2. Comunitatea vede</p>
+                  <p className="text-sm">Membrii AMiCUS citesc</p>
+                </div>
+                <div className="text-center">
+                  <i className="ri-hands-pray-line text-3xl mb-2"></i>
+                  <p className="font-medium">3. Ne rugăm pentru tine</p>
+                  <p className="text-sm">Studenții se roagă zilnic</p>
+                </div>
+              </div>
+            </div>
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="bg-white text-primary-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 inline-flex items-center space-x-2"
+            >
+              <i className="ri-add-line text-xl"></i>
+              <span>Adaugă o Rugăciune</span>
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
       {/* Prayer Form */}
       <AnimatePresence>
@@ -249,8 +284,35 @@ export const PrayerWall = () => {
         )}
       </AnimatePresence>
 
-      {/* Prayer Cards */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* Statistics Section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
+              <i className="ri-chat-3-line text-2xl text-white"></i>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900">{prayers.length}</h3>
+            <p className="text-gray-600">Rugăciuni Active</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
+              <i className="ri-hands-pray-line text-2xl text-white"></i>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900">{prayers.reduce((sum, p) => sum + p.prayer_count, 0)}</h3>
+            <p className="text-gray-600">Rugăciuni Oferite</p>
+          </div>
+          
+          <div className="bg-white rounded-lg shadow-lg p-6 text-center">
+            <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
+              <i className="ri-team-line text-2xl text-white"></i>
+            </div>
+            <h3 className="text-2xl font-bold text-gray-900">25+</h3>
+            <p className="text-gray-600">Studenți care se Roagă</p>
+          </div>
+        </div>
+
+        {/* Prayer Cards */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {prayers.map((prayer) => (
           <motion.div
             key={prayer.id}
@@ -266,36 +328,43 @@ export const PrayerWall = () => {
               {prayer.content}
             </p>
             
-            <div className="flex justify-between items-center text-sm text-gray-500 mb-4">
+            <div className="flex items-center text-sm text-gray-500 mb-4">
+              <i className="ri-user-line mr-2"></i>
               <span>
-                {prayer.is_anonymous ? t('anonymous') : prayer.author_name || t('anonymous')}
+                {prayer.is_anonymous ? 'Anonim' : prayer.author_name || 'Anonim'}
               </span>
-              <span>{formatDate(prayer.created_at)}</span>
             </div>
             
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-600">
-                {prayer.prayer_count} {t('peoplesPrayers')}
-              </span>
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600 flex items-center">
+                  <i className="ri-hands-pray-line mr-1"></i>
+                  {prayer.prayer_count} rugăciuni
+                </span>
+                <span className="text-xs text-gray-400">
+                  <i className="ri-calendar-line mr-1"></i>
+                  {formatDate(prayer.created_at)}
+                </span>
+              </div>
               
               <button
                 onClick={() => prayForRequest(prayer.id)}
                 disabled={prayedFor.has(prayer.id)}
-                className={`px-4 py-2 rounded-lg font-semibold transition-colors duration-200 ${
+                className={`px-4 py-2 rounded-lg font-semibold transition-all duration-200 ${
                   prayedFor.has(prayer.id)
-                    ? 'bg-green-100 text-green-700 cursor-not-allowed'
-                    : 'bg-primary-red text-white hover:bg-red-700'
+                    ? 'bg-green-100 text-green-700 cursor-not-allowed transform scale-95'
+                    : 'bg-primary-red text-white hover:bg-red-700 hover:scale-105'
                 }`}
               >
                 {prayedFor.has(prayer.id) ? (
                   <>
                     <i className="ri-check-line mr-1"></i>
-                    {t('prayed')}
+                    M-am rugat
                   </>
                 ) : (
                   <>
                     <i className="ri-hands-pray-line mr-1"></i>
-                    {t('prayForThis')}
+                    Mă rog
                   </>
                 )}
               </button>
@@ -304,12 +373,55 @@ export const PrayerWall = () => {
         ))}
       </div>
 
-      {prayers.length === 0 && (
-        <div className="text-center py-12">
-          <i className="ri-hands-pray-line text-6xl text-gray-300 mb-4"></i>
-          <p className="text-gray-500 text-lg">No prayers yet. Be the first to share!</p>
-        </div>
-      )}
+        {prayers.length === 0 && (
+          <div className="text-center py-12">
+            <i className="ri-hands-pray-line text-6xl text-gray-300 mb-4"></i>
+            <p className="text-gray-500 text-lg">Încă nu sunt rugăciuni. Fii primul care împărtășește!</p>
+          </div>
+        )}
+
+        {/* Community Promise Section */}
+        <section className="mt-16 bg-gray-50 rounded-2xl p-8">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Promisiunea Noastră</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              Fiecare rugăciune postată aici este citită și inclusă în rugăciunile noastre zilnice de către membrii AMiCUS Timișoara.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-time-line text-2xl text-white"></i>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Rugăciune Zilnică</h3>
+              <p className="text-gray-600">Ne rugăm în fiecare zi pentru cererile voastre</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-shield-check-line text-2xl text-white"></i>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Confidențialitate</h3>
+              <p className="text-gray-600">Poți alege să rămâi anonim dacă dorești</p>
+            </div>
+            
+            <div className="text-center">
+              <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
+                <i className="ri-heart-line text-2xl text-white"></i>
+              </div>
+              <h3 className="font-semibold text-gray-900 mb-2">Cu Dragoste</h3>
+              <p className="text-gray-600">Fiecare rugăciune este tratată cu respect și dragoste</p>
+            </div>
+          </div>
+          
+          <div className="text-center mt-8">
+            <p className="text-gray-600 italic">
+              "Rugați-vă unii pentru alții, ca să fiți vindecați. Rugăciunea fierbinte a celui neprihănit are o mare putere." - Iacov 5:16
+            </p>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

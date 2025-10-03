@@ -4,7 +4,7 @@ import { Toaster } from 'sonner';
 import './i18n';
 
 // Components
-import Navigation from './components/Navigation';
+import {Navigation} from './components/Navigation';
 import {LoadingAnimation} from './components/LoadingAnimation';
 import PrayerWall from './components/PrayerWall';
 import CookieBanner from './components/CookieBanner';
@@ -12,12 +12,11 @@ import CookieBanner from './components/CookieBanner';
 // Pages
 import {HomePage} from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
+import {AdminDashboard} from './pages/AdminDashboard';
 import AboutPage from './pages/AboutPage';
 import ProjectsPage from './pages/ProjectsPage';
 import {EventsPage} from './pages/EventsPage';
 import BookPage from './pages/BookPage';
-import VisionPage from './pages/VisionPage';
-import PodcastPage from './pages/PodcastPage';
 import ContactPage from './pages/ContactPage';
 import Form from './form/Form';
 import Table from './table/Table';
@@ -50,13 +49,12 @@ export const App = () => {
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/events" element={<EventsPage />} />
               <Route path="/book" element={<BookPage />} />
-              <Route path="/vision" element={<VisionPage />} />
-              <Route path="/podcast" element={<PodcastPage />} />
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/form" element={<Form />} />
               <Route path="/table" element={<Table />} />
               <Route path="/tabel-admin-amicus-2024-secret" element={<Table />} />
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/admin-dashboard-amicus-internal-2024" element={<AdminDashboard />} />
               <Route path="/prayer-wall" element={<PrayerWall />} />
             </Routes>
             
