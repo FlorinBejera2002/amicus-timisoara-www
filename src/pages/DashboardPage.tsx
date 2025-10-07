@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { createClient } from '@supabase/supabase-js';
 import { Data } from '../table/Table';
-import Modal from '../table/modal/Modal';
+import { Modal } from '../table/modal/Modal';
 import logo from '@/assets/Logo-AMiCUS-TM.png';
 
 const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co';
@@ -29,7 +29,7 @@ export const DashboardPage = () => {
 
   useEffect(() => {
     calculateStats();
-  }, [data]);
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -43,6 +43,7 @@ export const DashboardPage = () => {
         return;
       }
 
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
       const mappedData: Data[] = users.map((item: any) => ({
         id: item.id,
         name: item.name,
@@ -295,4 +296,3 @@ export const DashboardPage = () => {
   );
 };
 
-export default DashboardPage;

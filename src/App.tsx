@@ -7,19 +7,19 @@ import './i18n';
 import {Navigation} from './components/Navigation';
 import {LoadingAnimation} from './components/LoadingAnimation';
 // import PrayerWall from './components/PrayerWall'; // TODO: Funcționalitate de adăugat mai târziu
-import CookieBanner from './components/CookieBanner';
+import { CookieBanner } from './components/CookieBanner';
 
 // Pages
 import {HomePage} from './pages/HomePage';
-import DashboardPage from './pages/DashboardPage';
+import { DashboardPage } from './pages/DashboardPage';
 import {AdminDashboard} from './pages/AdminDashboard';
 import {AboutPage} from './pages/AboutPage';
 import {ProjectsPage} from './pages/ProjectsPage';
 import {EventsPage} from './pages/EventsPage';
 // import {BookPage} from './pages/BookPage'; // TODO: Pagina comentată - doar secțiunea din home rămâne activă
 import {ContactPage} from './pages/ContactPage';
-import Form from './form/Form';
-import Table from './table/Table';
+import { Form } from './form/Form';
+import { Table } from './table/Table';
 
 export const App = () => {
   const [isLoading, setIsLoading] = useState(true);

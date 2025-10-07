@@ -71,7 +71,7 @@ const SelectField = ({ label, value, onChange, options, required = false }: {
   </div>
 );
 
-export default function Form() {
+export const Form = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<FormData>({
@@ -93,6 +93,7 @@ export default function Form() {
 
   const totalSteps = 4;
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   const updateFormData = (field: keyof FormData, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };

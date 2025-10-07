@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { Data } from '../Table';
 
-export default function Modal({ data, show, setShow, date, setDate, onDelete }: { data: Data | undefined, show: boolean, setShow: (show: boolean) => void, date: Data[], setDate: (date: Data[]) => void, onDelete?: (id: number) => void }) {
-    if (!data) return null;
-    const [achitat, setAchitat] = useState(data.cash);
+export function Modal({ data, show, setShow, date, setDate, onDelete }: { data: Data | undefined, show: boolean, setShow: (show: boolean) => void, date: Data[], setDate: (date: Data[]) => void, onDelete?: (id: number) => void }) {
+    const [achitat, setAchitat] = useState(data?.cash || 0);
 
     useEffect(() => {
-        setAchitat(data.cash);
+        if (data) {
+            setAchitat(data.cash);
+        }
     }, [data]);
+
+    if (!data) return null;
 
     const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co' // Înlocuiește cu valorile tale
     const supabaseKey =

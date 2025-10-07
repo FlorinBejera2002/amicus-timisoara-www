@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import logo from '@/assets/Logo-AMiCUS-TM.png';
-import Modal from './modal/Modal';
+import { Modal } from './modal/Modal';
 import {createClient} from "@supabase/supabase-js";
 
-export default function Table() {
+export function Table() {
     const cellSpace = 110;
     const [date, setDate] = useState<Data[]>([]);
     const [modalData, setModalData] = useState<Data>();
@@ -18,6 +18,7 @@ export default function Table() {
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbWpkd3NrZG9zYm1lbmFxaHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NzgwNDQsImV4cCI6MjA3NTA1NDA0NH0.ujTLHvPIAbF1HVhgOF1Tqk-Rr4a18z7ZoEjk7IANe-E';
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         const fetchData = async () => {
             const { data, error } = await supabase
@@ -29,7 +30,8 @@ export default function Table() {
                 console.error('Eroare la preluarea datelor:', error);
             } else {
                 // Map the data to match the Data interface
-                const mappedData = data.map((item: any) => ({
+                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                                const mappedData = data.map((item: any) => ({
                     id: item.id,
                     name: item.full_name || item.name || '',
                     email: item.email,
@@ -48,7 +50,7 @@ export default function Table() {
         };
 
         fetchData();
-    }, []); // Empty dependency array to run only once on mount
+    }, []); 
 
     useEffect(() => { // set tableWidth to the width of the table
         const handleResize = () => {
