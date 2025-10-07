@@ -125,6 +125,11 @@ export const Footer = () => {
                     >
                       Președinte: 0758948440
                     </a>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <i className="ri-phone-line text-primary-red text-base sm:text-lg"></i>
+                  <div className="flex flex-col">
                     <a 
                       href="tel:+40768096881"
                       className="hover:text-white transition-colors duration-200 text-sm"
