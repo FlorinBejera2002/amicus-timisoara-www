@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 export const EventsPage = () => {
   const [selectedFilter, setSelectedFilter] = useState('Toate');
@@ -9,115 +9,115 @@ export const EventsPage = () => {
   const upcomingEvents = [
     {
       id: 1,
-      title: 'Întâlnire Săptămânală',
-      date: '2024-01-04',
-      time: '20:00',
-      location: 'Str. Piața Alexandru Mocioni 7, Timișoara',
-      category: 'Spiritual',
-      description: 'Întâlnirea noastră săptămânală cu studiu biblic, rugăciune și părtășie.',
+      title: 'Prima întâlnire',
+      date: 'Joi, 9 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      category: 'Întâlnire AMiCUS',
+      description: 'Prima întâlnire cu invitatul Levis Nistor pe tema "Amprenta".',
       image: 'ri-calendar-event-line',
-      spots: 50,
-      registered: 35,
-      recurring: true
+      guest: 'Levis Nistor',
+      theme: 'Amprenta'
     },
     {
       id: 2,
-      title: 'Conferința Anuală AMiCUS 2024',
-      date: '2024-03-15',
-      time: '09:00',
-      location: 'Aula Magna, Universitatea de Vest Timișoara',
-      category: 'Educație',
-      description: 'Conferința anuală cu speakeri de renume din domeniul medical și spiritual.',
+      title: 'Deschiderea anului Universitar',
+      date: 'Sâmbătă, 11 Octombrie',
+      time: '17:00 - 18:00',
+      location: 'Biserica AZS Maranatha, Timișoara',
+      category: 'Eveniment',
+      description: 'Eveniment de deschidere a anului universitar cu Ionuț Feier pe tema "Către necunoscut".',
       image: 'ri-presentation-line',
-      spots: 300,
-      registered: 180,
-      recurring: false
+      guest: 'Ionuț Feier',
+      theme: 'Către necunoscut'
     },
     {
       id: 3,
-      title: 'Campania de Donare de Sânge',
-      date: '2024-02-20',
-      time: '10:00',
-      location: 'Centrul de Transfuzie Sanguină Timișoara',
-      category: 'Social',
-      description: 'Campanie de sensibilizare și donare de sânge pentru salvarea de vieți.',
-      image: 'ri-heart-pulse-line',
-      spots: 100,
-      registered: 65,
-      recurring: false
+      title: 'Serată',
+      date: 'Sâmbătă, 11 Octombrie',
+      time: '20:00 - 23:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      category: 'Recreativ',
+      description: 'Seară de jocuri organizată de echipa AMiCUS.',
+      image: 'ri-gamepad-line',
+      guest: 'Echipa AMiCUS',
+      theme: 'Seară de jocuri'
     },
     {
       id: 4,
-      title: 'Workshop Dezvoltare Personală',
-      date: '2024-01-25',
-      time: '18:00',
-      location: 'Sala de conferințe AMiCUS',
-      category: 'Dezvoltare',
-      description: 'Workshop interactiv despre dezvoltarea abilităților de leadership.',
-      image: 'ri-user-star-line',
-      spots: 30,
-      registered: 22,
-      recurring: false
+      title: 'Întâlnire AMiCUS',
+      date: 'Joi, 16 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      category: 'Întâlnire AMiCUS',
+      description: 'Întâlnire cu Mihoc pe tema "Față în față cu succesul?".',
+      image: 'ri-calendar-event-line',
+      guest: 'Mihoc',
+      theme: 'Față în față cu succesul?'
     },
     {
       id: 5,
-      title: 'Seară Culturală',
-      date: '2024-02-10',
-      time: '19:00',
-      location: 'Casa de Cultură a Studenților',
-      category: 'Cultural',
-      description: 'O seară dedicată artei, muzicii și talentelor din comunitatea AMiCUS.',
-      image: 'ri-music-line',
-      spots: 80,
-      registered: 45,
-      recurring: false
+      title: 'Drumeție',
+      date: 'Duminica, 19 Octombrie',
+      time: '09:00 - 18:00',
+      location: 'Moneasa - Platoul Tinoasa - Cabana Izoi',
+      category: 'Recreativ',
+      description: 'Drumeție cu Pr. Alexandru Munteanu pe tema "Dezvoltarea Liderilor Creștini".',
+      image: 'ri-mountain-line',
+      guest: 'Pr. Alexandru Munteanu',
+      theme: 'Dezvoltarea Liderilor Creștini'
     },
     {
       id: 6,
-      title: 'Tabăra de Vară AMiCUS 2024',
-      date: '2024-07-15',
-      time: '10:00',
-      location: 'Munții Carpați, România',
-      category: 'Spiritual',
-      description: 'Tabăra anuală de dezvoltare spirituală și personală în natură.',
-      image: 'ri-tent-line',
-      spots: 80,
-      registered: 45,
-      recurring: false
-    }
-  ];
-
-  const pastEvents = [
+      title: 'De vorbă cu capelanul',
+      date: 'Marti, 21 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      category: 'Proiect',
+      description: 'Sesiune de discuții cu capelanul Levis Nistor.',
+      image: 'ri-chat-3-line',
+      guest: 'Levis Nistor',
+      theme: 'De vorbă cu capelanul'
+    },
     {
       id: 7,
-      title: 'Conferința Medicală de Toamnă',
-      date: '2023-11-20',
-      location: 'Spitalul Județean Timișoara',
-      category: 'Educație',
-      participants: 150,
-      image: 'ri-stethoscope-line'
+      title: 'Întâlnire AMiCUS',
+      date: 'Joi, 23 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      category: 'Întâlnire AMiCUS',
+      description: 'Întâlnire cu Adi Dorgo pe tema orientării și carierei.',
+      image: 'ri-calendar-event-line',
+      guest: 'Adi Dorgo',
+      theme: 'Orientare/Carieră'
     },
     {
       id: 8,
-      title: 'Proiect Îngrijire Bătrâni',
-      date: '2023-12-15',
-      location: 'Căminul de Bătrâni "Speranța"',
-      category: 'Social',
-      participants: 25,
-      image: 'ri-parent-line'
+      title: 'Ieșire culturală',
+      date: 'Marți, 28 Octombrie',
+      time: '09:00 - 18:00',
+      location: 'Timișoara',
+      category: 'Cultural',
+      description: 'Ieșire culturală în Timișoara pentru explorarea patrimoniului local.',
+      image: 'ri-building-line',
+      theme: 'Ieșire culturală'
     },
     {
       id: 9,
-      title: 'Concert de Colinde',
-      date: '2023-12-22',
-      location: 'Biserica Adventistă Timișoara',
-      category: 'Cultural',
-      participants: 200,
-      image: 'ri-music-line'
+      title: 'Întâlnire AMiCUS',
+      date: 'Joi, 30 Octombrie',
+      time: '20:00 - 22:00',
+      location: 'Piața Mocioni 7, Timișoara',
+      category: 'Întâlnire AMiCUS',
+      description: 'Întâlnire cu Florin Orodan pe tema Apocalipsei.',
+      image: 'ri-calendar-event-line',
+      guest: 'Florin Orodan',
+      theme: 'Apocalipsa'
     }
   ];
 
-  const categories = ['Toate', 'Spiritual', 'Educație', 'Social', 'Dezvoltare', 'Cultural'];
+
+  const categories = ['Toate', 'Întâlnire AMiCUS', 'Eveniment', 'Recreativ', 'Proiect', 'Cultural'];
 
   const filteredEvents = selectedFilter === 'Toate' 
     ? upcomingEvents 
@@ -166,35 +166,7 @@ export const EventsPage = () => {
         </div>
       </section>
 
-      {/* Quick Stats */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '52', label: 'Evenimente/An', icon: 'ri-calendar-line' },
-              { number: '1500+', label: 'Participanți', icon: 'ri-group-line' },
-              { number: '12', label: 'Tipuri Evenimente', icon: 'ri-list-check' },
-              { number: '100%', label: 'Gratuite', icon: 'ri-gift-line' }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className={`${stat.icon} text-2xl text-white`}></i>
-                </div>
-                <div className="text-3xl font-bold text-gray-900 mb-2">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+     
       {/* Filter Section */}
       <section className="py-8 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -277,82 +249,22 @@ export const EventsPage = () => {
                     {event.description}
                   </p>
                   
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-gray-600 mb-2">
-                      <span>Înregistrați: {event.registered}/{event.spots}</span>
-                      <span>{Math.round((event.registered / event.spots) * 100)}%</span>
+                  {event.guest && (
+                    <div className="flex items-center text-sm text-gray-600 mb-2">
+                      <i className="ri-user-line mr-2 text-primary-red"></i>
+                      <span>Invitat: {event.guest}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-primary-red h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${(event.registered / event.spots) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
+                  )}
                   
-                  <button className="w-full bg-primary-red text-white py-2 px-4 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200 flex items-center justify-center space-x-2">
-                    <span>Înscrie-te</span>
-                    <i className="ri-arrow-right-line"></i>
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Past Events */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Evenimente Trecute
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Privește în urmă la evenimentele noastre de succes
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {pastEvents.map((event, index) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200"
-              >
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gray-400 rounded-lg flex items-center justify-center mr-4">
-                    <i className={`${event.image} text-xl text-white`}></i>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900">{event.title}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(event.category)}`}>
-                      {event.category}
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-sm text-gray-600">
-                    <i className="ri-calendar-line mr-2"></i>
-                    <span>{formatDate(event.date)}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <i className="ri-map-pin-line mr-2"></i>
-                    <span>{event.location}</span>
-                  </div>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <i className="ri-group-line mr-2"></i>
-                    <span>{event.participants} participanți</span>
+                  {event.theme && (
+                    <div className="flex items-center text-sm text-gray-600 mb-4">
+                      <i className="ri-bookmark-line mr-2 text-primary-red"></i>
+                      <span>Tema: {event.theme}</span>
+                    </div>
+                  )}
+                  
+                  <div className="bg-gray-50 rounded-lg p-3 text-center">
+                    <span className="text-sm text-gray-600 font-medium">Eveniment informativ</span>
                   </div>
                 </div>
               </motion.div>
@@ -360,6 +272,7 @@ export const EventsPage = () => {
           </div>
         </div>
       </section>
+
 
       {/* CTA Section */}
       <section className="py-20 bg-primary-red text-white">

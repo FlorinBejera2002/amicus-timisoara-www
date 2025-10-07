@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 export const ProjectsPage = () => {
   const projects = [
@@ -259,4 +259,3 @@ export const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;

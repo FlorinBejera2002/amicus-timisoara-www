@@ -1,51 +1,7 @@
 import { motion } from 'framer-motion';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 export const BookPage = () => {
-  const chapters = [
-    {
-      number: 1,
-      title: 'Începuturile',
-      description: 'Povestea înființării AMiCUS și primii pași în comunitate',
-      pages: 25,
-      author: 'Echipa Fondatoare'
-    },
-    {
-      number: 2,
-      title: 'Credința în Medicină',
-      description: 'Cum să îmbini credința creștină cu practica medicală',
-      pages: 35,
-      author: 'Dr. Maria Popescu'
-    },
-    {
-      number: 3,
-      title: 'Mărturii de Transformare',
-      description: 'Povești personale de schimbare și creștere spirituală',
-      pages: 40,
-      author: 'Membri AMiCUS'
-    },
-    {
-      number: 4,
-      title: 'Serviciul în Comunitate',
-      description: 'Proiecte sociale și impactul lor asupra societății',
-      pages: 30,
-      author: 'Echipa Proiecte'
-    },
-    {
-      number: 5,
-      title: 'Dezvoltarea Profesională',
-      description: 'Ghid pentru cariera medicală din perspectivă creștină',
-      pages: 45,
-      author: 'Dr. Alexandru Ionescu'
-    },
-    {
-      number: 6,
-      title: 'Viitorul AMiCUS',
-      description: 'Viziunea și planurile pentru următorii ani',
-      pages: 20,
-      author: 'Consiliul Director'
-    }
-  ];
 
   const testimonials = [
     {
@@ -90,8 +46,7 @@ export const BookPage = () => {
                 Cartea AMiCUS Timișoara
               </h1>
               <p className="text-xl text-red-100 mb-8">
-                O colecție inspirațională de povești, mărturii și învățături din 
-                comunitatea medicilor și studenților creștini din Timișoara.
+                De-a lungul anilor, AMiCUS Timișoara a fost o piatră de hotar pentru studenții ce i-au trecut pragul. Astfel, volumul unic "AMiCUS la sfert de veac" reunește experiențele, amintirile și sfaturile amicușilor din toată generațiile.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <button className="bg-white text-primary-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 inline-flex items-center justify-center space-x-2">
@@ -174,10 +129,7 @@ export const BookPage = () => {
               Despre Această Carte
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              "Cartea AMiCUS Timișoara" este o compilație unică care adună experiențele, 
-              mărturiile și învățăturile membrilor comunității noastre. Fiecare pagină 
-              reflectă călătoria spirituală și profesională a celor care au ales să 
-              îmbine credința cu excelența în domeniul medical.
+              De-a lungul anilor, AMiCUS Timișoara a fost o piatră de hotar pentru studenții ce i-au trecut pragul. Astfel, volumul unic "AMiCUS la sfert de veac" reunește experiențele, amintirile și sfaturile amicușilor din toată generațiile. Timpurile s-au schimbat, drumul academic diferă, însă prietenia rămâne aceeași și peste ani. De ce? Pentru că AMiCUS a oferit studenției un farmec aparte.
             </p>
           </motion.div>
 
@@ -185,13 +137,13 @@ export const BookPage = () => {
             {[
               {
                 icon: 'ri-heart-line',
-                title: 'Mărturii Personale',
+                title: 'Experiențe autentice',
                 description: 'Povești autentice de transformare și creștere spirituală'
               },
               {
                 icon: 'ri-lightbulb-line',
-                title: 'Învățături Practice',
-                description: 'Ghiduri concrete pentru integrarea credinței în medicină'
+                title: 'Sfaturi practice',
+                description: 'Ghiduri concrete pentru integrarea credinței în viață'
               },
               {
                 icon: 'ri-community-line',
@@ -222,65 +174,6 @@ export const BookPage = () => {
         </div>
       </section>
 
-      {/* Chapters */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Cuprinsul Cărții
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Explorează cele 6 capitole care acoperă toate aspectele vieții creștine în medicină
-            </p>
-          </motion.div>
-
-          <div className="space-y-6">
-            {chapters.map((chapter, index) => (
-              <motion.div
-                key={chapter.number}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 hover:shadow-lg transition-shadow duration-200"
-              >
-                <div className="flex items-center space-x-6">
-                  <div className="flex-shrink-0 w-16 h-16 bg-primary-red rounded-full flex items-center justify-center">
-                    <span className="text-white font-bold text-xl">{chapter.number}</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      {chapter.title}
-                    </h3>
-                    <p className="text-gray-600 mb-2">
-                      {chapter.description}
-                    </p>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500">
-                      <span>
-                        <i className="ri-file-text-line mr-1"></i>
-                        {chapter.pages} pagini
-                      </span>
-                      <span>
-                        <i className="ri-user-line mr-1"></i>
-                        {chapter.author}
-                      </span>
-                    </div>
-                  </div>
-                  <button className="bg-primary-red text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-200">
-                    Citește
-                  </button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Testimonials */}
       <section className="py-20 bg-gray-50">
@@ -348,7 +241,7 @@ export const BookPage = () => {
             </h2>
             <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
               Această carte este disponibilă gratuit pentru toți cei interesați să 
-              exploreze intersecția dintre credință și medicină.
+              exploreze experiențele și învățăturile comunității AMiCUS.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button className="bg-white text-primary-red px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors duration-200 inline-flex items-center justify-center space-x-2">
@@ -372,4 +265,3 @@ export const BookPage = () => {
   );
 };
 
-export default BookPage;

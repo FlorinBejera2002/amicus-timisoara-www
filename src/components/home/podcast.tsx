@@ -17,8 +17,10 @@ export const Podcast = () => {
           Podcast AMiCUS
         </h2>
         <p className="text-lg text-gray-600 mb-6">
-          Ascultă conversații inspiraționale cu studenți din comunitatea noastră, 
-          discuții despre credință, viața universitară și dezvoltare personală.
+          Și tu îți pui întrebări despre lumea în care trăim? Despre ce ar trebui să faci, cum ar trebui să fii, încotro ne îndreptăm?
+        </p>
+        <p className="text-lg text-gray-600 mb-6">
+          Atunci te invităm să urmărești episoadele podcastului nostru Conceptum- un podcast cu prieteni și despre prieteni.
         </p>
         <div className="space-y-4 mb-6">
           <div className="flex items-center space-x-3">

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 export const VisionPage = () => {
   const visionPillars = [
@@ -389,4 +389,3 @@ export const VisionPage = () => {
   );
 };
 
-export default VisionPage;

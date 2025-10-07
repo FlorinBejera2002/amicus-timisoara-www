@@ -1,4 +1,4 @@
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 import { DailyVerse } from '../components/DailyVerse';
 import { Hero } from '../components/home/hero';
 import { Events } from '../components/home/events';

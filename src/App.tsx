@@ -6,18 +6,18 @@ import './i18n';
 // Components
 import {Navigation} from './components/Navigation';
 import {LoadingAnimation} from './components/LoadingAnimation';
-import PrayerWall from './components/PrayerWall';
+// import PrayerWall from './components/PrayerWall'; // TODO: Funcționalitate de adăugat mai târziu
 import CookieBanner from './components/CookieBanner';
 
 // Pages
 import {HomePage} from './pages/HomePage';
 import DashboardPage from './pages/DashboardPage';
 import {AdminDashboard} from './pages/AdminDashboard';
-import AboutPage from './pages/AboutPage';
-import ProjectsPage from './pages/ProjectsPage';
+import {AboutPage} from './pages/AboutPage';
+import {ProjectsPage} from './pages/ProjectsPage';
 import {EventsPage} from './pages/EventsPage';
-import BookPage from './pages/BookPage';
-import ContactPage from './pages/ContactPage';
+// import {BookPage} from './pages/BookPage'; // TODO: Pagina comentată - doar secțiunea din home rămâne activă
+import {ContactPage} from './pages/ContactPage';
 import Form from './form/Form';
 import Table from './table/Table';
 
@@ -48,14 +48,14 @@ export const App = () => {
               <Route path="/about" element={<AboutPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/events" element={<EventsPage />} />
-              <Route path="/book" element={<BookPage />} />
+              {/* <Route path="/book" element={<BookPage />} /> */} {/* TODO: Pagina comentată - doar secțiunea din home rămâne activă */}
               <Route path="/contact" element={<ContactPage />} />
               <Route path="/form" element={<Form />} />
               <Route path="/table" element={<Table />} />
               <Route path="/tabel-admin-amicus-2024-secret" element={<Table />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/admin-dashboard-amicus-internal-2024" element={<AdminDashboard />} />
-              <Route path="/prayer-wall" element={<PrayerWall />} />
+              {/* <Route path="/prayer-wall" element={<PrayerWall />} /> */} {/* TODO: Funcționalitate de adăugat mai târziu */}
             </Routes>
             
             <CookieBanner />

@@ -3,7 +3,7 @@ import { Toaster, toast } from 'sonner';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logo from '@/assets/Logo-Amicus.png';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 interface FormData {
   name: string;

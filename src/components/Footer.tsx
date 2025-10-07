@@ -12,9 +12,9 @@ export const Footer = () => {
   ];
 
   const resources = [
-    { path: '/book', label: 'Book AMiCUS' },
+    // { path: '/book', label: 'Book AMiCUS' }, // TODO: Pagina comentată - doar secțiunea din home rămâne activă
     { path: '/podcast', label: 'Podcast' },
-    { path: '/prayer-wall', label: 'Prayer Wall' },
+    // { path: '/prayer-wall', label: 'Prayer Wall' }, // TODO: Funcționalitate de adăugat mai târziu
     { path: '/form', label: 'Join Us' },
     { path: '/contact', label: 'Contact' }
   ];
@@ -106,21 +106,33 @@ export const Footer = () => {
               <div className="flex items-center space-x-2 sm:space-x-3">
                 <i className="ri-mail-line text-primary-red text-base sm:text-lg"></i>
                 <a 
-                  href="mailto:aamicustm@gmail.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=aamicustimisoara@gmail.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-white transition-colors duration-200 break-all sm:break-normal"
                 >
-                 aamicustm@gmail.com
+                 aamicustimisoara@gmail.com
                 </a>
               </div>
               
-              <div className="flex items-center space-x-2 sm:space-x-3">
-                <i className="ri-phone-line text-primary-red text-base sm:text-lg"></i>
-                <a 
-                  href="tel:+40 768 096 881"
-                  className="hover:text-white transition-colors duration-200"
-                >
-                  +40 768 096 881
-                </a>
+              <div className="flex flex-col space-y-2">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <i className="ri-phone-line text-primary-red text-base sm:text-lg"></i>
+                  <div className="flex flex-col">
+                    <a 
+                      href="tel:0758948440"
+                      className="hover:text-white transition-colors duration-200 text-sm"
+                    >
+                      Președinte: 0758948440
+                    </a>
+                    <a 
+                      href="tel:+40768096881"
+                      className="hover:text-white transition-colors duration-200 text-sm"
+                    >
+                      Capelan: +40 768 096 881
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -146,4 +158,3 @@ export const Footer = () => {
   );
 };
 
-export default Footer;

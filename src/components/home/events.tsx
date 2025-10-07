@@ -9,8 +9,7 @@ import {
   FaChevronLeft,
   FaChevronRight,
   FaUser,
-  FaMapMarkerAlt,
-  FaCalendarPlus
+  FaMapMarkerAlt
 } from 'react-icons/fa';
 
 export const Events = () => {
@@ -225,21 +224,9 @@ export const Events = () => {
                         )}
                       </div>
 
-                      <button 
-                        className="mt-auto w-full bg-primary-red text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-300 flex items-center justify-center space-x-2"
-                        onClick={() => {
-                          if (window.gtag) {
-                            window.gtag('event', 'select_content', {
-                              content_type: 'event',
-                              item_id: event.id,
-                              event_name: event.title
-                            });
-                          }
-                        }}
-                      >
-                        <FaCalendarPlus className="text-sm" />
-                        <span>Înscrie-te acum</span>
-                      </button>
+                      <div className="mt-auto bg-gray-50 rounded-lg p-3 text-center">
+                        <span className="text-sm text-gray-600 font-medium">Eveniment informativ</span>
+                      </div>
                     </motion.div>
                   </div>
                 ))}
@@ -330,21 +317,9 @@ export const Events = () => {
                               )}
                             </div>
 
-                            <button 
-                              className="mt-auto w-full bg-primary-red text-white py-2 rounded-lg font-medium hover:bg-red-700 transition-colors duration-300 flex items-center justify-center space-x-2"
-                              onClick={() => {
-                                if (window.gtag) {
-                                  window.gtag('event', 'select_content', {
-                                    content_type: 'event',
-                                    item_id: event.id,
-                                    event_name: event.title
-                                  });
-                                }
-                              }}
-                            >
-                              <FaCalendarPlus className="text-sm" />
-                              <span>Înscrie-te acum</span>
-                            </button>
+                            <div className="mt-auto bg-gray-50 rounded-lg p-3 text-center">
+                              <span className="text-sm text-gray-600 font-medium">Eveniment informativ</span>
+                            </div>
                           </motion.div>
                         ))}
                       </div>

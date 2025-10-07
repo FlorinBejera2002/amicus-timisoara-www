@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 import logo from '@/assets/Logo-Amicus.png';
 
 export const AboutPage = () => {
@@ -70,69 +70,56 @@ export const AboutPage = () => {
     }
   ];
 
-  const coreValues = [
-    {
-      title: 'Integritate',
-      description: 'Trăim conform principiilor biblice în toate aspectele vieții',
-      verse: 'Proverbele 10:9'
-    },
-    {
-      title: 'Compasiune',
-      description: 'Tratăm fiecare pacient cu dragostea lui Hristos',
-      verse: 'Coloseni 3:12'
-    },
-    {
-      title: 'Excelență',
-      description: 'Urmărim perfecțiunea în tot ceea ce facem',
-      verse: 'Coloseni 3:23'
-    },
-    {
-      title: 'Serviciu',
-      description: 'Servim comunitatea cu umilință și dedicare',
-      verse: 'Marcu 10:43-44'
-    },
-    {
-      title: 'Unitate',
-      description: 'Lucrăm împreună ca un singur trup în Hristos',
-      verse: '1 Corinteni 12:12'
-    },
-    {
-      title: 'Creștere',
-      description: 'Ne dezvoltăm continuu spiritual și profesional',
-      verse: '2 Petru 3:18'
-    }
-  ];
-
   const departments = [
     {
-      name: 'Departamentul Recreativ',
-      description: 'Organizează activități de relaxare și socializare pentru membri',
-      icon: 'ri-gamepad-line'
+      name: 'Președinte',
+      description: 'Elaborează și urmărește viziunea de ansamblu, reprezintă filiala în fața bisericii și a altor instituții, convocă și conduce ședințele comitetului.',
+      icon: 'ri-user-star-line'
     },
     {
-      name: 'Departamentul Cultural',
-      description: 'Promovează activități culturale și artistice în comunitate',
-      icon: 'ri-palette-line'
+      name: 'Departamentul Administrativ',
+      description: 'Ține evidența membrilor, comunică anunțurile organizatorice, se ocupă de fonduri și cheltuieli, întocmește bugetul anual.',
+      icon: 'ri-file-list-3-line'
     },
     {
-      name: 'Departamentul Social',
-      description: 'Coordonează proiectele de ajutorare și sprijin social',
-      icon: 'ri-group-line'
-    },
-    {
-      name: 'Departamentul Proiecte',
-      description: 'Dezvoltă și implementează proiecte inovatoare',
-      icon: 'ri-lightbulb-line'
-    },
-    {
-      name: 'Departamentul PR & Marketing',
-      description: 'Gestionează comunicarea și promovarea activităților',
+      name: 'Departamentul Marketing și Relații Publice',
+      description: 'Păstrează și promovează identitatea vizuală, menține legătura cu presa, coordonează campaniile de promovare.',
       icon: 'ri-megaphone-line'
     },
     {
       name: 'Departamentul Spiritual',
-      description: 'Organizează activități de dezvoltare spirituală',
+      description: 'Propune și coordonează activități care să promoveze valorile moral-creștine, oferă sprijin studenților care au nevoie de îndrumare.',
       icon: 'ri-book-read-line'
+    },
+    {
+      name: 'Departamentul de Resurse Umane',
+      description: 'Coordonează activitatea voluntarilor, propune strategii de atragere de noi membri, organizează activități de părtășie.',
+      icon: 'ri-team-line'
+    },
+    {
+      name: 'Departamentul Cultural',
+      description: 'Dezvoltă programe culturale de calitate, întreține relații cu organizațiile culturale, mediatizează programele culturale.',
+      icon: 'ri-palette-line'
+    },
+    {
+      name: 'Departamentul Social',
+      description: 'Organizează acțiuni de responsabilitate socială, identifică oportunitățile de implicare în proiecte locale cu persoane defavorizate.',
+      icon: 'ri-heart-line'
+    },
+    {
+      name: 'Departamentul de Activități Recreative',
+      description: 'Asigură momente de destindere și cunoaștere, organizează ieșiri în aer liber, excursii, concursuri, tabere.',
+      icon: 'ri-gamepad-line'
+    },
+    {
+      name: 'Departamentul de Coordonare a Proiectelor',
+      description: 'Concepe și implementează proiecte pe termen scurt și lung, gestionează buna desfășurare a proiectelor mari.',
+      icon: 'ri-lightbulb-line'
+    },
+    {
+      name: 'Capelanul',
+      description: 'Oferă consiliere și călăuzire specifică fiecărui student, asistă în plănuirea programelor spirituale și sociale.',
+      icon: 'ri-user-heart-line'
     }
   ];
 
@@ -151,7 +138,8 @@ export const AboutPage = () => {
               Despre AMiCUS Timișoara
             </h1>
             <p className="text-xl text-red-100 max-w-3xl mx-auto">
-              Mai mult decât o comunitate, o asociație studențească sau o oportunitate de dezvoltare. AMiCUS Timișoara e o familie!
+              O asociație studențească înființată de studenți, membrii ai Bisericii Adventiste de Ziua a Șaptea, 
+              deschisă pentru orice student care-și asumă viziunea, misiunea și valorile asociației.
             </p>
           </motion.div>
         </div>
@@ -171,11 +159,10 @@ export const AboutPage = () => {
                 Despre Noi
               </h2>
               <p className="text-lg text-gray-600 mb-6">
-                AMiCUS Timișoara este o asociație studențească autonomă, apolitică, 
-                neguvernamentală și non-profit, constituită la nivel național. 
-                Activitatea asociației se concentrează pe construirea unui mediu social 
-                propice dezvoltării membrilor și încurajează voluntariatul prin demararea 
-                multiplelor proiecte cu impact civic.
+                AMiCUS Timișoara este o asociație studențească înființată de studenți, membrii ai Bisericii Adventiste de Ziua a Șaptea. 
+                Ea continuă să-și desfășoare activitatea ca asociație studențească fiind deschisă pentru orice student 
+                care-și asumă viziunea, misiunea și valorile asociației. Oferim membrilor noștri ocazia de a aparține 
+                unui grup cu preocupări similare, în care să-și împlinească nevoile relaționale.
               </p>
               <p className="text-lg text-gray-600 mb-6">
                 Suntem parte din rețeaua națională AMiCUS, activând în 13 centre universitare 
@@ -185,9 +172,13 @@ export const AboutPage = () => {
               
               <div className="bg-primary-red/10 rounded-lg p-6 mb-6">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Misiunea Noastră</h3>
-                <p className="text-lg text-gray-700 font-semibold italic">
-                  "Într-o societate fără reper, ne dorim să fim lumină!"
-                </p>
+                <ul className="text-gray-700 space-y-2">
+                  <li className="flex items-start"><span className="text-primary-red mr-2">✓</span>Să oferim membrilor noștri ocazia de a aparține unui grup cu preocupări similare</li>
+                  <li className="flex items-start"><span className="text-primary-red mr-2">✓</span>Să promovăm creșterea spirituală și intelectuală</li>
+                  <li className="flex items-start"><span className="text-primary-red mr-2">✓</span>Să încurajăm implicarea în proiecte comunitare și evanghelistice</li>
+                  <li className="flex items-start"><span className="text-primary-red mr-2">✓</span>Să oferim asistență în orientarea și formarea profesională</li>
+                  <li className="flex items-start"><span className="text-primary-red mr-2">✓</span>Să asigurăm un cadru pentru împlinirea culturală, religiosă, artistică și sportivă</li>
+                </ul>
               </div>
               <Link
                 to="/form"
@@ -206,21 +197,12 @@ export const AboutPage = () => {
             >
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Viziunea Noastră</h3>
               <blockquote className="text-lg text-gray-700 mb-4">
-                <strong>Prietenii de calitate, proiecte cu impact, asumarea valorilor și un stil de viață diferit.</strong>
+                <strong>Să oferim membrilor noștri ocazia de a aparține unui grup cu preocupări similare și să promovăm creșterea spirituală și intelectuală.</strong>
               </blockquote>
               <p className="text-gray-700 mb-4">
-                Prin activitățile noastre ne propunem să oferim atât membrilor, cât și participanților ocazii unice de dezvoltare și conștientizare. 
-                Muncim ca o echipă pentru a aduce valorile de ieri în lumea de azi!
+                Ne propunem să încurajăm membrii să se implice atât individual cât și ca grup în proiecte comunitare și evanghelistice, 
+                să oferim asistență în orientarea și formarea profesională și să asigurăm un cadru specific pentru împlinirea culturală, religiosă, artistică și sportivă.
               </p>
-              <div className="flex items-center space-x-4">
-                <div className="w-12 h-12 bg-primary-red rounded-full flex items-center justify-center">
-                  <i className="ri-eye-line text-xl text-white"></i>
-                </div>
-                <div>
-                  <p className="font-semibold text-gray-900">Viziune 2030</p>
-                  <p className="text-gray-600">Impactând comunitatea prin credință și excelență</p>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
@@ -280,10 +262,10 @@ export const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Departamentele Noastre
+              Structura Organizațională
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Fiecare departament contribuie la misiunea comună prin activități specializate
+              Comitetul de Conducere al Filialei AMiCUS conform Regulamentului de Ordine Interioară
             </p>
           </motion.div>
 
@@ -314,80 +296,6 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section className="py-20 bg-primary-red text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <i className="ri-eye-line text-6xl mb-6"></i>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Viziunea Noastră
-            </h2>
-            <p className="text-xl text-red-100 max-w-3xl mx-auto mb-8">
-              "Să fim o comunitate de tineri creștini care impactează pozitiv societatea 
-              prin excelență profesională, integritate morală și serviciu dedicat."
-            </p>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Viziunea 2030</h3>
-              <p className="text-red-100">
-                Până în 2030, AMiCUS Timișoara va fi recunoscut ca un model de excelență 
-                în integrarea credinței creștine cu practica medicală, influențând 
-                pozitiv sistemul de sănătate din România.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Mission Statement */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
-              Misiunea Noastră
-            </h2>
-            <div className="bg-gray-50 rounded-lg p-8">
-              <blockquote className="text-xl text-gray-700 italic mb-6">
-                "Să formăm și să susținem o comunitate de medici și studenți creștini 
-                care să exceleze în profesie, să trăiască conform valorilor biblice 
-                și să servească societatea cu dragoste și dedicare."
-              </blockquote>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i className="ri-user-star-line text-2xl text-white"></i>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Formare</h3>
-                  <p className="text-gray-600">Dezvoltăm lideri creștini în medicină</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i className="ri-trophy-line text-2xl text-white"></i>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Excelență</h3>
-                  <p className="text-gray-600">Urmărim performanța de înalt nivel</p>
-                </div>
-                <div className="text-center">
-                  <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i className="ri-hand-heart-line text-2xl text-white"></i>
-                  </div>
-                  <h3 className="font-semibold text-gray-900 mb-2">Serviciu</h3>
-                  <p className="text-gray-600">Servim comunitatea cu dragoste</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Vision Pillars */}
       <section className="py-20 bg-gray-50">
@@ -441,8 +349,8 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      {/* Core Values */}
-      <section className="py-20 bg-white">
+      {/* History Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -452,94 +360,285 @@ export const AboutPage = () => {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Valorile Noastre Fundamentale
+              Povestea Noastră
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Principiile biblice care ne ghidează în toate activitățile
+              O călătorie de peste 30 de ani în slujba studenților și a comunității
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {coreValues.map((value, index) => (
+          {/* Timeline */}
+          <div className="relative">
+            {/* Timeline Line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary-red h-full hidden lg:block"></div>
+            
+            {/* Timeline Items */}
+            <div className="space-y-8">
+              {/* 1990s - Origins */}
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 shadow-lg text-center hover:shadow-xl transition-shadow duration-200"
+                className="lg:flex lg:items-center lg:space-x-8"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600 mb-4">{value.description}</p>
-                <div className="bg-primary-red/10 rounded-lg p-3">
-                  <p className="text-primary-red font-medium text-sm">{value.verse}</p>
+                <div className="lg:w-1/2 lg:text-right">
+                  <div className="bg-white rounded-lg shadow-lg p-6 mb-4 lg:mb-0">
+                    <div className="flex items-center mb-4 lg:justify-end">
+                      <div className="w-12 h-12 bg-primary-red rounded-full flex items-center justify-center mr-4 lg:mr-0 lg:ml-4 lg:order-2">
+                        <i className="ri-time-line text-xl text-white"></i>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 lg:order-1">Anii '90 - Începuturile</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">
+                      Studenția anilor '90 a fost marcată de o puternică perioadă de tranziție. În toată această dorință de a atinge 
+                      excelența și performanța academică, studenții n-au uitat niciodată ce contează cu adevărat: <strong>omul</strong>. 
+                      Omul ca prieten... Și așa a luat naștere AMiCUS.
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden lg:block lg:w-8 lg:flex-shrink-0 lg:relative">
+                  <div className="w-4 h-4 bg-primary-red rounded-full absolute left-1/2 transform -translate-x-1/2"></div>
+                </div>
+                <div className="lg:w-1/2"></div>
+              </motion.div>
+
+              {/* 1993 - Foundation */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="lg:flex lg:items-center lg:space-x-8"
+              >
+                <div className="lg:w-1/2"></div>
+                <div className="hidden lg:block lg:w-8 lg:flex-shrink-0 lg:relative">
+                  <div className="w-4 h-4 bg-primary-red rounded-full absolute left-1/2 transform -translate-x-1/2"></div>
+                </div>
+                <div className="lg:w-1/2">
+                  <div className="bg-white rounded-lg shadow-lg p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-primary-red rounded-full flex items-center justify-center mr-4">
+                        <i className="ri-flag-line text-xl text-white"></i>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">7 Aprilie 1993 - Înființarea</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed mb-4">
+                      Actele oficiale consemnează această zi drept data de înființare a asociației studențești 
+                      non-guvernamentale, non-profit și apolitice AMiCUS.
+                    </p>
+                    <div className="bg-primary-red/10 rounded-lg p-3">
+                      <p className="text-sm text-primary-red font-medium">
+                        <em>Adventist Ministry for International College and University Students</em>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
-            ))}
+
+              {/* Expansion */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="lg:flex lg:items-center lg:space-x-8"
+              >
+                <div className="lg:w-1/2 lg:text-right">
+                  <div className="bg-white rounded-lg shadow-lg p-6 mb-4 lg:mb-0">
+                    <div className="flex items-center mb-4 lg:justify-end">
+                      <div className="w-12 h-12 bg-primary-red rounded-full flex items-center justify-center mr-4 lg:mr-0 lg:ml-4 lg:order-2">
+                        <i className="ri-map-line text-xl text-white"></i>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 lg:order-1">Expansiunea Națională</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed">
+                      Cu un puternic impact la nivel național, AMiCUS se răspândește în celelalte centre universitare: 
+                      <strong>București, Craiova, Brașov, Timișoara</strong> și multe altele.
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden lg:block lg:w-8 lg:flex-shrink-0 lg:relative">
+                  <div className="w-4 h-4 bg-primary-red rounded-full absolute left-1/2 transform -translate-x-1/2"></div>
+                </div>
+                <div className="lg:w-1/2"></div>
+              </motion.div>
+
+              {/* Present Day */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+                className="lg:flex lg:items-center lg:space-x-8"
+              >
+                <div className="lg:w-1/2"></div>
+                <div className="hidden lg:block lg:w-8 lg:flex-shrink-0 lg:relative">
+                  <div className="w-4 h-4 bg-primary-red rounded-full absolute left-1/2 transform -translate-x-1/2"></div>
+                </div>
+                <div className="lg:w-1/2">
+                  <div className="bg-white rounded-lg shadow-lg p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="w-12 h-12 bg-primary-red rounded-full flex items-center justify-center mr-4">
+                        <i className="ri-heart-line text-xl text-white"></i>
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900">AMiCUS Timișoara Astăzi</h3>
+                    </div>
+                    <p className="text-gray-600 leading-relaxed mb-4">
+                      După mai bine de un sfert de veac, continuăm să îndeplinim misiunea ce ne-a fost încredințată. 
+                      Activitatea noastră se axează pe: <strong>dezvoltare multilaterală, implicare în comunitate și transmiterea de valori</strong>.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* History Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Projects Showcase */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="mt-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Istoria Noastră
-            </h2>
-          </motion.div>
+            <div className="text-center mb-12">
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">
+                Proiectele Noastre
+              </h3>
+              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                De-a lungul anilor, am dezvoltat o gamă variată de proiecte care au marcat generații de studenți
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Traditional Projects */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-primary-red to-red-700 rounded-2xl p-6 text-white relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full transform translate-x-16 -translate-y-16"></div>
+                <div className="relative z-10">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                    <i className="ri-trophy-line text-3xl text-white"></i>
+                  </div>
+                  <h4 className="text-xl font-bold mb-3">Proiecte Tradiție</h4>
+                  <p className="text-red-100 mb-4 text-sm">
+                    Proiectele care au definit identitatea AMiCUS de-a lungul anilor
+                  </p>
+                  <div className="space-y-2">
+                    {['Orășelul Copiilor', 'Zi de bine', 'Proiecte educaționale', 'Seminare', 'Campionate sportive'].map((project, index) => (
+                      <div key={index} className="flex items-center text-sm">
+                        <i className="ri-check-line mr-2 text-red-200"></i>
+                        <span className="text-red-100">{project}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
-          >
-            <p className="mb-6">
-              Studenția anilor '90 a fost marcată de o puternică perioadă de tranziție între două regimuri politice total diferite, 
-              între libertate și povara ei, între oportunități și visuri fără de sfârșit. În toată această dorință de a atinge 
-              excelența și performanța academică, studenții n-au uitat niciodată ce contează cu adevărat: omul. Omul în toată 
-              splendoarea și decăderea lui. Omul ca întreg. Omul ca prieten... Și așa a luat naștere AMiCUS.
-            </p>
+              {/* New Initiatives */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl p-6 text-white relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full transform translate-x-16 -translate-y-16"></div>
+                <div className="relative z-10">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4">
+                    <i className="ri-lightbulb-line text-3xl text-white"></i>
+                  </div>
+                  <h4 className="text-xl font-bold mb-3">Inițiative Noi</h4>
+                  <p className="text-blue-100 mb-4 text-sm">
+                    Proiecte inovatoare care răspund nevoilor actuale ale comunității
+                  </p>
+                  <div className="space-y-2">
+                    {['Bibliophile', 'Alerg pentru mama', 'Picătura de Viață', 'Conceptum', 'Lecții de Zbor'].map((project, index) => (
+                      <div key={index} className="flex items-center text-sm">
+                        <i className="ri-check-line mr-2 text-blue-200"></i>
+                        <span className="text-blue-100">{project}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Mission Statement */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-6 text-white relative overflow-hidden flex flex-col justify-center"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full transform translate-x-16 -translate-y-16"></div>
+                <div className="relative z-10 text-center">
+                  <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <i className="ri-heart-line text-3xl text-white"></i>
+                  </div>
+                  <blockquote className="text-2xl font-bold mb-4 italic">
+                    "Iată-mă, trimite-mă!"
+                  </blockquote>
+                  <p className="text-gray-300 text-sm mb-4">
+                    Motto-ul care ne ghidează în fiecare proiect și inițiativă
+                  </p>
+                </div>
+              </motion.div>
+            </div>
             
-            <p className="mb-6">
-              Apariția AMiCUS-ului are la bază preocuparea unui grup de studenți ieșeni pentru întărirea relațiilor interumane, 
-              fundamentate pe valorile moralei creștine și pe promovarea unor principii de viață sănătoase pentru trup, minte și suflet. 
-              Aceste idei s-au convertit în scopuri ale asociației.
-            </p>
-            
-            <p className="mb-6">
-              Actele oficiale consemnează ziua de <strong>7 aprilie 1993</strong> drept data de înființare a asociației studențești 
-              non-guvernamentale, non-profit și apolitice AMiCUS, acronim de la <em>Adventist Ministry for International College and University Students</em>. 
-              Astfel, în 1993, AMiCUS International ajungea în România.
-            </p>
-            
-            <p className="mb-6">
-              Cu un puternic impact la nivel național, AMiCUS se răspândește ușor și în celelalte centre universitare: 
-              București, Craiova, Brașov, Timișoara și așa mai departe.
-            </p>
-            
-            <p className="mb-6">
-              <strong>AMiCUS Timișoara</strong>, după mai bine de un sfert de veac, continuă să îndeplinească misiunea ce i-a fost încredințată. 
-              În prezent, activitatea filialei se axează pe direcțiile: dezvoltare multilaterală, implicare în comunitate și nevoile ei, 
-              transmiterea de valori și sprijinirea atât a membrilor, cât și a tuturor semenilor.
-            </p>
-            
-            <p className="mb-6">
-              Continuând proiectele tradiție (<strong>Orășelul Copiilor, Zi de bine, proiecte educaționale și seminare, proiecte sociale, 
-              campionate sportive, excursii</strong>), bucurându-ne mereu de noi idei și șanse de reîntâlnire (<strong>clubul de carte Bibliophile, 
-              Crosul Caritabil Alerg pentru mama, Campania de Donare de sânge Picătura de Viață, Podcastul Conceptum, Lecții de Zbor pentru Boboci, 
-              TedTalks, De vorbă cu capelanul, activități recreative, concerte caritabile</strong> sub numele <em>Inima a fost dată împreună cu darul</em>), 
-              privind cu admirație spre ideile specifice fiecărei generații în parte (<strong>Clubul Meteora, proiectul Pași spre cer, XChange, H2O pentru S2</strong> etc.), 
-              suntem gata întotdeuna să ne unim forțele și să spunem <strong><em>Iată-mă, trimite-mă!</em></strong>
-            </p>
+            {/* Additional Projects - Simple List */}
+            <div className="mt-12 bg-white rounded-lg shadow-sm p-6">
+              <h4 className="text-lg font-semibold text-gray-900 mb-4 text-center">
+                Alte Proiecte și Activități
+              </h4>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { 
+                    name: 'TedTalks', 
+                    icon: 'ri-presentation-line',
+                    description: 'Prezentări inspiraționale și educaționale'
+                  },
+                  { 
+                    name: 'De vorbă cu capelanul', 
+                    icon: 'ri-chat-3-line',
+                    description: 'Sesiuni de consiliere și îndrumare spirituală'
+                  },
+                  { 
+                    name: 'Activități recreative', 
+                    icon: 'ri-gamepad-line',
+                    description: 'Jocuri, concursuri și activități de relaxare'
+                  },
+                  { 
+                    name: 'Concerte caritabile', 
+                    icon: 'ri-music-line',
+                    description: 'Evenimente muzicale cu scop caritabil'
+                  }
+                ].map((project, index) => (
+                  <div
+                    key={index}
+                    className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg"
+                  >
+                    <div className="w-8 h-8 bg-primary-red rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <i className={`${project.icon} text-sm text-white`}></i>
+                    </div>
+                    <div>
+                      <h5 className="text-sm font-medium text-gray-900 mb-1">
+                        {project.name}
+                      </h5>
+                      <p className="text-xs text-gray-600">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -557,7 +656,7 @@ export const AboutPage = () => {
               Fă Parte din Povestea Noastră
             </h2>
             <p className="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
-              Alătură-te unei comunități ce are la bază credința, nădejdea și prietenia!
+              Alătură-te unei comunități ce are la bază credința, dezvoltarea și prietenia!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -584,4 +683,3 @@ export const AboutPage = () => {
   );
 };
 
-export { AboutPage as default };

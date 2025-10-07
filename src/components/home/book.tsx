@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { 
   FaEnvelope,
   FaBookOpen,
@@ -28,10 +27,6 @@ return (
               <h3 className="text-3xl font-bold mb-2">AMiCUS</h3>
               <p className="text-red-100 text-lg">Povești de credință</p>
             </div>
-            <div className="text-right">
-              <p className="text-red-200 text-sm">Asociația Studenților</p>
-              <p className="text-red-200 text-sm">Creștini Timișoara</p>
-            </div>
           </div>
           <div className="absolute inset-0 bg-gradient-to-br from-primary-red/20 to-red-800/20 rounded-2xl blur-xl scale-110 -z-10"></div>
         </div>
@@ -50,8 +45,7 @@ return (
             Cartea AMiCUS
           </h2>
           <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-            Cartea AMiCUS este o compilație unică de experiențe, mărturii și învățături din comunitatea studenților creștini. 
-            Fiecare pagină reflectă călătoria spirituală și academică a studenților noștri, oferind inspirație și îndrumare.
+            De-a lungul anilor, AMiCUS Timișoara a fost o piatră de hotar pentru studenții ce i-au trecut pragul. Astfel, volumul unic "AMiCUS la sfert de veac" reunește experiențele, amintirile și sfaturile amicușilor din toată generațiile. Timpurile s-au schimbat, drumul academic diferă, însă prietenia rămâne aceeași și peste ani. De ce? Pentru că AMiCUS a oferit studenției un farmec aparte.
           </p>
         </div>
 
@@ -61,7 +55,7 @@ return (
               <FaHeart className="text-primary-red text-xl" />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-1">Mărturii Personale</h4>
+              <h4 className="font-semibold text-gray-900 mb-1">Experiențe autentice</h4>
               <p className="text-gray-600 text-sm">Povești reale de transformare și creștere</p>
             </div>
           </div>
@@ -71,25 +65,19 @@ return (
               <FaPray className="text-primary-red text-xl" />
             </div>
             <div>
-              <h4 className="font-semibold text-gray-900 mb-1">Învățături Spirituale</h4>
+              <h4 className="font-semibold text-gray-900 mb-1">Sfaturi practice</h4>
               <p className="text-gray-600 text-sm">Reflecții biblice și aplicații practice</p>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Link
-            to="/book"
-            className="bg-primary-red text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center justify-center space-x-3 hover:scale-105 shadow-lg"
+        <div className="flex justify-start">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=aamicustimisoara@gmail.com&su=Cerere%20exemplar%20carte%20AMiCUS&body=Bun%C4%83%20ziua%2C%0A%0ADoresc%20s%C4%83%20ob%C8%9Bin%20un%20exemplar%20al%20c%C4%83r%C8%9Bii%20%22AMiCUS%20la%20sfert%20de%20veac%22.%0A%0AV%C4%83%20mul%C8%9Bumesc%21" target="_blank" rel="noopener noreferrer"
+          className="bg-primary-red text-white px-8 py-4 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center justify-center space-x-3 hover:scale-105 shadow-lg"
           >
-            <FaBookOpen className="text-xl" />
-            <span>Citește Online</span>
-          </Link>
-          
-          <button className="border-2 border-primary-red text-primary-red px-8 py-4 rounded-lg font-semibold hover:bg-primary-red hover:text-white transition-all duration-300 inline-flex items-center justify-center space-x-3 hover:scale-105">
             <FaEnvelope className="text-xl" />
             <span>Obține un exemplar</span>
-          </button>
+          </a>
         </div>
       </motion.div>
     </div>

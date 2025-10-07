@@ -193,7 +193,7 @@ export const Hero = () => {
       { Icon: FaFacebookF, url: 'https://facebook.com/amicus.timisoara', color: 'hover:bg-blue-600' },
       { Icon: FaInstagram, url: 'https://www.instagram.com/amicus.timisoara/', color: 'hover:bg-pink-600' },
       { Icon: FaYoutube, url: 'https://www.youtube.com/@amicus.timisoara', color: 'hover:bg-red-600' },
-      { Icon: FaEnvelope, url: 'mailto:aamicustimisoara@gmail.com', color: 'hover:bg-gray-600' }
+      { Icon: FaEnvelope, url: 'https://mail.google.com/mail/?view=cm&fs=1&to=aamicustimisoara@gmail.com', color: 'hover:bg-gray-600' }
     ].map((social, index) => (
       <a
         key={index}

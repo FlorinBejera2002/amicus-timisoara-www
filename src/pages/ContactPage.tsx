@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { toast } from 'sonner';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 export const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -45,36 +45,23 @@ export const ContactPage = () => {
       details: [
         'Str. Piața Alexandru Mocioni 7',
         'Timișoara, România'
-      ],
-      action: 'Vezi pe Hartă'
-    },
-    {
-      icon: 'ri-time-line',
-      title: 'Program Întâlniri',
-      details: [
-        'Joi ora 20:00',
-        'Duminică ora 18:00 (Rugăciune)'
-      ],
-      action: 'Vezi Calendar'
+      ]
     },
     {
       icon: 'ri-mail-line',
       title: 'Email',
       details: [
-        'contact@amicus-timisoara.ro',
-        'leadership@amicus-timisoara.ro'
-      ],
-      action: 'Trimite Email'
+        'aamicustimisoara@gmail.com'
+      ] 
     },
     {
       icon: 'ri-phone-line',
       title: 'Telefon',
       details: [
-        '+40 123 456 789',
-        '+40 987 654 321'
-      ],
-      action: 'Sună Acum'
-    }
+        'Președinte: 0758948440',
+        'Capelan: +40 768 096 881'
+      ]
+    },
   ];
 
   const socialLinks = [
@@ -82,67 +69,48 @@ export const ContactPage = () => {
       name: 'Facebook',
       icon: 'ri-facebook-fill',
       url: 'https://facebook.com/amicus.timisoara',
-      color: 'bg-blue-600 hover:bg-blue-700'
+      color: 'bg-blue-600 hover:bg-blue-700',
+      description: 'Urmărește-ne pentru actualizări zilnice'
     },
     {
       name: 'Instagram',
       icon: 'ri-instagram-line',
-      url: 'https://instagram.com/amicii.timisoara',
-      color: 'bg-pink-600 hover:bg-pink-700'
+      url: 'https://instagram.com/amicus.timisoara',
+      color: 'bg-pink-600 hover:bg-pink-700',
+      description: 'Fotografii de la evenimentele noastre'
     },
     {
       name: 'YouTube',
       icon: 'ri-youtube-fill',
       url: 'https://youtube.com/@amicustimisoara',
-      color: 'bg-red-600 hover:bg-red-700'
-    },
-    {
-      name: 'LinkedIn',
-      icon: 'ri-linkedin-fill',
-      url: 'https://linkedin.com/company/amicus-timisoara',
-      color: 'bg-blue-700 hover:bg-blue-800'
+      color: 'bg-red-600 hover:bg-red-700',
+      description: 'Predici și prezentări video'
     }
   ];
 
   const faqItems = [
     {
       question: 'Cum mă pot alătura comunității AMiCUS?',
-      answer: 'Poți să te alături completând formularul de înscriere de pe site-ul nostru sau venind direct la una dintre întâlnirile noastre săptămânale.'
-    },
-    {
-      question: 'Trebuie să fiu student la medicină pentru a participa?',
-      answer: 'Nu neapărat! Deși ne concentrăm pe medici și studenți la medicină, primim cu brațele deschise pe oricine dorește să facă parte din comunitatea noastră creștină.'
+      answer: 'Poți să te alături completând formularul de înscriere sau venind direct la întâlnirile noastre de joi seara, ora 20:00, la Piața Mocioni 7. Suntem o asociație studențească deschisă pentru orice student care-și asumă viziunea, misiunea și valorile noastre.'
     },
     {
       question: 'Ce activități organizați?',
-      answer: 'Organizăm întâlniri săptămânale, conferințe, proiecte sociale, activități de voluntariat, studii biblice și multe altele.'
+      answer: 'Întâlniri săptămânale de joi seara, drumeții, serate recreative, ieșiri culturale, proiecte comunitare și evanghelistice, activități de dezvoltare spirituală și intelectuală.'
     },
     {
-      question: 'Cum pot să mă implic în proiectele sociale?',
-      answer: 'Contactează-ne prin email sau vino la o întâlnire pentru a afla despre oportunitățile de voluntariat și proiectele în desfășurare.'
+      question: 'Care este misiunea AMiCUS Timișoara?',
+      answer: 'Să oferim membrilor noștri ocazia de a aparține unui grup cu preocupări similare, să promovăm valorile moral-creștine și să asigurăm un cadru pentru împlinirea culturală, religiosă, artistică și sportivă.'
+    },
+    {
+      question: 'Trebuie să fiu membru al Bisericii Adventiste?',
+      answer: 'AMiCUS este o asociație studențească înființată de studenți membri ai Bisericii Adventiste, dar este deschisă pentru orice student care-și asumă viziunea, misiunea și valorile asociației.'
+    },
+    {
+      question: 'Când și unde au loc întâlnirile?',
+      answer: 'Întâlnirile regulate au loc joi seara, între orele 20:00-22:00, la adresa Piața Alexandru Mocioni 7, Timișoara. Verifică secțiunea Evenimente pentru program detaliat.'
     }
   ];
 
-  const teamMembers = [
-    {
-      name: 'Dr. Maria Popescu',
-      role: 'Președinte',
-      email: 'maria.popescu@amicus-timisoara.ro',
-      phone: '+40 123 456 789'
-    },
-    {
-      name: 'Andrei Popescu',
-      role: 'Vicepreședinte',
-      email: 'andrei.popescu@amicus-timisoara.ro',
-      phone: '+40 987 654 321'
-    },
-    {
-      name: 'Elena Dumitrescu',
-      role: 'Coordonator Proiecte',
-      email: 'elena.dumitrescu@amicus-timisoara.ro',
-      phone: '+40 555 666 777'
-    }
-  ];
 
   return (
     <div className="min-h-screen pt-16">
@@ -156,11 +124,12 @@ export const ContactPage = () => {
           >
             <i className="ri-customer-service-line text-6xl mb-6"></i>
             <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Contactează-ne
+              Hai să fim prieteni!
             </h1>
-            <p className="text-xl text-red-100 max-w-2xl mx-auto">
-              Suntem aici să răspundem la întrebările tale și să te ajutăm să te 
-              alături comunității noastre. Nu ezita să ne scrii!
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Suntem o asociație studențească înființată de studenți adventisti, deschisă pentru 
+              orice student care-și asumă viziunea, misiunea și valorile noastre. 
+              <span className="block mt-2 font-semibold">Contactează-ne și alătură-te familiei AMiCUS!</span>
             </p>
           </motion.div>
         </div>
@@ -184,7 +153,7 @@ export const ContactPage = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {contactInfo.map((info, index) => (
               <motion.div
                 key={index}
@@ -192,7 +161,7 @@ export const ContactPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-lg transition-shadow duration-200"
+                className="bg-white rounded-xl p-6 text-center shadow-lg transition-shadow duration-200"
               >
                 <div className="w-16 h-16 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className={`${info.icon} text-2xl text-white`}></i>
@@ -203,9 +172,6 @@ export const ContactPage = () => {
                     <p key={detailIndex} className="text-gray-600">{detail}</p>
                   ))}
                 </div>
-                <button className="text-primary-red font-medium hover:text-red-700 transition-colors duration-200">
-                  {info.action}
-                </button>
               </motion.div>
             ))}
           </div>
@@ -236,7 +202,7 @@ export const ContactPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             onSubmit={handleSubmit}
-            className="bg-white rounded-lg shadow-lg p-8"
+            className="bg-white rounded-xl shadow-sm p-8"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
@@ -366,25 +332,97 @@ export const ContactPage = () => {
             <p className="text-lg text-gray-600 mb-8">
               Rămâi conectat cu noi și află ultimele noutăți despre activitățile comunității
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={index}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`${social.color} text-white px-6 py-3 rounded-lg font-medium transition-colors duration-200 inline-flex items-center space-x-2`}
+                  className="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-lg transition-shadow duration-200"
                 >
-                  <i className={social.icon}></i>
-                  <span>{social.name}</span>
+                  <div className={`w-16 h-16 ${social.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <i className={`${social.icon} text-2xl text-white`}></i>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{social.name}</h3>
                 </motion.a>
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Quick Actions CTA */}
+      <section className="py-16 bg-primary-red text-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Gata să te alături?
+            </h2>
+            <p className="text-xl text-red-100 max-w-2xl mx-auto">
+              Fă primul pas către o experiență universitară memorabilă
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors duration-200"
+            >
+              <i className="ri-user-add-line text-4xl mb-4"></i>
+              <h3 className="text-xl font-bold mb-2">Înscrie-te</h3>
+              <p className="text-red-100 mb-4">Completează formularul și devino membru AMiCUS</p>
+              <a 
+                href="/form" 
+                className="bg-white text-primary-red px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 inline-block"
+              >
+                Formular Înscriere
+              </a>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors duration-200"
+            >
+              <i className="ri-calendar-event-line text-4xl mb-4"></i>
+              <h3 className="text-xl font-bold mb-2">Vino la întâlniri</h3>
+              <p className="text-red-100 mb-4">Joi seara, 20:00-22:00, Piața Mocioni 7</p>
+              <a 
+                href="/events" 
+                className="bg-white text-primary-red px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 inline-block"
+              >
+                Vezi Evenimente
+              </a>
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white/10 backdrop-blur-sm rounded-xl p-6 text-center hover:bg-white/20 transition-colors duration-200"
+            >
+              <i className="ri-question-answer-line text-4xl mb-4"></i>
+              <h3 className="text-xl font-bold mb-2">Întreabă-ne</h3>
+              <p className="text-red-100 mb-4">Scrie-ne direct pentru orice întrebare</p>
+              <a 
+                href="https://mail.google.com/mail/?view=cm&fs=1&to=aamicustimisoara@gmail.com" 
+                className="bg-white text-primary-red px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors duration-200 inline-block"
+              >
+                Trimite Email
+              </a>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -414,7 +452,7 @@ export const ContactPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-lg p-6"
+                className="bg-white rounded-xl shadow-sm p-6"
               >
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {faq.question}
@@ -428,64 +466,9 @@ export const ContactPage = () => {
         </div>
       </section>
 
-      {/* Team Contact */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Contactează Echipa de Leadership
-            </h2>
-            <p className="text-lg text-gray-600">
-              Pentru întrebări specifice, poți contacta direct membrii echipei noastre
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="bg-gray-50 rounded-lg p-6 text-center"
-              >
-                <div className="w-20 h-20 bg-primary-red rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className="ri-user-line text-3xl text-white"></i>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-primary-red font-medium mb-4">{member.role}</p>
-                <div className="space-y-2">
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="block text-gray-600 hover:text-primary-red transition-colors duration-200"
-                  >
-                    <i className="ri-mail-line mr-2"></i>
-                    {member.email}
-                  </a>
-                  <a
-                    href={`tel:${member.phone}`}
-                    className="block text-gray-600 hover:text-primary-red transition-colors duration-200"
-                  >
-                    <i className="ri-phone-line mr-2"></i>
-                    {member.phone}
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <Footer />
     </div>
   );
 };
 
-export default ContactPage;

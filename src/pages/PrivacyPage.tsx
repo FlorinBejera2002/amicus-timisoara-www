@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import Footer from '../components/Footer';
+import {Footer} from '../components/Footer';
 
 export const PrivacyPage = () => {
   return (
@@ -152,8 +152,9 @@ export const PrivacyPage = () => {
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-gray-700">
                     <strong>Responsabil cu protecția datelor:</strong> AMiCUS Timișoara<br />
-                    <strong>Email:</strong> aamicustm@gmail.com<br />
-                    <strong>Telefon:</strong> +40 768 096 881<br />
+                    <strong>Email:</strong> aamicustimisoara@gmail.com<br />
+                    <strong>Telefon Președinte:</strong> 0758948440<br />
+                    <strong>Telefon Capelan:</strong> +40 768 096 881<br />
                     <strong>Adresă:</strong> Str. Piața Alexandru Mocioni 7, Timișoara, România
                   </p>
                 </div>
@@ -174,4 +175,3 @@ export const PrivacyPage = () => {
   );
 };
 
-export default PrivacyPage;
