@@ -1,12 +1,10 @@
 # AMiCUS Timișoara - Modern Website
 
-A modern, responsive website for AMiCUS Timișoara (Association of Christian Medical Students) built with React, TypeScript, Tailwind CSS, and Supabase.
+A modern, responsive website for AMiCUS Timișoara - built with React, TypeScript, Tailwind CSS, and Supabase.
 
 ## 🚀 Features
 
 - **Modern Design**: Clean, responsive design with red, white, and black color scheme
-- **Multi-language Support**: Romanian and English internationalization
-- **Prayer Wall**: Interactive prayer request system with Supabase integration
 - **Dashboard**: CRUD operations for member management
 - **Loading Animations**: Smooth page transitions and loading states
 - **Mobile Responsive**: Optimized for all device sizes
@@ -18,7 +16,6 @@ A modern, responsive website for AMiCUS Timișoara (Association of Christian Med
 - **Styling**: Tailwind CSS (converted from SCSS)
 - **Animations**: Framer Motion
 - **Routing**: React Router DOM
-- **Internationalization**: React i18next
 - **Backend**: Supabase (PostgreSQL)
 - **Notifications**: Sonner
 
