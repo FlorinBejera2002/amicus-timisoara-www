@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import logo from '@/assets/Logo-AMiCUS-TM.png';
-import { Modal } from './modal/Modal';
+import { Modal } from './modal/ModalFixed';
 import {createClient} from "@supabase/supabase-js";
 
 export function Table() {
@@ -24,24 +24,20 @@ export function Table() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log('Starting fetch from Supabase...'); // Debug log
                 
                 const { data, error } = await supabase
                     .from('users')
                     .select('*');
 
-                console.log('Supabase response:', { data, error }); // Debug log
 
                 if (error) {
                     console.error('Supabase error:', error);
                     alert('Eroare la încărcarea datelor: ' + error.message);
                 } else if (data) {
-                    console.log('Raw data from Supabase:', data);
-                    console.log('Number of records:', data.length);
                     
                     // Map according to actual Supabase structure
-                    const mappedData = data.map((item: any, index: number) => {
-                        console.log(`Item ${index}:`, item);
+                    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+                                                            const mappedData = data.map((item: any, index: number) => {
                         return {
                             id: item.id || `temp-${index}`,
                             name: item.full_name || `User ${index}`,
@@ -54,14 +50,12 @@ export function Table() {
                             department: item.department || '',
                             university: item.university || '',
                             dateOfBirth: item.date_of_birth || '',
-                            cash: 0 // Nu există în structura actuală, va fi adăugat separat
+                            taxa: Number(item.taxa) || 0 // Folosim coloana taxa din Supabase
                         };
                     });
                     
-                    console.log('Final mapped data:', mappedData);
                     setDate(mappedData);
                 } else {
-                    console.log('No data received from Supabase');
                     alert('Nu s-au primit date din baza de date');
                 }
             } catch (err) {
@@ -197,7 +191,7 @@ export function Table() {
                                 <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(9 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.university}</h3></div>
                                 <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(10 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.faculty}</h3></div>
                                 <div className={`flex-1 flex items-center gap-5 overflow-hidden text-ellipsis ${(11 * cellSpace) < tableWidth ? '' : 'hidden'}`}><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.studyYear}</h3></div>
-                                <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis justify-end"><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.cash ? data.cash + ' RON' : '0 RON'}</h3></div>
+                                <div className="flex-1 flex items-center gap-5 overflow-hidden text-ellipsis justify-end"><h3 className="text-base text-gray-700 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{data.taxa ? data.taxa + ' RON' : '0 RON'}</h3></div>
                                 <button className="bg-transparent border-none text-gray-600 cursor-pointer hover:text-gray-800 transition-colors duration-200" onClick={() => {
                                     setModalData(data);
                                     setShowModal(true);
@@ -215,7 +209,7 @@ export function Table() {
 
 
                 <div className="flex justify-between items-center gap-5 px-5 py-2.5 bg-gray-200 border-t-2 border-gray-300">
-                    <h3 className="text-base text-gray-700 font-semibold">Total achitat: {date.reduce((acc, curr) => acc + (curr.cash ? curr.cash : 0), 0)} RON ({date.reduce((acc, curr) => acc + (curr.cash ? 1 : 0), 0)}/{date.length})</h3>
+                    <h3 className="text-base text-gray-700 font-semibold">Total achitat: {date.reduce((acc, curr) => acc + (curr.taxa ? curr.taxa : 0), 0)} RON ({date.reduce((acc, curr) => acc + (curr.taxa ? 1 : 0), 0)}/{date.length})</h3>
                 </div>
             </div>
 
@@ -236,5 +230,5 @@ export interface Data {
     department: string,
     university: string,
     dateOfBirth: string,
-    cash: number
+    taxa: number
 }

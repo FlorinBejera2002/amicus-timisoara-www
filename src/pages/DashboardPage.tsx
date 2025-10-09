@@ -56,7 +56,7 @@ export const DashboardPage = () => {
         department: item.department || '',
         university: item.university || '',
         dateOfBirth: item.date_of_birth || '',
-        cash: item.cash || 0
+        taxa: Number(item.taxa) || 0
       }));
 
       setData(mappedData);
@@ -69,8 +69,8 @@ export const DashboardPage = () => {
 
   const calculateStats = () => {
     const totalUsers = data.length;
-    const totalPaid = data.reduce((acc, user) => acc + (user.cash || 0), 0);
-    const paidUsers = data.filter(user => user.cash > 0).length;
+    const totalPaid = data.reduce((acc, user) => acc + (user.taxa || 0), 0);
+    const paidUsers = data.filter(user => user.taxa > 0).length;
 
     setStats({ totalUsers, totalPaid, paidUsers });
   };
@@ -79,23 +79,23 @@ export const DashboardPage = () => {
     search === '' || user.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const deleteUser = async (userId: number) => {
-    if (!confirm('Are you sure you want to delete this user?')) return;
+  // const deleteUser = async (userId: number) => {
+  //   if (!confirm('Are you sure you want to delete this user?')) return;
 
-    try {
-      const { error } = await supabase
-        .from('users')
-        .delete()
-        .eq('id', userId);
+  //   try {
+  //     const { error } = await supabase
+  //       .from('users')
+  //       .delete()
+  //       .eq('id', userId);
 
-      if (error) throw error;
+  //     if (error) throw error;
 
-      setData(prev => prev.filter(user => user.id !== userId));
-      setShowModal(false);
-    } catch (error) {
-      console.error('Error deleting user:', error);
-    }
-  };
+  //     // setData(prev => prev.filter(user => user.id !== userId));
+  //     setShowModal(false);
+  //   } catch (error) {
+  //     console.error('Error deleting user:', error);
+  //   }
+  // };
 
   if (loading) {
     return (
@@ -242,11 +242,11 @@ export const DashboardPage = () => {
                   </div>
                   <div className="col-span-1">
                     <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                      user.cash > 0 
+                      user.taxa > 0 
                         ? 'bg-green-100 text-green-800' 
                         : 'bg-red-100 text-red-800'
                     }`}>
-                      {user.cash > 0 ? `${user.cash} RON` : '0 RON'}
+                      {user.taxa > 0 ? `${user.taxa} RON` : '0 RON'}
                     </span>
                   </div>
                   <div className="col-span-1">
@@ -289,7 +289,7 @@ export const DashboardPage = () => {
           setShow={setShowModal}
           date={data}
           setDate={setData}
-          onDelete={deleteUser}
+          // onDelete={deleteUser}
         />
       )}
     </div>
