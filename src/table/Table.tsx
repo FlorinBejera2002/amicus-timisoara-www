@@ -7,50 +7,91 @@ export function Table() {
     const cellSpace = 110;
     const [date, setDate] = useState<Data[]>([]);
     const [modalData, setModalData] = useState<Data>();
-    const [showModal, setShowModal] = useState(true);
+    const [showModal, setShowModal] = useState(false);
     const [search, setSearch] = useState('');
     const [tableWidth, setTableWidth] = useState(window.innerWidth);
+    const [loading, setLoading] = useState(true);
 
     const inputRef = useRef<HTMLInputElement>(null);
     const tableRef = useRef<HTMLDivElement>(null);
-
-    const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co' // Înlocuiește cu valorile tale
+    
+    const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co';
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbWpkd3NrZG9zYm1lbmFxaHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NzgwNDQsImV4cCI6MjA3NTA1NDA0NH0.ujTLHvPIAbF1HVhgOF1Tqk-Rr4a18z7ZoEjk7IANe-E';
     const supabase = createClient(supabaseUrl, supabaseKey);
+    
 
     // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     useEffect(() => {
         const fetchData = async () => {
-            const { data, error } = await supabase
-                .from('users')
-                .select('*')
-                .order('id', { ascending: true });
+            try {
+                console.log('Starting fetch from Supabase...'); // Debug log
+                
+                const { data, error } = await supabase
+                    .from('users')
+                    .select('*');
 
-            if (error) {
-                console.error('Eroare la preluarea datelor:', error);
-            } else {
-                // Map the data to match the Data interface
-                // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                                const mappedData = data.map((item: any) => ({
-                    id: item.id,
-                    name: item.full_name || item.name || '',
-                    email: item.email,
-                    phone: item.phone,
-                    address: item.address,
-                    isMember: item.is_member,
-                    faculty: item.faculty || '',
-                    studyYear: item.study_year || '',
-                    department: item.department || '',
-                    university: item.university || '',
-                    dateOfBirth: item.date_of_birth || '',
-                    cash: item.cash || 0
-                }));
-                setDate(mappedData);
+                console.log('Supabase response:', { data, error }); // Debug log
+
+                if (error) {
+                    console.error('Supabase error:', error);
+                    alert('Eroare la încărcarea datelor: ' + error.message);
+                } else if (data) {
+                    console.log('Raw data from Supabase:', data);
+                    console.log('Number of records:', data.length);
+                    
+                    // Map according to actual Supabase structure
+                    const mappedData = data.map((item: any, index: number) => {
+                        console.log(`Item ${index}:`, item);
+                        return {
+                            id: item.id || `temp-${index}`,
+                            name: item.full_name || `User ${index}`,
+                            email: item.email || 'no-email',
+                            phone: item.phone || 'no-phone',
+                            address: item.address || 'no-address',
+                            isMember: Boolean(item.is_member),
+                            faculty: item.faculty || '',
+                            studyYear: item.study_year ? String(item.study_year) : '',
+                            department: item.department || '',
+                            university: item.university || '',
+                            dateOfBirth: item.date_of_birth || '',
+                            cash: 0 // Nu există în structura actuală, va fi adăugat separat
+                        };
+                    });
+                    
+                    console.log('Final mapped data:', mappedData);
+                    setDate(mappedData);
+                } else {
+                    console.log('No data received from Supabase');
+                    alert('Nu s-au primit date din baza de date');
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+                alert('Eroare la conectarea la baza de date: ' + err);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchData();
     }, []); 
+
+    const deleteUser = async (userId: string) => {
+        if (!confirm('Ești sigur că vrei să ștergi acest utilizator?')) return;
+
+        try {
+            const { error } = await supabase
+                .from('users')
+                .delete()
+                .eq('id', userId);
+
+            if (error) throw error;
+
+            setDate(prev => prev.filter(user => user.id !== userId));
+            setShowModal(false);
+        } catch (error) {
+            console.error('Error deleting user:', error);
+        }
+    };
 
     useEffect(() => { // set tableWidth to the width of the table
         const handleResize = () => {
@@ -78,6 +119,15 @@ export function Table() {
             window.removeEventListener('keydown', handleKeyDown);
         };
     }, []);
+
+    if (loading) {
+        return (
+            <div className="relative h-screen m-0 font-poppins bg-gray-200 flex flex-col justify-center items-center gap-5 p-5 overflow-hidden">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-red"></div>
+                <p className="text-gray-600">Se încarcă datele...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="relative h-screen m-0 font-poppins bg-gray-200 flex flex-col justify-center gap-5 p-5 overflow-hidden">
@@ -107,10 +157,31 @@ export function Table() {
                 </div>
 
                 <div className="flex-1 overflow-y-auto">
+                    {/* Debug info */}
+                    <div className="px-5 py-2 bg-yellow-100 border-b border-yellow-300">
+                        <p className="text-sm text-yellow-800">
+                            Debug: Total records loaded: {date.length} | 
+                            Filtered records: {date.filter((data) => {
+                                if (search === '') return true;
+                                return (
+                                    data.name.toLowerCase().includes(search.toLowerCase()) ||
+                                    data.email.toLowerCase().includes(search.toLowerCase()) ||
+                                    data.phone.toLowerCase().includes(search.toLowerCase()) ||
+                                    data.department.toLowerCase().includes(search.toLowerCase())
+                                );
+                            }).length}
+                        </p>
+                    </div>
+                    
                     {date.filter((data) => {
                         if (search === '') {
                             return data;
-                        } else if (data.name.toLowerCase().includes(search.toLowerCase())) {
+                        } else if (
+                            data.name.toLowerCase().includes(search.toLowerCase()) ||
+                            data.email.toLowerCase().includes(search.toLowerCase()) ||
+                            data.phone.toLowerCase().includes(search.toLowerCase()) ||
+                            data.department.toLowerCase().includes(search.toLowerCase())
+                        ) {
                             return data;
                         }
                     }).map((data, index) => {
@@ -148,13 +219,13 @@ export function Table() {
                 </div>
             </div>
 
-            {date.length !== 0 && <Modal data={modalData as Data} show={showModal} setShow={setShowModal} date={date} setDate={setDate}/>}
+            {modalData && <Modal data={modalData} show={showModal} setShow={setShowModal} date={date} setDate={setDate} onDelete={deleteUser}/>}
         </div>
     )
 }
 
 export interface Data {
-    id: number,
+    id: string,
     name: string,
     email: string,
     phone: string,
