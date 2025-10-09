@@ -2,8 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 import { Toaster, toast } from 'sonner';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from '@/assets/Logo-Amicus.png';
 import {Footer} from '../components/Footer';
+
+// Create Supabase client instance once to avoid multiple instances
+const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbWpkd3NrZG9zYm1lbmFxaHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NzgwNDQsImV4cCI6MjA3NTA1NDA0NH0.ujTLHvPIAbF1HVhgOF1Tqk-Rr4a18z7ZoEjk7IANe-E';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 interface FormData {
   name: string;
@@ -143,10 +147,6 @@ export const Form = () => {
     setIsSubmitting(true);
     
     try {
-      const supabaseUrl = 'https://simjdwskdosbmenaqhzd.supabase.co';
-      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpbWpkd3NrZG9zYm1lbmFxaHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk0NzgwNDQsImV4cCI6MjA3NTA1NDA0NH0.ujTLHvPIAbF1HVhgOF1Tqk-Rr4a18z7ZoEjk7IANe-E';
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
       const { error } = await supabase.from('users').insert({
         full_name: formData.name,
         email: formData.email,
@@ -160,7 +160,14 @@ export const Form = () => {
         department: formData.department
       });
 
-      if (error) throw error;
+      if (error) {
+        // Handle specific error cases
+        if (error.code === '23505' && error.message.includes('users_email_key')) {
+          toast.error('📧 Acest email este deja înregistrat. Te rugăm să folosești o altă adresă de email.');
+          return;
+        }
+        throw error;
+      }
 
       toast.success('🎉 Mulțumim pentru înscriere! Te vom contacta în curând.');
       
@@ -196,7 +203,7 @@ export const Form = () => {
             )}
           </div>
           {step < totalSteps && (
-            <div className={`w-16 h-1 mx-2 transition-all duration-300 ${
+            <div className={`w-5 md:w-16 h-1 mx-2 transition-all duration-300 ${
               step < currentStep ? 'bg-primary-red' : 'bg-gray-200'
             }`}></div>
           )}
@@ -210,26 +217,24 @@ export const Form = () => {
       <Toaster position="top-right" />
       
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-red to-red-700 text-white py-16">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <section className="py-20 bg-gradient-to-br from-primary-red to-red-800 text-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center justify-center gap-6 mb-6"
           >
-            <img src={logo} alt="AMiCUS Logo" className="w-16 h-16" />
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold">Alătură-te AMiCUS</h1>
-              <p className="text-xl text-red-100 mt-2">Fă parte din comunitatea noastră</p>
-            </div>
+            <i className="ri-user-add-line text-6xl mb-6"></i>
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              Alătură-te AMiCUS
+            </h1>
+            <p className="text-xl text-red-100 max-w-3xl mx-auto">
+              Completează formularul de mai jos pentru a te înscrie în comunitatea AMiCUS Timișoara. 
+              Procesul durează doar câteva minute.
+            </p>
           </motion.div>
-          <p className="text-lg text-red-100 max-w-2xl mx-auto">
-            Completează formularul de mai jos pentru a te înscrie în comunitatea AMiCUS Timișoara. 
-            Procesul durează doar câteva minute.
-          </p>
         </div>
-      </div>
+      </section>
 
       {/* Form Section */}
       <div className="max-w-2xl mx-auto px-4 py-12">
@@ -300,7 +305,7 @@ export const Form = () => {
                     />
                     
                     <InputField
-                      label="Localitate"
+                      label="Adresa"
                       value={formData.address}
                       onChange={(value) => updateFormData('address', value)}
                       required={true}
@@ -347,7 +352,7 @@ export const Form = () => {
                     <label className="block text-sm font-medium text-gray-700">
                       Ești în prezent student?
                     </label>
-                    <div className="flex space-x-4">
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:space-x-4">
                       {[
                         { value: true, label: 'Da, sunt student' },
                         { value: false, label: 'Nu, nu sunt student' }
@@ -465,7 +470,7 @@ export const Form = () => {
                     <label className="block text-sm font-medium text-gray-700">
                       Ce te interesează? (opțional)
                     </label>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-3 gap-3">
                       {[
                         'Activități sociale', 'Evenimente culturale', 'Studiu biblic',
                         'Voluntariat', 'Sport și recreere', 'Muzică și artă',
@@ -492,7 +497,7 @@ export const Form = () => {
           </AnimatePresence>
           
           {/* Navigation Buttons */}
-          <div className="flex justify-between mt-8 pt-6 border-t border-gray-200">
+          <div className="flex flex-col md:flex-row justify-between mt-8 pt-6 border-t border-gray-200 gap-6">
             <button
               onClick={prevStep}
               disabled={currentStep === 1}

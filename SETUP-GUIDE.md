@@ -30,7 +30,7 @@
 
 ### ✅ Modern Design
 - Red, white, black color scheme
-- Tailwind CSS (converted from SCSS)
+- Tailwind CSS
 - Responsive design
 - Modern animations with Framer Motion
 

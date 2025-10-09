@@ -54,18 +54,18 @@ export const Events = () => {
           Icon: FaHandsHelping,
           color: 'bg-purple-500'
         },
-        { 
-          id: 4,
-          title: 'Întâlnire AMiCUS', 
-          date: 'Joi, 16 Octombrie',
-          time: '20:00 - 22:00',
-          location: 'Piața Mocioni 7, Timișoara',
-          guest: 'Mihoc',
-          theme: 'Față în față cu succesul?',
-          type: 'Întâlnire AMiCUS',
-          Icon: FaUsers,
-          color: 'bg-blue-500'
-        },
+        // { 
+        //   id: 4,
+        //   title: 'Întâlnire AMiCUS', 
+        //   date: 'Joi, 16 Octombrie',
+        //   time: '20:00 - 22:00',
+        //   location: 'Piața Mocioni 7, Timișoara',
+        //   guest: 'Mihoc',
+        //   theme: 'Față în față cu succesul?',
+        //   type: 'Întâlnire AMiCUS',
+        //   Icon: FaUsers,
+        //   color: 'bg-blue-500'
+        // },
         { 
           id: 5,
           title: 'Drumeție', 

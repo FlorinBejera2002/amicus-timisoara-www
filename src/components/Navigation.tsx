@@ -24,15 +24,15 @@ const Navigation = () => {
   const navItems: NavItem[] = [
     { path: '/', label: 'Acasă', type: 'single' },
     { path: '/about', label: 'Despre Noi', type: 'single' },
-    {
-      label: 'Proiecte',
-      type: 'dropdown',
-      items: [
-        { path: '/projects', label: 'Toate Proiectele', icon: 'ri-folder-line' },
-        // { path: '/prayer-wall', label: 'Peretele Rugăciunii', icon: 'ri-hands-pray-line' }, // TODO: Funcționalitate de adăugat mai târziu
-        // { path: '/book', label: 'Carte', icon: 'ri-book-line' } // TODO: Pagina comentată - doar secțiunea din home rămâne activă
-      ]
-    },
+    // {
+    //   label: 'Proiecte',
+    //   type: 'dropdown',
+    //   items: [
+    //     { path: '/projects', label: 'Toate Proiectele', icon: 'ri-folder-line' },
+    //     // { path: '/prayer-wall', label: 'Peretele Rugăciunii', icon: 'ri-hands-pray-line' }, // TODO: Funcționalitate de adăugat mai târziu
+    //     // { path: '/book', label: 'Carte', icon: 'ri-book-line' } // TODO: Pagina comentată - doar secțiunea din home rămâne activă
+    //   ]
+    // },
     { path: '/events', label: 'Evenimente', type: 'single' },
     { path: '/contact', label: 'Contact', type: 'single' }
   ];

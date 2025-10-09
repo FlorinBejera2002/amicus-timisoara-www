@@ -18,6 +18,8 @@ import {ProjectsPage} from './pages/ProjectsPage';
 import {EventsPage} from './pages/EventsPage';
 // import {BookPage} from './pages/BookPage'; // TODO: Pagina comentată - doar secțiunea din home rămâne activă
 import {ContactPage} from './pages/ContactPage';
+import {PrivacyPage} from './pages/PrivacyPage';
+import {TermsPage} from './pages/TermsPage';
 import { Form } from './form/Form';
 import { Table } from './table/Table';
 
@@ -50,6 +52,8 @@ export const App = () => {
               <Route path="/events" element={<EventsPage />} />
               {/* <Route path="/book" element={<BookPage />} /> */} {/* TODO: Pagina comentată - doar secțiunea din home rămâne activă */}
               <Route path="/contact" element={<ContactPage />} />
+              <Route path="/privacy" element={<PrivacyPage />} />
+              <Route path="/terms" element={<TermsPage />} />
               <Route path="/form" element={<Form />} />
               <Route path="/table" element={<Table />} />
               <Route path="/tabel-admin-amicus-2024-secret" element={<Table />} />

@@ -14,7 +14,6 @@ export const EventsPage = () => {
       time: '20:00 - 22:00',
       location: 'Piața Mocioni 7, Timișoara',
       category: 'Întâlnire AMiCUS',
-      description: 'Prima întâlnire cu invitatul Levis Nistor pe tema "Amprenta".',
       image: 'ri-calendar-event-line',
       guest: 'Levis Nistor',
       theme: 'Amprenta'
@@ -26,7 +25,6 @@ export const EventsPage = () => {
       time: '17:00 - 18:00',
       location: 'Biserica AZS Maranatha, Timișoara',
       category: 'Eveniment',
-      description: 'Eveniment de deschidere a anului universitar cu Ionuț Feier pe tema "Către necunoscut".',
       image: 'ri-presentation-line',
       guest: 'Ionuț Feier',
       theme: 'Către necunoscut'
@@ -38,7 +36,6 @@ export const EventsPage = () => {
       time: '20:00 - 23:00',
       location: 'Piața Mocioni 7, Timișoara',
       category: 'Recreativ',
-      description: 'Seară de jocuri organizată de echipa AMiCUS.',
       image: 'ri-gamepad-line',
       guest: 'Echipa AMiCUS',
       theme: 'Seară de jocuri'
@@ -50,7 +47,6 @@ export const EventsPage = () => {
       time: '20:00 - 22:00',
       location: 'Piața Mocioni 7, Timișoara',
       category: 'Întâlnire AMiCUS',
-      description: 'Întâlnire cu Mihoc pe tema "Față în față cu succesul?".',
       image: 'ri-calendar-event-line',
       guest: 'Mihoc',
       theme: 'Față în față cu succesul?'
@@ -62,7 +58,6 @@ export const EventsPage = () => {
       time: '09:00 - 18:00',
       location: 'Moneasa - Platoul Tinoasa - Cabana Izoi',
       category: 'Recreativ',
-      description: 'Drumeție cu Pr. Alexandru Munteanu pe tema "Dezvoltarea Liderilor Creștini".',
       image: 'ri-mountain-line',
       guest: 'Pr. Alexandru Munteanu',
       theme: 'Dezvoltarea Liderilor Creștini'
@@ -74,7 +69,6 @@ export const EventsPage = () => {
       time: '20:00 - 22:00',
       location: 'Piața Mocioni 7, Timișoara',
       category: 'Proiect',
-      description: 'Sesiune de discuții cu capelanul Levis Nistor.',
       image: 'ri-chat-3-line',
       guest: 'Levis Nistor',
       theme: 'De vorbă cu capelanul'
@@ -86,7 +80,6 @@ export const EventsPage = () => {
       time: '20:00 - 22:00',
       location: 'Piața Mocioni 7, Timișoara',
       category: 'Întâlnire AMiCUS',
-      description: 'Întâlnire cu Adi Dorgo pe tema orientării și carierei.',
       image: 'ri-calendar-event-line',
       guest: 'Adi Dorgo',
       theme: 'Orientare/Carieră'
@@ -98,7 +91,6 @@ export const EventsPage = () => {
       time: '09:00 - 18:00',
       location: 'Timișoara',
       category: 'Cultural',
-      description: 'Ieșire culturală în Timișoara pentru explorarea patrimoniului local.',
       image: 'ri-building-line',
       theme: 'Ieșire culturală'
     },
@@ -109,7 +101,6 @@ export const EventsPage = () => {
       time: '20:00 - 22:00',
       location: 'Piața Mocioni 7, Timișoara',
       category: 'Întâlnire AMiCUS',
-      description: 'Întâlnire cu Florin Orodan pe tema Apocalipsei.',
       image: 'ri-calendar-event-line',
       guest: 'Florin Orodan',
       theme: 'Apocalipsa'
@@ -230,7 +221,7 @@ export const EventsPage = () => {
                     {event.title}
                   </h3>
                   
-                  <div className="space-y-2 mb-4">
+                  <div className="space-y-2 mb-2">
                     <div className="flex items-center text-sm text-gray-600">
                       <i className="ri-calendar-line mr-2 text-primary-red"></i>
                       <span>{formatDate(event.date)}</span>
@@ -244,10 +235,6 @@ export const EventsPage = () => {
                       <span className="line-clamp-1">{event.location}</span>
                     </div>
                   </div>
-                  
-                  <p className="text-gray-600 mb-4 line-clamp-2">
-                    {event.description}
-                  </p>
                   
                   {event.guest && (
                     <div className="flex items-center text-sm text-gray-600 mb-2">
